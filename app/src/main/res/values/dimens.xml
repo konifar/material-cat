@@ -12,4 +12,8 @@
     <!-- Line -->
     <dimen name="line">2sp</dimen>
 
+
+    <!-- Component -->
+    <dimen name="drawer_header">152sp</dimen>
+    <dimen name="image_thumb">64sp</dimen>
 </resources>

@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".NavigationViewActivity">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checked="true"
+            android:icon="@drawable/ic_home_grey_600_24dp"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorite_grey_600_24dp"
+            android:title="@string/favorite" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_grey_600_24dp"
+            android:title="@string/settings" />
+    </group>
+</menu>
