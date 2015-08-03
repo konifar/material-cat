@@ -5,6 +5,9 @@
     <string name="favorite">Favorite</string>
     <string name="settings">Settings</string>
 
+    <string name="popular">Popular</string>
+    <string name="news">New</string>
+
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 </resources>

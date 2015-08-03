@@ -8,14 +8,17 @@ public class PhotoSearchCallbackEvent {
 
     private boolean success;
     private List<Photo> photos;
+    private String sort;
 
-    public PhotoSearchCallbackEvent(boolean success) {
+    public PhotoSearchCallbackEvent(boolean success, String sort) {
         this.success = success;
+        this.sort = sort;
     }
 
-    public PhotoSearchCallbackEvent(boolean success, List<Photo> photos) {
+    public PhotoSearchCallbackEvent(boolean success, List<Photo> photos, String sort) {
         this.success = success;
         this.photos = photos;
+        this.sort = sort;
     }
 
     public boolean isSuccess() {
@@ -24,6 +27,10 @@ public class PhotoSearchCallbackEvent {
 
     public List<Photo> getPhotos() {
         return photos;
+    }
+
+    public String getSort() {
+        return sort;
     }
 
 }

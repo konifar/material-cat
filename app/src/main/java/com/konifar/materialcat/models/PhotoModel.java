@@ -31,17 +31,17 @@ public class PhotoModel {
         return instance;
     }
 
-    public void getCatPhotos(int page, String sort) {
+    public void getCatPhotos(int page, final String sort) {
         flickerApiService.photosSearch(CAT_SEARCH_TEXT, page, PER_PAGE, sort,
                 new Callback<PhotoSource>() {
                     @Override
                     public void success(PhotoSource photoSource, Response response) {
-                        EventBus.getDefault().post(new PhotoSearchCallbackEvent(true, photoSource.getPhotos()));
+                        EventBus.getDefault().post(new PhotoSearchCallbackEvent(true, photoSource.getPhotos(), sort));
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        EventBus.getDefault().post(new PhotoSearchCallbackEvent(false));
+                        EventBus.getDefault().post(new PhotoSearchCallbackEvent(false, sort));
                     }
                 });
     }
