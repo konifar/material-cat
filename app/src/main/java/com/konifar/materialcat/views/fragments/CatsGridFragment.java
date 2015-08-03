@@ -22,6 +22,7 @@ import com.konifar.materialcat.views.listeners.OnLoadMoreScrollListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import de.greenrobot.event.EventBus;
 import jp.co.recruit_mp.android.widget.HeaderFooterGridView;
 
@@ -99,16 +100,15 @@ public class CatsGridFragment extends Fragment {
         loadingFooter = new ListLoadingView(getActivity());
         gridView.addFooterView(loadingFooter);
         gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Photo photo = adapter.getItem(position);
-                PhotoPreviewActivity.start(getActivity(), view, photo);
-            }
-        });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             gridView.setNestedScrollingEnabled(true);
         }
+    }
+
+    @OnItemClick(R.id.grid_view)
+    void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Photo photo = adapter.getItem(position);
+        PhotoPreviewActivity.start(getActivity(), view, photo);
     }
 
     private void showList(final int page) {
