@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="theme500">#673AB7</color>
+
+    <color name="grey200">#EEEEEE</color>
+    <color name="grey600">#757575</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="feedback">#14000000</color>
+    <color name="cover">#80000000</color>
+</resources>

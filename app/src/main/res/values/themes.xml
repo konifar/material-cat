@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/theme500</item>
+        <item name="colorPrimaryDark">@color/theme500</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorControlNormal">@color/grey200</item>
+        <item name="colorControlActivated">@color/theme500</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Transparent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+</resources>

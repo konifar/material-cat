@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        maven { url "http://dl.bintray.com/populov/maven" }
+        maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'io.fabric.tools:gradle:1.19.2'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "http://dl.bintray.com/populov/maven" }
+        maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
+    }
+}

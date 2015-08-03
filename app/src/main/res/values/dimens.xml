@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- space -->
+    <dimen name="spacing_small">12sp</dimen>
+    <dimen name="spacing">16sp</dimen>
+
+    <!-- Text -->
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_medium">14sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+
+    <!-- Line -->
+    <dimen name="line">2sp</dimen>
+
+</resources>
