@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import com.konifar.materialcat.events.PhotoSearchCallbackEvent;
 import com.konifar.materialcat.models.PhotoModel;
 import com.konifar.materialcat.models.pojo.Photo;
+import com.konifar.materialcat.network.FlickrApiService;
 import com.konifar.materialcat.views.ListLoadingView;
 import com.konifar.materialcat.views.adapters.PhotosArrayAdapter;
 import com.konifar.materialcat.views.listeners.OnLoadMoreScrollListener;
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showList(final int page) {
         if (page > 1) loadingFooter.switchVisible(true);
-        PhotoModel.getInstance(this).getCatPhotos(page);
+        PhotoModel.getInstance(this).getCatPhotos(page, FlickrApiService.SORT_INTERESTINGNESS_DESC);
     }
 
     private void initListViewScrollListener() {
