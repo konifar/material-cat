@@ -73,6 +73,7 @@ public class PhotoPreviewActivity extends Activity {
 
         Picasso.with(this)
                 .load(photo.getImageUrl())
+                .placeholder(R.color.grey200)
                 .into(imgPreview);
 
         if (savedInstanceState == null) {
