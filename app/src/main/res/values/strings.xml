@@ -10,4 +10,6 @@
 
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+
+    <string name="shared_element_photo">photo_element</string>
 </resources>

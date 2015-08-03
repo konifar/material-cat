@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
+        android:transitionName="@string/shared_element_photo"
         app:imageRatio="1" />
 
 </RelativeLayout>

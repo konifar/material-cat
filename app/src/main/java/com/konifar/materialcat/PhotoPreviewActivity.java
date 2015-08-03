@@ -1,12 +1,13 @@
 package com.konifar.materialcat;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 
@@ -29,7 +30,7 @@ public class PhotoPreviewActivity extends Activity {
     private static final String EXTRA_HEIGHT = "extra_height";
 
     private static final long ANIMATION_DURATION = 300;
-    private static final Interpolator decelerateInterpolator = new DecelerateInterpolator();
+    private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
 
     @Bind(R.id.img_preview)
     ImageView imgPreview;
@@ -42,19 +43,25 @@ public class PhotoPreviewActivity extends Activity {
 
     public static void start(Activity activity, View transitionView, Photo photo) {
         Intent intent = new Intent(activity, PhotoPreviewActivity.class);
-
-        int[] screenLocation = new int[2];
-        transitionView.getLocationOnScreen(screenLocation);
-        int orientation = activity.getResources().getConfiguration().orientation;
-
         intent.putExtra(Photo.class.getSimpleName(), photo);
-        intent.putExtra(EXTRA_ORIENTATION, orientation);
-        intent.putExtra(EXTRA_LEFT, screenLocation[0]);
-        intent.putExtra(EXTRA_TOP, screenLocation[1]);
-        intent.putExtra(EXTRA_WIDTH, transitionView.getWidth());
-        intent.putExtra(EXTRA_HEIGHT, transitionView.getHeight());
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(activity, transitionView,
+                            activity.getString(R.string.shared_element_photo));
+            activity.startActivity(intent, options.toBundle());
+        } else {
+            int[] screenLocation = new int[2];
+            transitionView.getLocationOnScreen(screenLocation);
+            int orientation = activity.getResources().getConfiguration().orientation;
+            intent.putExtra(EXTRA_ORIENTATION, orientation);
+            intent.putExtra(EXTRA_LEFT, screenLocation[0]);
+            intent.putExtra(EXTRA_TOP, screenLocation[1]);
+            intent.putExtra(EXTRA_WIDTH, transitionView.getWidth());
+            intent.putExtra(EXTRA_HEIGHT, transitionView.getHeight());
+            activity.startActivity(intent);
+            activity.overridePendingTransition(0, 0);
+        }
     }
 
     @Override
@@ -65,11 +72,6 @@ public class PhotoPreviewActivity extends Activity {
 
         Bundle bundle = getIntent().getExtras();
         final Photo photo = (Photo) bundle.getSerializable(Photo.class.getSimpleName());
-        final int thumbnailTop = bundle.getInt(EXTRA_TOP);
-        final int thumbnailLeft = bundle.getInt(EXTRA_LEFT);
-        final int thumbnailWidth = bundle.getInt(EXTRA_WIDTH);
-        final int thumbnailHeight = bundle.getInt(EXTRA_HEIGHT);
-        originalOrientation = bundle.getInt(EXTRA_ORIENTATION);
 
         Picasso.with(this)
                 .load(photo.getImageUrl())
@@ -77,24 +79,31 @@ public class PhotoPreviewActivity extends Activity {
                 .into(imgPreview);
 
         if (savedInstanceState == null) {
-            ViewTreeObserver observer = imgPreview.getViewTreeObserver();
-            observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    imgPreview.getViewTreeObserver().removeOnPreDrawListener(this);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                final int thumbnailTop = bundle.getInt(EXTRA_TOP);
+                final int thumbnailLeft = bundle.getInt(EXTRA_LEFT);
+                final int thumbnailWidth = bundle.getInt(EXTRA_WIDTH);
+                final int thumbnailHeight = bundle.getInt(EXTRA_HEIGHT);
+                originalOrientation = bundle.getInt(EXTRA_ORIENTATION);
+                ViewTreeObserver observer = imgPreview.getViewTreeObserver();
+                observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        imgPreview.getViewTreeObserver().removeOnPreDrawListener(this);
 
-                    int[] screenLocation = new int[2];
-                    imgPreview.getLocationOnScreen(screenLocation);
-                    leftDelta = thumbnailLeft - screenLocation[0];
-                    topDelta = thumbnailTop - screenLocation[1];
-                    widthScale = (float) thumbnailWidth / (imgPreview.getWidth());
-                    heightScale = (float) thumbnailHeight / imgPreview.getHeight();
+                        int[] screenLocation = new int[2];
+                        imgPreview.getLocationOnScreen(screenLocation);
+                        leftDelta = thumbnailLeft - screenLocation[0];
+                        topDelta = thumbnailTop - screenLocation[1];
+                        widthScale = (float) thumbnailWidth / (imgPreview.getWidth());
+                        heightScale = (float) thumbnailHeight / imgPreview.getHeight();
 
-                    startEnterAnimation();
+                        startEnterAnimation();
 
-                    return true;
-                }
-            });
+                        return true;
+                    }
+                });
+            }
         }
     }
 
@@ -120,7 +129,7 @@ public class PhotoPreviewActivity extends Activity {
                 .setDuration(ANIMATION_DURATION)
                 .scaleX(1).scaleY(1)
                 .translationX(0).translationY(0)
-                .setInterpolator(decelerateInterpolator);
+                .setInterpolator(INTERPOLATOR);
     }
 
     public void startExitAnimation() {
@@ -145,7 +154,7 @@ public class PhotoPreviewActivity extends Activity {
                 .setDuration(ANIMATION_DURATION)
                 .scaleX(widthScale).scaleY(heightScale)
                 .translationX(leftDelta).translationY(topDelta)
-                .setInterpolator(decelerateInterpolator)
+                .setInterpolator(INTERPOLATOR)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -160,7 +169,11 @@ public class PhotoPreviewActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        startExitAnimation();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            startExitAnimation();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
