@@ -2,6 +2,7 @@ package com.konifar.materialcat;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,7 @@ import com.konifar.materialcat.views.adapters.CatsGridPagerAdappter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     @Bind(R.id.view_pager)
     ViewPager viewPager;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
 
     private ActionBarDrawerToggle drawerToggle;
 
@@ -104,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @OnClick(R.id.fab)
+    void onClickFab() {
+        //
     }
 
 }
