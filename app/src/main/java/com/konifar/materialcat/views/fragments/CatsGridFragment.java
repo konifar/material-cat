@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 
-import com.konifar.materialcat.PhotoPreviewActivity;
+import com.konifar.materialcat.PhotoDetailActivity;
 import com.konifar.materialcat.R;
 import com.konifar.materialcat.events.PhotoSearchCallbackEvent;
 import com.konifar.materialcat.models.PhotoModel;
@@ -108,7 +108,7 @@ public class CatsGridFragment extends Fragment {
     @OnItemClick(R.id.grid_view)
     void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Photo photo = adapter.getItem(position);
-        PhotoPreviewActivity.start(getActivity(), view, photo);
+        PhotoDetailActivity.start(getActivity(), view, photo);
     }
 
     private void showList(final int page) {

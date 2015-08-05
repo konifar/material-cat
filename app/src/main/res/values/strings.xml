@@ -12,4 +12,6 @@
     <string name="drawer_close">Close</string>
 
     <string name="shared_element_photo">photo_element</string>
+
+    <string name="activity_transition_mills">200</string>
 </resources>
