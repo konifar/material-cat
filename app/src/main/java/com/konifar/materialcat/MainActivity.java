@@ -13,14 +13,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
 
+import com.konifar.fab_transformation.FabTransformation;
+import com.konifar.materialcat.views.ShareBarView;
 import com.konifar.materialcat.views.adapters.CatsGridPagerAdappter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AbsListView.OnScrollListener {
 
     @Bind(R.id.navigation_view)
     NavigationView navigationView;
@@ -34,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     @Bind(R.id.fab)
     FloatingActionButton fab;
+    @Bind(R.id.share_bar)
+    ShareBarView shareBar;
 
     private ActionBarDrawerToggle drawerToggle;
+    private boolean isTransforming;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +119,66 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     void onClickFab() {
-        //
+        if (fab.getVisibility() == View.VISIBLE && !isTransforming) {
+            FabTransformation.with(fab)
+                    .setListener(new FabTransformation.OnTransformListener() {
+                        @Override
+                        public void onStartTransform() {
+                            isTransforming = true;
+                        }
+
+                        @Override
+                        public void onEndTransform() {
+                            isTransforming = false;
+                        }
+                    })
+                    .transformTo(shareBar);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (fab.getVisibility() != View.VISIBLE && !isTransforming) {
+            FabTransformation.with(fab)
+                    .setListener(new FabTransformation.OnTransformListener() {
+                        @Override
+                        public void onStartTransform() {
+                            isTransforming = true;
+                        }
+
+                        @Override
+                        public void onEndTransform() {
+                            isTransforming = false;
+                        }
+                    })
+                    .transformFrom(shareBar);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        if (fab.getVisibility() != View.VISIBLE && !isTransforming) {
+            FabTransformation.with(fab)
+                    .setListener(new FabTransformation.OnTransformListener() {
+                        @Override
+                        public void onStartTransform() {
+                            isTransforming = true;
+                        }
+
+                        @Override
+                        public void onEndTransform() {
+                            isTransforming = false;
+                        }
+                    })
+                    .transformFrom(shareBar);
+        }
     }
 
 }
