@@ -48,6 +48,19 @@
             android:src="@drawable/ic_share_grey_600_24dp"
             app:backgroundTint="@color/accent100" />
 
+        <io.codetail.widget.RevealFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <com.konifar.materialcat.views.ShareBarView
+                android:id="@+id/share_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+
+        </io.codetail.widget.RevealFrameLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

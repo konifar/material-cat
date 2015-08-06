@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 
@@ -117,7 +118,8 @@ public class CatsGridFragment extends Fragment {
     }
 
     private void initListViewScrollListener() {
-        gridView.setOnScrollListener(new OnLoadMoreScrollListener() {
+        AbsListView.OnScrollListener scrollListener = (AbsListView.OnScrollListener) getActivity();
+        gridView.setOnScrollListener(new OnLoadMoreScrollListener(scrollListener) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 showList(page);

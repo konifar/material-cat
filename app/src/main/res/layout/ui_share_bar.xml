@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/share_footer"
+    android:background="@color/accent100"
+    android:orientation="horizontal">
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/btn_email"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:mrl_rippleAlpha="0.6"
+        app:mrl_rippleColor="@color/yellow300"
+        app:mrl_rippleDuration="350"
+        app:mrl_rippleFadeDuration="150">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/ic_email_grey_600_24dp" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/btn_copy"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:mrl_rippleAlpha="0.6"
+        app:mrl_rippleColor="@color/yellow300"
+        app:mrl_rippleDuration="350"
+        app:mrl_rippleFadeDuration="150">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/ic_content_copy_grey_600_24dp" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/btn_google_plus"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:mrl_rippleAlpha="0.6"
+        app:mrl_rippleColor="@color/yellow300"
+        app:mrl_rippleDuration="350"
+        app:mrl_rippleFadeDuration="150">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/ic_google_plus_grey_600_24dp" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/btn_facebook"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:mrl_rippleAlpha="0.6"
+        app:mrl_rippleColor="@color/yellow300"
+        app:mrl_rippleDuration="350"
+        app:mrl_rippleFadeDuration="150">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/ic_facebook_grey_600_24dp" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/btn_twitter"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:mrl_rippleAlpha="0.6"
+        app:mrl_rippleColor="@color/yellow300"
+        app:mrl_rippleDuration="350"
+        app:mrl_rippleFadeDuration="150">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/ic_twitter_grey_600_24dp" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+</LinearLayout>
