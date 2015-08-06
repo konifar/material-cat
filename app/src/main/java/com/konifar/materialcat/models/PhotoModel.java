@@ -15,7 +15,7 @@ import retrofit.client.Response;
 public class PhotoModel {
 
     private static final String CAT_SEARCH_TEXT = "cat";
-    private static final int PER_PAGE = 36;
+    private static final int PER_PAGE = 35;
     private static PhotoModel instance;
 
     FlickrApiService flickerApiService;

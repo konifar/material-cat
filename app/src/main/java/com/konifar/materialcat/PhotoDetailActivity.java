@@ -155,6 +155,10 @@ public class PhotoDetailActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+            } else {
+                appBarLayout.setVisibility(View.VISIBLE);
+                imgPreviewDummy.setVisibility(View.GONE);
+                imgPreview.setVisibility(View.VISIBLE);
             }
         }
     }
