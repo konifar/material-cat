@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/row_vibrant"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/color_pallete"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/container_lignt_vibrant"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/txt_lignt_vibrant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:textSize="@dimen/text_small" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/container_vibrant"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/txt_vibrant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:textSize="@dimen/text_small" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/container_dark_vibrant"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/txt_dark_vibrant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:textSize="@dimen/text_small" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_muted"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/color_pallete"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/container_lignt_muted"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/txt_lignt_muted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:textSize="@dimen/text_small" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/container_muted"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/txt_muted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:textSize="@dimen/text_small" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/container_dark_muted"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/txt_dark_muted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lines="1"
+                android:textSize="@dimen/text_small" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -51,6 +51,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                style="@style/TextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing"
+                android:text="@string/colors"
+                android:textSize="@dimen/text_xlarge" />
+
+            <View style="@style/Border" />
+
+            <com.konifar.materialcat.views.ColorPalleteView
+                android:id="@+id/color_pallete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/TextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing"
+                android:padding="@dimen/spacing"
+                android:text="@string/photo_data"
+                android:textSize="@dimen/text_xlarge" />
+
+            <View style="@style/Border.SpaceLeft" />
+
             <com.konifar.materialcat.views.PhotoInfoView
                 android:id="@+id/photo_info_id"
                 android:layout_width="match_parent"
