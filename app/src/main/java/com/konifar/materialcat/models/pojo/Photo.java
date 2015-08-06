@@ -6,6 +6,8 @@ public class Photo extends Model {
 
     @SerializedName("id")
     private String id;
+    @SerializedName("owner")
+    private String owner;
     @SerializedName("secret")
     private String secret;
     @SerializedName("server")
@@ -14,6 +16,12 @@ public class Photo extends Model {
     private int farm;
     @SerializedName("title")
     private String title;
+    @SerializedName("ispublic")
+    private int isPublic;
+    @SerializedName("isfriend")
+    private int isFriend;
+    @SerializedName("isfamily")
+    private int isFamily;
 
     public String getImageUrl() {
         StringBuilder sb = new StringBuilder();
@@ -30,8 +38,40 @@ public class Photo extends Model {
         return sb.toString();
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public int getFarm() {
+        return farm;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public boolean isPublic() {
+        return isPublic != 0;
+    }
+
+    public boolean isFriend() {
+        return isFriend != 0;
+    }
+
+    public boolean isFamily() {
+        return isFamily != 0;
     }
 
 }

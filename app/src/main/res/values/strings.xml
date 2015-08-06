@@ -11,6 +11,17 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <string name="identifier">Identifier</string>
+    <string name="owner">Owener</string>
+    <string name="secret">Secret</string>
+    <string name="server">Server id</string>
+    <string name="title">Title</string>
+    <string name="is_public">Public photo</string>
+    <string name="is_friend">Friend\'s photo</string>
+    <string name="is_family">Family\'s photo</string>
+    <string name="pallete">Color pallete</string>
+
+    <!-- Shared elements -->
     <string name="shared_element_photo">photo_element</string>
 
     <string name="activity_transition_mills">200</string>

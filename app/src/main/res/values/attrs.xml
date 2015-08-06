@@ -6,4 +6,10 @@
         <attr name="autoScale" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="PhotoInfoView">
+        <attr name="iconSrc" format="reference" />
+        <attr name="subText" format="string" />
+        <attr name="titleText" format="string" />
+    </declare-styleable>
+
 </resources>

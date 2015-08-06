@@ -8,7 +8,8 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -50,110 +51,75 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_format_list_numbered_cyan_500_24dp"
+                app:subText="@string/identifier" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+            <View style="@style/Border.SpaceLeft" />
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_owner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_person_cyan_500_24dp"
+                app:subText="@string/owner" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+            <View style="@style/Border.SpaceLeft" />
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_secret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_vpn_key_cyan_500_24dp"
+                app:subText="@string/secret" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+            <View style="@style/Border.SpaceLeft" />
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_subtitles_cyan_500_24dp"
+                app:subText="@string/title" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+            <View style="@style/Border.SpaceLeft" />
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_server"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_computer_cyan_500_24dp"
+                app:subText="@string/server" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+            <View style="@style/Border.SpaceLeft" />
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_public"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_public_cyan_500_24dp"
+                app:subText="@string/is_public" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+            <View style="@style/Border.SpaceLeft" />
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_friend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_people_cyan_500_24dp"
+                app:subText="@string/is_friend" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+            <View style="@style/Border.SpaceLeft" />
 
-            <TextView
-                style="@style/TextTitle"
+            <com.konifar.materialcat.views.PhotoInfoView
+                android:id="@+id/photo_info_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="Text Text Text Text Text Text Text Text Text Text Text Text." />
+                app:iconSrc="@drawable/ic_visibility_cyan_500_24dp"
+                app:subText="@string/is_family" />
 
         </LinearLayout>
 
