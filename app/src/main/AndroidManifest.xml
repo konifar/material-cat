@@ -32,7 +32,13 @@
             android:name=".PhotoPreviewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/Transparent" />
+            android:theme="@style/NoActionBarTheme.Transparent" />
+
+        <activity
+            android:name=".PhotoDetailActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/NoActionBarTheme.Transparent" />
 
         <meta-data
             android:name="com.crashlytics.ApiKey"
