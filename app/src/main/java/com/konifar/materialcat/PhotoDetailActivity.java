@@ -114,12 +114,12 @@ public class PhotoDetailActivity extends AppCompatActivity {
 
         Picasso.with(this)
                 .load(photo.getImageUrl())
-                .placeholder(R.color.grey200)
+                .placeholder(R.color.theme50)
                 .into(imgPreviewDummy);
 
         Picasso.with(this)
                 .load(photo.getImageUrl())
-                .placeholder(R.color.grey200)
+                .placeholder(R.color.theme50)
                 .into(imgPreview);
 
         if (savedInstanceState == null) {

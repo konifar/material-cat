@@ -5,6 +5,8 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
@@ -21,6 +23,8 @@ import butterknife.ButterKnife;
 
 public class PhotosArrayAdapter extends ArrayAdapter<Photo> {
 
+    private int lastPosition = -1;
+
     public PhotosArrayAdapter(Context context) {
         super(context, R.layout.item_photo, new ArrayList<Photo>());
     }
@@ -36,10 +40,12 @@ public class PhotosArrayAdapter extends ArrayAdapter<Photo> {
             holder = (ViewHolder) view.getTag();
         }
 
+        view.setTag(holder);
+
         bindData(holder, getItem(pos));
         initListeners(holder, pos, view, parent);
 
-        view.setTag(holder);
+        if (pos > 1) startAnimation(view, pos);
 
         return view;
     }
@@ -59,7 +65,7 @@ public class PhotosArrayAdapter extends ArrayAdapter<Photo> {
         if (holder.imgPreview.getTag() == null || !holder.imgPreview.getTag().equals(imageUrl)) {
             Picasso.with(getContext())
                     .load(imageUrl)
-                    .placeholder(R.color.grey200)
+                    .placeholder(R.color.theme50)
                     .into(holder.imgPreview);
             holder.imgPreview.setTag(imageUrl);
         }
@@ -74,6 +80,14 @@ public class PhotosArrayAdapter extends ArrayAdapter<Photo> {
             for (Photo item : photos) {
                 super.add(item);
             }
+        }
+    }
+
+    void startAnimation(View view, int pos) {
+        if (lastPosition < pos) {
+            Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.item_scale_in);
+            view.startAnimation(anim);
+            lastPosition = pos;
         }
     }
 
