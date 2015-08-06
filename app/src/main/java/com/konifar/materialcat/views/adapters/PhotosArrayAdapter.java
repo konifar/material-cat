@@ -65,7 +65,7 @@ public class PhotosArrayAdapter extends ArrayAdapter<Photo> {
         if (holder.imgPreview.getTag() == null || !holder.imgPreview.getTag().equals(imageUrl)) {
             Picasso.with(getContext())
                     .load(imageUrl)
-                    .placeholder(R.color.grey200)
+                    .placeholder(R.color.theme50)
                     .into(holder.imgPreview);
             holder.imgPreview.setTag(imageUrl);
         }
