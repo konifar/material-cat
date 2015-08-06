@@ -3,6 +3,8 @@ package com.konifar.materialcat;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -20,12 +22,14 @@ import android.widget.ImageView;
 
 import com.konifar.materialcat.models.pojo.Photo;
 import com.konifar.materialcat.utils.FabAnimationUtils;
+import com.konifar.materialcat.views.ColorPalleteView;
 import com.konifar.materialcat.views.PhotoInfoView;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.nineoldandroids.view.animation.AnimatorProxy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,6 +57,9 @@ public class PhotoDetailActivity extends AppCompatActivity {
     ImageView imgPreviewDummy;
     @Bind(R.id.fab)
     FloatingActionButton fab;
+
+    @Bind(R.id.color_pallete)
+    ColorPalleteView colorPalleteView;
 
     @Bind(R.id.photo_info_id)
     PhotoInfoView photoInfoId;
@@ -117,10 +124,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 .placeholder(R.color.theme50)
                 .into(imgPreviewDummy);
 
-        Picasso.with(this)
-                .load(photo.getImageUrl())
-                .placeholder(R.color.theme50)
-                .into(imgPreview);
+        initPallete(photo);
 
         if (savedInstanceState == null) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -153,6 +157,29 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 });
             }
         }
+    }
+
+    private void initPallete(Photo photo) {
+        Picasso.with(this)
+                .load(photo.getImageUrl())
+                .placeholder(R.color.theme50)
+                .into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        imgPreview.setImageBitmap(bitmap);
+                        colorPalleteView.initColors(bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                        //
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        //
+                    }
+                });
     }
 
     private void bindPhotoInfo(Photo photo) {

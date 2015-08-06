@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- space -->
-    <dimen name="spacing_small">12sp</dimen>
+    <dimen name="spacing_small">8sp</dimen>
     <dimen name="spacing">16sp</dimen>
 
     <!-- Text -->
     <dimen name="text_small">12sp</dimen>
     <dimen name="text_medium">14sp</dimen>
     <dimen name="text_large">18sp</dimen>
+    <dimen name="text_xlarge">24sp</dimen>
 
     <!-- Line -->
     <dimen name="line">2sp</dimen>
@@ -17,4 +18,5 @@
     <dimen name="drawer_header">152sp</dimen>
     <dimen name="image_thumb">64sp</dimen>
     <dimen name="share_footer">64dp</dimen>
+    <dimen name="color_pallete">72dp</dimen>
 </resources>

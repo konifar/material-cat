@@ -8,6 +8,9 @@
     <string name="popular">Popular</string>
     <string name="news">New</string>
 
+    <string name="colors">Colors</string>
+    <string name="photo_data">Photo data</string>
+
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
