@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import com.konifar.materialcat.models.pojo.Photo;
 import com.konifar.materialcat.utils.FabAnimationUtils;
 import com.konifar.materialcat.views.ColorPalleteView;
+import com.konifar.materialcat.views.CustomKenBurnsView;
 import com.konifar.materialcat.views.PhotoInfoView;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
@@ -56,7 +57,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.img_preview)
-    ImageView imgPreview;
+    CustomKenBurnsView imgPreview;
     @Bind(R.id.img_preview_dummy)
     ImageView imgPreviewDummy;
     @Bind(R.id.fab)
@@ -161,11 +162,13 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 });
             } else {
                 appBarLayout.setVisibility(View.VISIBLE);
-                imgPreviewDummy.setVisibility(View.GONE);
+                hideDummyImage();
                 imgPreview.setVisibility(View.VISIBLE);
                 FabAnimationUtils.scaleOut(fab, 50, null);
             }
         }
+
+        fab.setSelected(true);
 
         initActivityTransitions();
     }
@@ -252,7 +255,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
                         // AppBarLayout is set invisible, because AppbarLayout has default background color.
                         appBarLayout.setVisibility(View.VISIBLE);
                         imgPreview.setVisibility(View.VISIBLE);
-                        imgPreviewDummy.setVisibility(View.GONE);
+                        hideDummyImage();
                         FabAnimationUtils.scaleIn(fab);
                     }
                 });
@@ -309,6 +312,33 @@ public class PhotoDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void hideDummyImage() {
+        ViewPropertyAnimator.animate(imgPreviewDummy)
+                .alpha(0.0f)
+                .setDuration(300)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        //
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        imgPreviewDummy.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                        //
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+                        //
+                    }
+                });
+    }
+
     @OnClick(R.id.fab)
     void onClickFab() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -322,6 +352,12 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 drawable = fab.getDrawable();
                 ((AnimatedVectorDrawable) drawable).start();
             }
+        }
+
+        if (fab.isSelected()) {
+            imgPreview.pause();
+        } else {
+            imgPreview.resume();
         }
 
         fab.setSelected(!fab.isSelected());
