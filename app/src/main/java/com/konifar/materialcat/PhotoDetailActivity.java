@@ -315,7 +315,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
     private void hideDummyImage() {
         ViewPropertyAnimator.animate(imgPreviewDummy)
                 .alpha(0.0f)
-                .setDuration(300)
+                .setDuration(350)
                 .setListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
