@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_favorite_grey_600_24dp_part">
+
+    <!--<target-->
+    <!--android:name="rotationGroup"-->
+    <!--android:animation="@anim/fab_rotation" />-->
+
+    <target
+        android:name="plus_path"
+        android:animation="@anim/fab_path_morph" />
+
+</animated-vector>
