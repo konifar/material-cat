@@ -19,7 +19,7 @@
             app:contentScrim="@color/theme500"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <com.konifar.materialcat.views.AspectRatioImageView
+            <com.konifar.materialcat.views.CustomKenBurnsView
                 android:id="@+id/img_preview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

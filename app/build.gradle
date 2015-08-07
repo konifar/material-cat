@@ -48,6 +48,7 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.5'
 //    compile 'com.github.ozodrukh:CircularReveal:1.1.0@aar'
     compile 'konifar:fab-transformation:1.0.0'
+    compile 'com.flaviofaria:kenburnsview:1.0.6'
 
     compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
         transitive = true;
