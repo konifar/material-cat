@@ -17,7 +17,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -314,13 +313,18 @@ public class PhotoDetailActivity extends AppCompatActivity {
     void onClickFab() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Drawable drawable = fab.getDrawable();
-            Log.e("hogehoge", drawable + "");
             if (drawable instanceof AnimatedVectorDrawable) {
+                if (((AnimatedVectorDrawable) drawable).isRunning()) return;
+
+                int drawableResId = fab.isSelected() ? R.drawable.ic_pause_to_play : R.drawable.ic_play_to_pause;
+                fab.setImageResource(drawableResId);
+
+                drawable = fab.getDrawable();
                 ((AnimatedVectorDrawable) drawable).start();
-            } else {
-                Log.e("hogehoge", "hogehoge");
             }
         }
+
+        fab.setSelected(!fab.isSelected());
     }
 
 }

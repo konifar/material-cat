@@ -1,7 +1,6 @@
 package com.konifar.materialcat.utils;
 
 import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -17,11 +16,11 @@ public class FabAnimationUtils {
     private static final long DEFAULT_DURATION = 200L;
     private static final Interpolator FAST_OUT_SLOW_IN_INTERPOLATOR = new FastOutSlowInInterpolator();
 
-    public static void scaleIn(final FloatingActionButton fab) {
+    public static void scaleIn(final View fab) {
         scaleIn(fab, DEFAULT_DURATION, null);
     }
 
-    public static void scaleIn(final FloatingActionButton fab, long duration, final ScaleCallback callback) {
+    public static void scaleIn(final View fab, long duration, final ScaleCallback callback) {
         fab.setVisibility(View.VISIBLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             ViewCompat.animate(fab)
@@ -67,15 +66,15 @@ public class FabAnimationUtils {
         }
     }
 
-    public static void scaleOut(final FloatingActionButton fab) {
+    public static void scaleOut(final View fab) {
         scaleOut(fab, DEFAULT_DURATION, null);
     }
 
-    public static void scaleOut(final FloatingActionButton fab, final ScaleCallback callback) {
+    public static void scaleOut(final View fab, final ScaleCallback callback) {
         scaleOut(fab, DEFAULT_DURATION, callback);
     }
 
-    public static void scaleOut(final FloatingActionButton fab, long duration, final ScaleCallback callback) {
+    public static void scaleOut(final View fab, long duration, final ScaleCallback callback) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             ViewCompat.animate(fab)
                     .scaleX(0.0F)

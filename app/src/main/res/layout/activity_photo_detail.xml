@@ -156,7 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
-        android:src="@drawable/ic_favorite_grey_600_24dp"
+        android:src="@drawable/ic_play_to_pause"
         android:visibility="gone"
         app:backgroundTint="@color/accent100"
         app:layout_anchor="@+id/app_bar"
