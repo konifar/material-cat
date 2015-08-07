@@ -93,23 +93,22 @@ public class PhotoDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(activity, PhotoDetailActivity.class);
         intent.putExtra(Photo.class.getSimpleName(), photo);
 
+        int[] screenLocation = new int[2];
+        transitionView.getLocationOnScreen(screenLocation);
+        int orientation = activity.getResources().getConfiguration().orientation;
+        intent.putExtra(EXTRA_ORIENTATION, orientation);
+        intent.putExtra(EXTRA_LEFT, screenLocation[0]);
+        intent.putExtra(EXTRA_TOP, screenLocation[1]);
+        intent.putExtra(EXTRA_WIDTH, transitionView.getWidth());
+        intent.putExtra(EXTRA_HEIGHT, transitionView.getHeight());
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(activity, transitionView,
-                            activity.getString(R.string.shared_element_photo));
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, null);
             activity.startActivity(intent, options.toBundle());
         } else {
-            int[] screenLocation = new int[2];
-            transitionView.getLocationOnScreen(screenLocation);
-            int orientation = activity.getResources().getConfiguration().orientation;
-            intent.putExtra(EXTRA_ORIENTATION, orientation);
-            intent.putExtra(EXTRA_LEFT, screenLocation[0]);
-            intent.putExtra(EXTRA_TOP, screenLocation[1]);
-            intent.putExtra(EXTRA_WIDTH, transitionView.getWidth());
-            intent.putExtra(EXTRA_HEIGHT, transitionView.getHeight());
             activity.startActivity(intent);
-            activity.overridePendingTransition(0, R.anim.activity_scale_start_exit);
         }
+        activity.overridePendingTransition(0, R.anim.activity_scale_start_exit);
     }
 
     @Override
@@ -132,40 +131,33 @@ public class PhotoDetailActivity extends AppCompatActivity {
         initPallete(photo);
 
         if (savedInstanceState == null) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                final int thumbnailTop = bundle.getInt(EXTRA_TOP);
-                final int thumbnailLeft = bundle.getInt(EXTRA_LEFT);
-                final int thumbnailWidth = bundle.getInt(EXTRA_WIDTH);
-                final int thumbnailHeight = bundle.getInt(EXTRA_HEIGHT);
-                originalOrientation = bundle.getInt(EXTRA_ORIENTATION);
-                ViewTreeObserver observer = imgPreviewDummy.getViewTreeObserver();
-                observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        // TODO setVisibility(View.gone) does not work...
-                        // fab.setVisibility(View.GONE);
-                        FabAnimationUtils.scaleOut(fab, 50, null);
+            final int thumbnailTop = bundle.getInt(EXTRA_TOP);
+            final int thumbnailLeft = bundle.getInt(EXTRA_LEFT);
+            final int thumbnailWidth = bundle.getInt(EXTRA_WIDTH);
+            final int thumbnailHeight = bundle.getInt(EXTRA_HEIGHT);
+            originalOrientation = bundle.getInt(EXTRA_ORIENTATION);
+            ViewTreeObserver observer = imgPreviewDummy.getViewTreeObserver();
+            observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    // TODO setVisibility(View.gone) does not work...
+                    // fab.setVisibility(View.GONE);
+                    FabAnimationUtils.scaleOut(fab, 50, null);
 
-                        imgPreviewDummy.getViewTreeObserver().removeOnPreDrawListener(this);
+                    imgPreviewDummy.getViewTreeObserver().removeOnPreDrawListener(this);
 
-                        int[] screenLocation = new int[2];
-                        imgPreviewDummy.getLocationOnScreen(screenLocation);
-                        leftDelta = thumbnailLeft - screenLocation[0];
-                        topDelta = thumbnailTop - screenLocation[1];
-                        widthScale = (float) thumbnailWidth / (imgPreviewDummy.getWidth());
-                        heightScale = (float) thumbnailHeight / imgPreviewDummy.getHeight();
+                    int[] screenLocation = new int[2];
+                    imgPreviewDummy.getLocationOnScreen(screenLocation);
+                    leftDelta = thumbnailLeft - screenLocation[0];
+                    topDelta = thumbnailTop - screenLocation[1];
+                    widthScale = (float) thumbnailWidth / (imgPreviewDummy.getWidth());
+                    heightScale = (float) thumbnailHeight / imgPreviewDummy.getHeight();
 
-                        startEnterAnimation();
+                    startEnterAnimation();
 
-                        return true;
-                    }
-                });
-            } else {
-                appBarLayout.setVisibility(View.VISIBLE);
-                hideDummyImage();
-                imgPreview.setVisibility(View.VISIBLE);
-                FabAnimationUtils.scaleOut(fab, 50, null);
-            }
+                    return true;
+                }
+            });
         }
 
         fab.setSelected(true);
@@ -177,10 +169,10 @@ public class PhotoDetailActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Slide transition = new Slide();
             transition.excludeTarget(android.R.id.statusBarBackground, true);
+            transition.excludeTarget(R.id.img_preview_dummy, true);
             transition.setInterpolator(new LinearOutSlowInInterpolator());
             transition.setDuration(300);
             getWindow().setEnterTransition(transition);
-            getWindow().setReturnTransition(transition);
         }
     }
 
@@ -300,6 +292,11 @@ public class PhotoDetailActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.activity_scale_finish_enter, R.anim.activity_slide_finish_exit);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     @Override
