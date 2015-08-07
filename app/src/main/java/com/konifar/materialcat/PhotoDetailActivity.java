@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -33,6 +36,7 @@ import com.squareup.picasso.Target;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PhotoDetailActivity extends AppCompatActivity {
 
@@ -155,7 +159,25 @@ public class PhotoDetailActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+            } else {
+                appBarLayout.setVisibility(View.VISIBLE);
+                imgPreviewDummy.setVisibility(View.GONE);
+                imgPreview.setVisibility(View.VISIBLE);
+                FabAnimationUtils.scaleOut(fab, 50, null);
             }
+        }
+
+        initActivityTransitions();
+    }
+
+    private void initActivityTransitions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Slide transition = new Slide();
+            transition.excludeTarget(android.R.id.statusBarBackground, true);
+            transition.setInterpolator(new LinearOutSlowInInterpolator());
+            transition.setDuration(300);
+            getWindow().setEnterTransition(transition);
+            getWindow().setReturnTransition(transition);
         }
     }
 
@@ -285,6 +307,24 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.fab)
+    void onClickFab() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Drawable drawable = fab.getDrawable();
+            if (drawable instanceof AnimatedVectorDrawable) {
+                if (((AnimatedVectorDrawable) drawable).isRunning()) return;
+
+                int drawableResId = fab.isSelected() ? R.drawable.ic_pause_to_play : R.drawable.ic_play_to_pause;
+                fab.setImageResource(drawableResId);
+
+                drawable = fab.getDrawable();
+                ((AnimatedVectorDrawable) drawable).start();
+            }
+        }
+
+        fab.setSelected(!fab.isSelected());
     }
 
 }
