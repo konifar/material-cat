@@ -33,7 +33,7 @@ Cat photos app for Material Design Animation tranining.
 
 
 # Thanks
-This library use following Material design support libraries for pre-lollipop.
+This app uses following Material design support libraries for pre-lollipop.
 * [CircularReveal](https://github.com/ozodrukh/CircularReveal)
 * [NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)
 * [materialish-progress](https://github.com/pnikosis/materialish-progress)
