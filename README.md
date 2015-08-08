@@ -8,15 +8,23 @@ Cat photos app for Material Design Animation tranining.
 
 # Material Animations
 ## Ripple Effect
+[Responsive interaction](https://www.google.com/design/spec/animation/responsive-interaction.html#responsive-interaction-user-input) in Material Design Spec.
+
 ![Demo1](art/ripple.gif)
 
 ## Reveal Animation
+[Meaningful Transitions](https://www.google.com/design/spec/animation/meaningful-transitions.html) in Material Design Spec.
+
 ![Demo1](art/reveal.gif)
 
 ## Activity Transition (Shared Element)
+[Meaningful Transitions](https://www.google.com/design/spec/animation/meaningful-transitions.html) in Material Design Spec.
+
 ![Demo1](art/trainsition_shared_element.gif)
 
 ## Animated Vector Drawable
+[Delightful details](https://www.google.com/design/spec/animation/delightful-details.html) in Material Design Spec.
+
 ![Demo1](art/vector_animate.gif)
 
 
