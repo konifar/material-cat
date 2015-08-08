@@ -38,6 +38,8 @@ import com.squareup.picasso.Target;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.codetail.animation.SupportAnimator;
+import io.codetail.animation.ViewAnimationUtils;
 
 public class PhotoDetailActivity extends AppCompatActivity {
 
@@ -247,45 +249,10 @@ public class PhotoDetailActivity extends AppCompatActivity {
                         // AppBarLayout is set invisible, because AppbarLayout has default background color.
                         appBarLayout.setVisibility(View.VISIBLE);
                         imgPreview.setVisibility(View.VISIBLE);
-                        hideDummyImage();
+                        revealPreview();
                         FabAnimationUtils.scaleIn(fab);
                     }
                 });
-    }
-
-    public void startExitAnimation() {
-        final boolean fadeOut;
-        if (getResources().getConfiguration().orientation != originalOrientation) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                imgPreviewDummy.setPivotX(imgPreviewDummy.getWidth() / 2);
-                imgPreviewDummy.setPivotY(imgPreviewDummy.getHeight() / 2);
-            } else {
-                AnimatorProxy proxy = AnimatorProxy.wrap(imgPreviewDummy);
-                proxy.setPivotX(imgPreviewDummy.getWidth() / 2);
-                proxy.setPivotY(imgPreviewDummy.getHeight() / 2);
-            }
-            leftDelta = 0;
-            topDelta = 0;
-            fadeOut = true;
-        } else {
-            fadeOut = false;
-        }
-
-        ViewPropertyAnimator.animate(imgPreviewDummy)
-                .setDuration(ANIMATION_DURATION)
-                .scaleX(widthScale).scaleY(heightScale)
-                .translationX(leftDelta).translationY(topDelta)
-                .setInterpolator(INTERPOLATOR)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        finish();
-                    }
-                });
-
-        if (fadeOut) {
-            ViewPropertyAnimator.animate(imgPreviewDummy).alpha(0);
-        }
     }
 
     @Override
@@ -309,31 +276,38 @@ public class PhotoDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void hideDummyImage() {
-        ViewPropertyAnimator.animate(imgPreviewDummy)
-                .alpha(0.0f)
-                .setDuration(350)
-                .setListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        //
-                    }
+    private void revealPreview() {
+        int cx = (imgPreviewDummy.getLeft() + imgPreviewDummy.getRight()) / 2;
+        int cy = (imgPreviewDummy.getTop() + imgPreviewDummy.getBottom()) / 2;
 
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        imgPreviewDummy.setVisibility(View.GONE);
-                    }
+        float finalRadius = (float) Math.hypot(cx, cy);
 
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                        //
-                    }
+        SupportAnimator animator =
+                ViewAnimationUtils.createCircularReveal(imgPreviewDummy, cx, cy, finalRadius, 0);
+        animator.setInterpolator(new FastOutSlowInInterpolator());
+        animator.setDuration(300);
+        animator.addListener(new SupportAnimator.AnimatorListener() {
+            @Override
+            public void onAnimationStart() {
+                imgPreview.setVisibility(View.VISIBLE);
+            }
 
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-                        //
-                    }
-                });
+            @Override
+            public void onAnimationEnd() {
+                imgPreviewDummy.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel() {
+                //
+            }
+
+            @Override
+            public void onAnimationRepeat() {
+                //
+            }
+        });
+        animator.start();
     }
 
     @OnClick(R.id.fab)

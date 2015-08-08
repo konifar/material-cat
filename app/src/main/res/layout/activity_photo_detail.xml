@@ -162,12 +162,18 @@
         app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="bottom|right|end" />
 
-    <com.konifar.materialcat.views.AspectRatioImageView
-        android:id="@+id/img_preview_dummy"
+    <io.codetail.widget.RevealFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:transitionName="@string/shared_element_photo"
-        app:imageRatio="1" />
+        android:layout_height="wrap_content">
+
+        <com.konifar.materialcat.views.AspectRatioImageView
+            android:id="@+id/img_preview_dummy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:transitionName="@string/shared_element_photo"
+            app:imageRatio="1" />
+
+    </io.codetail.widget.RevealFrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
