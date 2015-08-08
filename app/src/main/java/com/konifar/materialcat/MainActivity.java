@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
@@ -21,6 +22,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.konifar.fab_transformation.FabTransformation;
 import com.konifar.materialcat.utils.AppUtils;
+import com.konifar.materialcat.utils.ShareUtils;
 import com.konifar.materialcat.views.ShareBarView;
 import com.konifar.materialcat.views.adapters.CatsGridPagerAdappter;
 
@@ -110,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.action_link:
+                AppUtils.showWebPage(ShareUtils.REPOGITORY_URL, this);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -195,6 +200,12 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
 }

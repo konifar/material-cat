@@ -29,6 +29,8 @@
     <string name="not_supported">Your phone is not supported :(</string>
     <string name="copyed">Copyed!</string>
 
+    <string name="github_repo">GitHub repogitory</string>
+
     <!-- Shared elements -->
     <string name="shared_element_photo">photo_element</string>
 
