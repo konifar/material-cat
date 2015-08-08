@@ -41,7 +41,8 @@ This library use following libraries.
 
 # Developed By
 Yusuke Konishi (konifar) - <yahpeycoy0403@gmail.com>
-[@konifar](http://twitter.com/konifar)
+
+Twitter Account [@konifar](http://twitter.com/konifar)
 
 # License
 ```
