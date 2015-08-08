@@ -20,10 +20,12 @@ Cat photos app for Material Design Animation tranining.
 ![Demo1](art/vector_animate.gif)
 
 
-# Credits
+# Thanks
 This library use following libraries.
 * [CircularReveal](https://github.com/ozodrukh/CircularReveal)
 * [NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)
+* [materialish-progress](https://github.com/pnikosis/materialish-progress)
+* [fab-transformation](https://github.com/konifar/fab-transformation)
 
 # Developed By
 Yusuke Konishi (konifar) - <yahpeycoy0403@gmail.com>
