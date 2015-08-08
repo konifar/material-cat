@@ -160,7 +160,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
             });
         }
 
-        fab.setSelected(true);
+        onClickFab();
 
         initActivityTransitions();
     }
