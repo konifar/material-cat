@@ -249,8 +249,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
                         // AppBarLayout is set invisible, because AppbarLayout has default background color.
                         appBarLayout.setVisibility(View.VISIBLE);
                         imgPreview.setVisibility(View.VISIBLE);
-                        revealPreview();
-                        FabAnimationUtils.scaleIn(fab);
+                        revealOutDummyPreview();
                     }
                 });
     }
@@ -276,7 +275,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void revealPreview() {
+    private void revealOutDummyPreview() {
         int cx = (imgPreviewDummy.getLeft() + imgPreviewDummy.getRight()) / 2;
         int cy = (imgPreviewDummy.getTop() + imgPreviewDummy.getBottom()) / 2;
 
@@ -284,7 +283,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
 
         SupportAnimator animator =
                 ViewAnimationUtils.createCircularReveal(imgPreviewDummy, cx, cy, finalRadius, 0);
-        animator.setInterpolator(new FastOutSlowInInterpolator());
+        animator.setInterpolator(new LinearOutSlowInInterpolator());
         animator.setDuration(300);
         animator.addListener(new SupportAnimator.AnimatorListener() {
             @Override
@@ -295,6 +294,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd() {
                 imgPreviewDummy.setVisibility(View.GONE);
+                FabAnimationUtils.scaleIn(fab);
             }
 
             @Override
