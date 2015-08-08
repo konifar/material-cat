@@ -24,6 +24,9 @@
     <string name="is_family">Family\'s photo</string>
     <string name="pallete">Color pallete</string>
 
+    <string name="version_prefix">V</string>
+    <string name="coming_soon">Coming soon :)</string>
+
     <!-- Shared elements -->
     <string name="shared_element_photo">photo_element</string>
 
