@@ -19,15 +19,28 @@
             app:contentScrim="@color/theme500"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <com.konifar.materialcat.views.CustomKenBurnsView
-                android:id="@+id/img_preview"
+            <com.konifar.materialcat.views.AspectRatioImageView
+                android:id="@+id/img_preview_cover"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                android:transitionName="@string/shared_element_photo"
                 android:visibility="invisible"
-                app:imageRatio="1"
-                app:layout_collapseMode="parallax" />
+                app:imageRatio="1" />
+
+            <io.codetail.widget.RevealFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax">
+
+                <com.konifar.materialcat.views.CustomKenBurnsView
+                    android:id="@+id/img_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:transitionName="@string/shared_element_photo"
+                    android:visibility="invisible"
+                    app:imageRatio="1" />
+            </io.codetail.widget.RevealFrameLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -162,19 +175,13 @@
         app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="bottom|right|end" />
 
-    <io.codetail.widget.RevealFrameLayout
-        android:id="@+id/container_preview_dummy"
+
+    <com.konifar.materialcat.views.AspectRatioImageView
+        android:id="@+id/img_preview_dummy"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.konifar.materialcat.views.AspectRatioImageView
-            android:id="@+id/img_preview_dummy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:transitionName="@string/shared_element_photo"
-            app:imageRatio="1" />
-
-    </io.codetail.widget.RevealFrameLayout>
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/shared_element_photo"
+        app:imageRatio="1" />
 
 </android.support.design.widget.CoordinatorLayout>

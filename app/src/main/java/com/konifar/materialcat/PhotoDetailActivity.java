@@ -60,8 +60,8 @@ public class PhotoDetailActivity extends AppCompatActivity {
     Toolbar toolbar;
     @Bind(R.id.img_preview)
     CustomKenBurnsView imgPreview;
-    @Bind(R.id.container_preview_dummy)
-    View containerPreviewDummy;
+    @Bind(R.id.img_preview_cover)
+    ImageView imgPreviewCover;
     @Bind(R.id.img_preview_dummy)
     ImageView imgPreviewDummy;
     @Bind(R.id.fab)
@@ -132,6 +132,12 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 .placeholder(R.color.theme50)
                 .into(imgPreviewDummy);
 
+        // For circular reveal animation
+        Picasso.with(this)
+                .load(photo.getImageUrl())
+                .placeholder(R.color.theme50)
+                .into(imgPreviewCover);
+
         initPallete(photo);
 
         if (savedInstanceState == null) {
@@ -140,7 +146,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
             final int thumbnailWidth = bundle.getInt(EXTRA_WIDTH);
             final int thumbnailHeight = bundle.getInt(EXTRA_HEIGHT);
             originalOrientation = bundle.getInt(EXTRA_ORIENTATION);
-            ViewTreeObserver observer = containerPreviewDummy.getViewTreeObserver();
+            ViewTreeObserver observer = imgPreviewDummy.getViewTreeObserver();
             observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
                 public boolean onPreDraw() {
@@ -148,14 +154,14 @@ public class PhotoDetailActivity extends AppCompatActivity {
                     // fab.setVisibility(View.GONE);
                     FabAnimationUtils.scaleOut(fab, 50, null);
 
-                    containerPreviewDummy.getViewTreeObserver().removeOnPreDrawListener(this);
+                    imgPreviewDummy.getViewTreeObserver().removeOnPreDrawListener(this);
 
                     int[] screenLocation = new int[2];
-                    containerPreviewDummy.getLocationOnScreen(screenLocation);
+                    imgPreviewDummy.getLocationOnScreen(screenLocation);
                     leftDelta = thumbnailLeft - screenLocation[0];
                     topDelta = thumbnailTop - screenLocation[1];
-                    widthScale = (float) thumbnailWidth / (containerPreviewDummy.getWidth());
-                    heightScale = (float) thumbnailHeight / containerPreviewDummy.getHeight();
+                    widthScale = (float) thumbnailWidth / (imgPreviewDummy.getWidth());
+                    heightScale = (float) thumbnailHeight / imgPreviewDummy.getHeight();
 
                     startEnterAnimation();
 
@@ -224,14 +230,14 @@ public class PhotoDetailActivity extends AppCompatActivity {
 
     public void startEnterAnimation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            containerPreviewDummy.setPivotX(0);
-            containerPreviewDummy.setPivotY(0);
-            containerPreviewDummy.setScaleX(widthScale);
-            containerPreviewDummy.setScaleY(heightScale);
-            containerPreviewDummy.setTranslationX(leftDelta);
-            containerPreviewDummy.setTranslationY(topDelta);
+            imgPreviewDummy.setPivotX(0);
+            imgPreviewDummy.setPivotY(0);
+            imgPreviewDummy.setScaleX(widthScale);
+            imgPreviewDummy.setScaleY(heightScale);
+            imgPreviewDummy.setTranslationX(leftDelta);
+            imgPreviewDummy.setTranslationY(topDelta);
         } else {
-            AnimatorProxy proxy = AnimatorProxy.wrap(containerPreviewDummy);
+            AnimatorProxy proxy = AnimatorProxy.wrap(imgPreviewDummy);
             proxy.setPivotX(0);
             proxy.setPivotY(0);
             proxy.setScaleX(widthScale);
@@ -240,7 +246,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
             proxy.setTranslationY(topDelta);
         }
 
-        ViewPropertyAnimator.animate(containerPreviewDummy)
+        ViewPropertyAnimator.animate(imgPreviewDummy)
                 .setDuration(ANIMATION_DURATION)
                 .scaleX(1).scaleY(1)
                 .translationX(0).translationY(0)
@@ -251,7 +257,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
                         // AppBarLayout is set invisible, because AppbarLayout has default background color.
                         appBarLayout.setVisibility(View.VISIBLE);
                         imgPreview.setVisibility(View.VISIBLE);
-                        revealOutDummyPreview();
+                        revealPreview();
                     }
                 });
     }
@@ -277,25 +283,26 @@ public class PhotoDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void revealOutDummyPreview() {
-        int cx = (imgPreviewDummy.getLeft() + imgPreviewDummy.getRight()) / 2;
-        int cy = (imgPreviewDummy.getTop() + imgPreviewDummy.getBottom()) / 2;
+    private void revealPreview() {
+        int cx = (imgPreview.getLeft() + imgPreview.getRight()) / 2;
+        int cy = (imgPreview.getTop() + imgPreview.getBottom()) / 2;
 
         float finalRadius = (float) Math.hypot(cx, cy);
 
         SupportAnimator animator =
-                ViewAnimationUtils.createCircularReveal(imgPreviewDummy, cx, cy, finalRadius, 0);
-        animator.setInterpolator(new LinearOutSlowInInterpolator());
+                ViewAnimationUtils.createCircularReveal(imgPreview, cx, cy, 0, finalRadius);
+        animator.setInterpolator(INTERPOLATOR);
         animator.setDuration(300);
         animator.addListener(new SupportAnimator.AnimatorListener() {
             @Override
             public void onAnimationStart() {
+                imgPreviewDummy.setVisibility(View.GONE);
+                imgPreviewCover.setVisibility(View.VISIBLE);
                 imgPreview.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onAnimationEnd() {
-                imgPreviewDummy.setVisibility(View.GONE);
                 FabAnimationUtils.scaleIn(fab);
             }
 
