@@ -26,6 +26,8 @@
 
     <string name="version_prefix">V</string>
     <string name="coming_soon">Coming soon :)</string>
+    <string name="not_supported">Your phone is not supported :(</string>
+    <string name="copyed">Copyed!</string>
 
     <!-- Shared elements -->
     <string name="shared_element_photo">photo_element</string>

@@ -10,7 +10,7 @@ import com.konifar.materialcat.R;
 
 public class ShareUtils {
 
-    private static final String REPOGITORY_URL = "https://github.com/konifar/material-cat";
+    public static final String REPOGITORY_URL = "https://github.com/konifar/material-cat";
 
     public static void showShareDialog(@NonNull Activity activity) {
         if (!ShareDialog.canShow(ShareLinkContent.class)) return;
