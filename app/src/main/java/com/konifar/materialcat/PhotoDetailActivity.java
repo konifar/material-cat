@@ -103,7 +103,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_HEIGHT, transitionView.getHeight());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, null);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity);
             activity.startActivity(intent, options.toBundle());
         } else {
             activity.startActivity(intent);
