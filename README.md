@@ -1,6 +1,11 @@
 # Material Cat
 Cat photos app for Material Design Animation tranining.
 
+<a href="https://play.google.com/store/apps/details?id=com.konifar.materialcat">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+</a>
+
 # Material Animations
 ## Ripple Effect
 ![Demo1](art/ripple.gif)
