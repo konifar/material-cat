@@ -1,5 +1,6 @@
 package com.konifar.materialcat;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,12 +13,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
 import com.konifar.fab_transformation.FabTransformation;
 import com.konifar.materialcat.utils.AppUtils;
+import com.konifar.materialcat.utils.ShareUtils;
 import com.konifar.materialcat.views.ShareBarView;
 import com.konifar.materialcat.views.adapters.CatsGridPagerAdappter;
 
@@ -44,12 +49,16 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
 
     private ActionBarDrawerToggle drawerToggle;
     private boolean isTransforming;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
@@ -102,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.action_link:
+                AppUtils.showWebPage(ShareUtils.REPOGITORY_URL, this);
                 return true;
         }
 
@@ -162,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+        //
     }
 
     @Override
@@ -182,6 +194,18 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
                     })
                     .transformFrom(shareBar);
         }
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
 }
