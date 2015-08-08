@@ -22,8 +22,8 @@
         android:layout_alignTop="@id/img_preview"
         app:mrl_rippleAlpha="0.6"
         app:mrl_rippleColor="@color/accent100"
-        app:mrl_rippleDuration="350"
-        app:mrl_rippleFadeDuration="100"
+        app:mrl_rippleDuration="300"
+        app:mrl_rippleFadeDuration="75"
         app:mrl_rippleInAdapter="true">
 
         <View

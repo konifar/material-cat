@@ -18,7 +18,7 @@ public interface FlickrApiService {
     @GET("/services/rest?method=flickr.photos.search&api_key=" + Constants.FLICKR_API_KEY + "&format=json&nojsoncallback=1")
     void photosSearch(@Query("text") String text,
                       @Query("page") Integer page,
-                      @Query("perpage") Integer perpage,
+                      @Query("per_page") Integer perpage,
                       @Query("sort") String sort,
                       Callback<PhotoSource> cb);
 
