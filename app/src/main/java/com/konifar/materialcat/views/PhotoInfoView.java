@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.konifar.materialcat.R;
@@ -13,7 +13,7 @@ import com.konifar.materialcat.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PhotoInfoView extends RelativeLayout {
+public class PhotoInfoView extends FrameLayout {
 
     @Bind(R.id.img_icon)
     ImageView imgIcon;
