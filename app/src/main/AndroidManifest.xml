@@ -34,9 +34,25 @@
             android:label="@string/app_name"
             android:theme="@style/NoActionBarTheme.Transparent" />
 
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <meta-data
             android:name="com.crashlytics.ApiKey"
             android:value="eef593299f106222b116410ba972260f992134e5" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider464110687102972"
+            android:exported="true" />
+
     </application>
 
 </manifest>
