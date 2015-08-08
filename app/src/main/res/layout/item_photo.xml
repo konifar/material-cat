@@ -23,7 +23,9 @@
         app:mrl_rippleAlpha="0.6"
         app:mrl_rippleColor="@color/accent100"
         app:mrl_rippleDuration="350"
-        app:mrl_rippleFadeDuration="150">
+        app:mrl_rippleFadeDuration="100"
+        app:mrl_rippleHover="true"
+        app:mrl_rippleInAdapter="true">
 
         <View
             android:layout_width="match_parent"

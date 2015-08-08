@@ -153,21 +153,27 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
+        style="@style/FabMargin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
         android:src="@drawable/ic_play_to_pause"
         android:visibility="gone"
         app:backgroundTint="@color/accent100"
         app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="bottom|right|end" />
 
-    <com.konifar.materialcat.views.AspectRatioImageView
-        android:id="@+id/img_preview_dummy"
+    <io.codetail.widget.RevealFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:transitionName="@string/shared_element_photo"
-        app:imageRatio="1" />
+        android:layout_height="wrap_content">
+
+        <com.konifar.materialcat.views.AspectRatioImageView
+            android:id="@+id/img_preview_dummy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:transitionName="@string/shared_element_photo"
+            app:imageRatio="1" />
+
+    </io.codetail.widget.RevealFrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
