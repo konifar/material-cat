@@ -1,13 +1,6 @@
 # Material Cat
 Cat photos app for Material Design Animation tranining.
 
-# Screenshot
-## MainActivity
-![Demo1](art/screenshot_main.png)
-
-## PhotoDetailActivity
-![Demo2](art/screenshot_detail.png)
-
 # Material Animations
 ## Ripple Effect
 ![Demo1](art/ripple.gif)
