@@ -60,6 +60,8 @@ public class PhotoDetailActivity extends AppCompatActivity {
     Toolbar toolbar;
     @Bind(R.id.img_preview)
     CustomKenBurnsView imgPreview;
+    @Bind(R.id.container_preview_dummy)
+    View containerPreviewDummy;
     @Bind(R.id.img_preview_dummy)
     ImageView imgPreviewDummy;
     @Bind(R.id.fab)
@@ -110,7 +112,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
         } else {
             activity.startActivity(intent);
         }
-        activity.overridePendingTransition(0, R.anim.activity_scale_start_exit);
+        activity.overridePendingTransition(0, R.anim.activity_fade_out);
     }
 
     @Override
@@ -138,7 +140,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
             final int thumbnailWidth = bundle.getInt(EXTRA_WIDTH);
             final int thumbnailHeight = bundle.getInt(EXTRA_HEIGHT);
             originalOrientation = bundle.getInt(EXTRA_ORIENTATION);
-            ViewTreeObserver observer = imgPreviewDummy.getViewTreeObserver();
+            ViewTreeObserver observer = containerPreviewDummy.getViewTreeObserver();
             observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
                 public boolean onPreDraw() {
@@ -146,14 +148,14 @@ public class PhotoDetailActivity extends AppCompatActivity {
                     // fab.setVisibility(View.GONE);
                     FabAnimationUtils.scaleOut(fab, 50, null);
 
-                    imgPreviewDummy.getViewTreeObserver().removeOnPreDrawListener(this);
+                    containerPreviewDummy.getViewTreeObserver().removeOnPreDrawListener(this);
 
                     int[] screenLocation = new int[2];
-                    imgPreviewDummy.getLocationOnScreen(screenLocation);
+                    containerPreviewDummy.getLocationOnScreen(screenLocation);
                     leftDelta = thumbnailLeft - screenLocation[0];
                     topDelta = thumbnailTop - screenLocation[1];
-                    widthScale = (float) thumbnailWidth / (imgPreviewDummy.getWidth());
-                    heightScale = (float) thumbnailHeight / imgPreviewDummy.getHeight();
+                    widthScale = (float) thumbnailWidth / (containerPreviewDummy.getWidth());
+                    heightScale = (float) thumbnailHeight / containerPreviewDummy.getHeight();
 
                     startEnterAnimation();
 
@@ -222,14 +224,14 @@ public class PhotoDetailActivity extends AppCompatActivity {
 
     public void startEnterAnimation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            imgPreviewDummy.setPivotX(0);
-            imgPreviewDummy.setPivotY(0);
-            imgPreviewDummy.setScaleX(widthScale);
-            imgPreviewDummy.setScaleY(heightScale);
-            imgPreviewDummy.setTranslationX(leftDelta);
-            imgPreviewDummy.setTranslationY(topDelta);
+            containerPreviewDummy.setPivotX(0);
+            containerPreviewDummy.setPivotY(0);
+            containerPreviewDummy.setScaleX(widthScale);
+            containerPreviewDummy.setScaleY(heightScale);
+            containerPreviewDummy.setTranslationX(leftDelta);
+            containerPreviewDummy.setTranslationY(topDelta);
         } else {
-            AnimatorProxy proxy = AnimatorProxy.wrap(imgPreviewDummy);
+            AnimatorProxy proxy = AnimatorProxy.wrap(containerPreviewDummy);
             proxy.setPivotX(0);
             proxy.setPivotY(0);
             proxy.setScaleX(widthScale);
@@ -238,7 +240,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
             proxy.setTranslationY(topDelta);
         }
 
-        ViewPropertyAnimator.animate(imgPreviewDummy)
+        ViewPropertyAnimator.animate(containerPreviewDummy)
                 .setDuration(ANIMATION_DURATION)
                 .scaleX(1).scaleY(1)
                 .translationX(0).translationY(0)

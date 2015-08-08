@@ -163,6 +163,7 @@
         app:layout_anchorGravity="bottom|right|end" />
 
     <io.codetail.widget.RevealFrameLayout
+        android:id="@+id/container_preview_dummy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
