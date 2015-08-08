@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AbsListView;
 
 import com.konifar.fab_transformation.FabTransformation;
+import com.konifar.materialcat.utils.AppUtils;
 import com.konifar.materialcat.views.ShareBarView;
 import com.konifar.materialcat.views.adapters.CatsGridPagerAdappter;
 
@@ -76,8 +77,10 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
                     case R.id.nav_home:
                         return true;
                     case R.id.nav_favorite:
+                        AppUtils.showToast(R.string.coming_soon, MainActivity.this);
                         return true;
                     case R.id.nav_settings:
+                        AppUtils.showToast(R.string.coming_soon, MainActivity.this);
                         return true;
                 }
 
