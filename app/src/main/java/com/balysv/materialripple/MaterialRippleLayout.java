@@ -55,18 +55,18 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class MaterialRippleLayout extends FrameLayout {
 
-    private static final int DEFAULT_DURATION = 350;
-    private static final int DEFAULT_FADE_DURATION = 75;
-    private static final float DEFAULT_DIAMETER_DP = 35;
-    private static final float DEFAULT_ALPHA = 0.2f;
-    private static final int DEFAULT_COLOR = Color.BLACK;
-    private static final int DEFAULT_BACKGROUND = Color.TRANSPARENT;
-    private static final boolean DEFAULT_HOVER = true;
-    private static final boolean DEFAULT_DELAY_CLICK = true;
-    private static final boolean DEFAULT_PERSISTENT = false;
-    private static final boolean DEFAULT_SEARCH_ADAPTER = false;
-    private static final boolean DEFAULT_RIPPLE_OVERLAY = false;
-    private static final int DEFAULT_ROUNDED_CORNERS = 0;
+    private static final int DEFAULT_DURATION = 350,
+                             DEFAULT_FADE_DURATION = 75,
+                             DEFAULT_COLOR = Color.BLACK,
+                             DEFAULT_BACKGROUND = Color.TRANSPARENT,
+                             DEFAULT_ROUNDED_CORNERS = 0;
+    private static final float DEFAULT_DIAMETER_DP = 35,
+                               DEFAULT_ALPHA = 0.2f;
+    private static final boolean DEFAULT_HOVER = true,
+                                 DEFAULT_DELAY_CLICK = true,
+                                 DEFAULT_PERSISTENT = false,
+                                 DEFAULT_SEARCH_ADAPTER = false,
+                                 DEFAULT_RIPPLE_OVERLAY = false;
 
     private static final int FADE_EXTRA_DELAY = 50;
     private static final long HOVER_DURATION = 2500;
