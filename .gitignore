@@ -9,9 +9,9 @@
 app/build/
 *.jks
 *.apk
+keys.gradle
 
 class_files.txt
 mapping.txt
 seeds.txt
 unused.txt
-EnvConstants.java

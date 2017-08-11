@@ -1,0 +1,8 @@
+class ApiKey {
+    def flickrApiDebugKey = "92026ec47dec235cd07da78305a4da89"
+    def flickrApiReleaseKey = "92026ec47dec235cd07da78305a4da89"
+}
+
+ext {
+    keys = new ApiKey()
+}
