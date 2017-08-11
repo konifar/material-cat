@@ -114,7 +114,7 @@ public class CatsGridFragment extends Fragment {
 
     private void showList(final int page) {
         if (page > 1) loadingFooter.switchVisible(true);
-        PhotoModel.getInstance(getActivity()).getCatPhotos(page, sort);
+        PhotoModel.Companion.getInstance(getActivity()).getCatPhotos(page, sort);
     }
 
     private void initListViewScrollListener() {
