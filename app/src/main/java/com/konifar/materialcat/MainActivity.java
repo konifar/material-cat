@@ -86,10 +86,10 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
                     case R.id.nav_home:
                         return true;
                     case R.id.nav_favorite:
-                        AppUtils.showToast(R.string.coming_soon, MainActivity.this);
+                        AppUtils.INSTANCE.showToast(R.string.coming_soon, MainActivity.this);
                         return true;
                     case R.id.nav_settings:
-                        AppUtils.showToast(R.string.coming_soon, MainActivity.this);
+                        AppUtils.INSTANCE.showToast(R.string.coming_soon, MainActivity.this);
                         return true;
                 }
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements AbsListView.OnScr
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.action_link:
-                AppUtils.showWebPage(ShareUtils.REPOGITORY_URL, this);
+                AppUtils.INSTANCE.showWebPage(ShareUtils.INSTANCE.getREPOGITORY_URL(), this);
                 return true;
         }
 

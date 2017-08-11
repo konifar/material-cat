@@ -152,7 +152,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
                 public boolean onPreDraw() {
                     // TODO setVisibility(View.gone) does not work...
                     // fab.setVisibility(View.GONE);
-                    FabAnimationUtils.scaleOut(fab, 50, null);
+                    FabAnimationUtils.INSTANCE.scaleOut(fab, 50, null);
 
                     imgPreviewDummy.getViewTreeObserver().removeOnPreDrawListener(this);
 
@@ -303,7 +303,7 @@ public class PhotoDetailActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd() {
-                FabAnimationUtils.scaleIn(fab);
+                FabAnimationUtils.INSTANCE.scaleIn(fab);
             }
 
             @Override

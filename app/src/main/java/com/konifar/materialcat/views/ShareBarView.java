@@ -30,35 +30,35 @@ public class ShareBarView extends LinearLayout {
     @OnClick(R.id.btn_email)
     void onClickBtnEmail() {
         String[] mails = new String[1];
-        AppUtils.openMailChooser(getContext(), ShareUtils.REPOGITORY_URL, mails,
+        AppUtils.INSTANCE.openMailChooser(getContext(), ShareUtils.INSTANCE.getREPOGITORY_URL(), mails,
                 getContext().getString(R.string.app_name));
     }
 
     @OnClick(R.id.btn_copy)
     void onClickBtnCopy() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            ClipData clip = ClipData.newPlainText("simple text", ShareUtils.REPOGITORY_URL);
-            AppUtils.showToast(R.string.copyed, getContext());
+            ClipData clip = ClipData.newPlainText("simple text", ShareUtils.INSTANCE.getREPOGITORY_URL());
+            AppUtils.INSTANCE.showToast(R.string.copyed, getContext());
         } else {
-            AppUtils.showToast(R.string.not_supported, getContext());
+            AppUtils.INSTANCE.showToast(R.string.not_supported, getContext());
         }
     }
 
     @OnClick(R.id.btn_google_plus)
     void onClickBtnGooglePlus() {
         // TODO
-        AppUtils.showToast(R.string.coming_soon, getContext());
+        AppUtils.INSTANCE.showToast(R.string.coming_soon, getContext());
     }
 
     @OnClick(R.id.btn_facebook)
     void onClickBtnFacebook() {
-        ShareUtils.showShareDialog((Activity) getContext());
+        ShareUtils.INSTANCE.showShareDialog((Activity) getContext());
     }
 
     @OnClick(R.id.btn_twitter)
     void onClickTwitter() {
         // TODO
-        AppUtils.showToast(R.string.coming_soon, getContext());
+        AppUtils.INSTANCE.showToast(R.string.coming_soon, getContext());
     }
 
 }
