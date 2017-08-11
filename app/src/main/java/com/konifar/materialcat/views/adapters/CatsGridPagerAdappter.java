@@ -24,8 +24,8 @@ public class CatsGridPagerAdappter extends FragmentPagerAdapter {
         titles.add(context.getString(R.string.news));
 
         fragments = new ArrayList<>();
-        fragments.add(CatsGridFragment.newInstance(FlickrApiService.SORT_INTERESTINGNESS_DESC));
-        fragments.add(CatsGridFragment.newInstance(FlickrApiService.SORT_DATE_POSTED_DESC));
+        fragments.add(CatsGridFragment.newInstance(FlickrApiService.Companion.getSORT_INTERESTINGNESS_DESC()));
+        fragments.add(CatsGridFragment.newInstance(FlickrApiService.Companion.getSORT_DATE_POSTED_DESC()));
     }
 
     @Override
