@@ -6,10 +6,8 @@ import android.content.Intent
 import android.content.pm.LabeledIntent
 import android.net.Uri
 import android.text.TextUtils
-import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
-import com.konifar.materialcat.R
 import java.util.*
 
 object AppUtils {
@@ -42,18 +40,7 @@ object AppUtils {
         showToast(context.resources.getString(stringResId), context)
     }
 
-    fun getVersionName(context: Context): String {
-        try {
-            val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-            return context.getString(R.string.version_prefix, packageInfo.versionName)
-        } catch (e: Exception) {
-            Log.e(TAG, e.message + "")
-            return ""
-        }
-
-    }
-
-    fun openMailChooser(context: Context, text: String, mails: Array<String>, subject: String) {
+    fun openMailChooser(context: Context, text: String, mails: Array<String?>, subject: String) {
         val mailIntent = Intent()
         mailIntent.action = Intent.ACTION_SEND
         mailIntent.putExtra(Intent.EXTRA_TEXT, text)
@@ -106,27 +93,6 @@ object AppUtils {
         val uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         context.startActivity(intent)
-    }
-
-    fun getGooglePlayUrl(utmSource: String?, utmContent: String?): String {
-        val builder = Uri.Builder()
-        builder.scheme("https")
-        builder.authority("play.google.com")
-        builder.path("/store/apps/details")
-        builder.appendQueryParameter("id", "com.konifar.materialcat")
-
-        if (utmSource != null && utmContent != null) {
-            val sb = StringBuffer()
-            sb.append("utm_source=")
-            sb.append(utmSource)
-            sb.append("&utm_medium=direct")
-            sb.append("&")
-            sb.append("utm_content=")
-            sb.append(utmContent)
-            builder.appendQueryParameter("referrer", sb.toString())
-        }
-
-        return builder.build().toString()
     }
 
 }

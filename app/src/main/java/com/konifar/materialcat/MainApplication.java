@@ -14,8 +14,8 @@ import retrofit.converter.GsonConverter;
 public class MainApplication extends Application {
 
     public static final FlickrApiService FLICKR_API = new RestAdapter.Builder()
-            .setEndpoint(Constants.FLICKR_ENDPOINT)
-            .setConverter(new GsonConverter(new GsonBuilder().setDateFormat(Constants.JSON_DATE_FORMAT).create()))
+            .setEndpoint(Constants.INSTANCE.getFLICKR_ENDPOINT())
+            .setConverter(new GsonConverter(new GsonBuilder().setDateFormat(Constants.INSTANCE.getJSON_DATE_FORMAT()).create()))
             .build()
             .create(FlickrApiService.class);
 
