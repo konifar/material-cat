@@ -1,32 +1,36 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
+        android:layout_height="match_parent">
 
-        <jp.co.recruit_mp.android.widget.HeaderFooterGridView
-            android:id="@+id/grid_view"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:horizontalSpacing="@dimen/line"
-            android:numColumns="3"
-            android:verticalSpacing="@dimen/line" />
+            android:layout_below="@id/toolbar">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <jp.co.recruit_mp.android.widget.HeaderFooterGridView
+                android:id="@+id/grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:horizontalSpacing="@dimen/line"
+                android:numColumns="3"
+                android:verticalSpacing="@dimen/line" />
 
-    <FrameLayout
-        android:id="@+id/loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:layout_centerInParent="true">
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-        <include layout="@layout/part_loading" />
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_centerInParent="true">
 
-</RelativeLayout>
+            <include layout="@layout/part_loading" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</layout>

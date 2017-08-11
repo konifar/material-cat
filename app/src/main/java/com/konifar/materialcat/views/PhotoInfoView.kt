@@ -1,30 +1,22 @@
 package com.konifar.materialcat.views
 
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
-import butterknife.Bind
-import butterknife.ButterKnife
 import com.konifar.materialcat.R
+import com.konifar.materialcat.databinding.UiPhotoInfoBinding
 
 class PhotoInfoView : FrameLayout {
 
-    @Bind(R.id.img_icon)
-    internal var imgIcon: ImageView? = null
-    @Bind(R.id.txt_title)
-    internal var txtTitle: TextView? = null
-    @Bind(R.id.txt_sub)
-    internal var txtSub: TextView? = null
+    lateinit var binding: UiPhotoInfoBinding
 
     constructor(context: Context) : super(context) {}
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        View.inflate(context, R.layout.ui_photo_info, this)
-        ButterKnife.bind(this)
+        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.ui_photo_info, this, true)
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.PhotoInfoView)
         try {
@@ -39,13 +31,13 @@ class PhotoInfoView : FrameLayout {
     }
 
     private fun bindData(iconSrc: Drawable?, titleText: String?, subText: String?) {
-        if (iconSrc != null) imgIcon!!.setImageDrawable(iconSrc)
-        if (titleText != null) txtTitle!!.text = titleText
-        if (subText != null) txtSub!!.text = subText
+        if (iconSrc != null) binding.imgIcon.setImageDrawable(iconSrc)
+        if (titleText != null) binding.txtTitle.text = titleText
+        if (subText != null) binding.txtSub.text = subText
     }
 
     fun setTitleText(text: String) {
-        txtTitle!!.text = text
+        binding.txtTitle.text = text
     }
 
 }
