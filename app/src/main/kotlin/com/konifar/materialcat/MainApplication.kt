@@ -5,13 +5,19 @@ import android.content.Context
 
 import com.crashlytics.android.Crashlytics
 import com.google.gson.GsonBuilder
-import com.konifar.materialcat.network.FlickrApiService
+import com.konifar.materialcat.infra.network.FlickrApiService
 
 import io.fabric.sdk.android.Fabric
 import retrofit.RestAdapter
 import retrofit.converter.GsonConverter
 
 class MainApplication : Application() {
+
+    val applicationComponent: ApplicationComponent by lazy {
+        DaggerApplicationComponent.builder().apply {
+            applicationModule(ApplicationModule(this@MainApplication))
+        }.build()
+    }
 
     override fun onCreate() {
         super.onCreate()

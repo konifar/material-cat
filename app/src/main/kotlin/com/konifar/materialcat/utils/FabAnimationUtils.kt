@@ -37,7 +37,7 @@ object FabAnimationUtils {
                         }
                     }).start()
         } else {
-            val anim = AnimationUtils.loadAnimation(fab.context, R.anim.fab_in)
+            val anim = AnimationUtils.loadAnimation(fab.context, R.anim.design_fab_in)
             anim.duration = duration
             anim.interpolator = FAST_OUT_SLOW_IN_INTERPOLATOR
             anim.setAnimationListener(object : Animation.AnimationListener {
@@ -83,7 +83,7 @@ object FabAnimationUtils {
                         }
                     }).start()
         } else {
-            val anim = AnimationUtils.loadAnimation(fab.context, R.anim.fab_out)
+            val anim = AnimationUtils.loadAnimation(fab.context, R.anim.design_fab_out)
             anim.interpolator = FAST_OUT_SLOW_IN_INTERPOLATOR
             anim.duration = duration
             anim.setAnimationListener(object : Animation.AnimationListener {

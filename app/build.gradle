@@ -6,13 +6,13 @@ apply plugin: 'io.fabric'
 apply from: "${rootDir.absolutePath}/keys.gradle"
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 25
     buildToolsVersion '25.0.3'
 
     defaultConfig {
         applicationId "com.konifar.materialcat"
         minSdkVersion 10
-        targetSdkVersion 22
+        targetSdkVersion 25
         versionCode 2
         versionName "1.0.1"
     }
@@ -45,10 +45,10 @@ dependencies {
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    compile 'com.android.support:support-v4:22.2.1'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:palette-v7:22.2.1'
-    compile 'com.android.support:design:22.2.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:palette-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
 
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
@@ -68,4 +68,8 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.3.0'
 
     kapt "com.android.databinding:compiler:$gradle_version"
+
+    // Structure
+    compile 'com.google.dagger:dagger:2.9'
+    kapt 'com.google.dagger:dagger-compiler:2.9'
 }
