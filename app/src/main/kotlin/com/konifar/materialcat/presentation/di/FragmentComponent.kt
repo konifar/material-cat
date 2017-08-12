@@ -1,6 +1,6 @@
 package com.konifar.materialcat.presentation.di
 
-import com.konifar.materialcat.presentation.views.fragments.CatsGridFragment
+import com.konifar.materialcat.views.fragments.CatsGridFragment
 import dagger.Subcomponent
 
 @FragmentScope

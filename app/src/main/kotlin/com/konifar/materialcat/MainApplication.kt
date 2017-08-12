@@ -5,7 +5,7 @@ import android.content.Context
 
 import com.crashlytics.android.Crashlytics
 import com.google.gson.GsonBuilder
-import com.konifar.materialcat.infra.network.FlickrApiService
+import com.konifar.materialcat.network.FlickrApiService
 
 import io.fabric.sdk.android.Fabric
 import retrofit.RestAdapter
