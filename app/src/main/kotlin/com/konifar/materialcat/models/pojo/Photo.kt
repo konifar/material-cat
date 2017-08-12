@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 class Photo : Model() {
 
     @SerializedName("id")
-    val id: String? = null
+    lateinit var id: String
     @SerializedName("owner")
-    val owner: String? = null
+    lateinit var owner: String
     @SerializedName("secret")
-    val secret: String? = null
+    lateinit var secret: String
     @SerializedName("server")
-    val server: String? = null
+    lateinit var server: String
     @SerializedName("farm")
     val farm: Int = 0
     @SerializedName("title")
-    val title: String? = null
+    lateinit var title: String
     @SerializedName("ispublic")
     private val isPublic: Int = 0
     @SerializedName("isfriend")
