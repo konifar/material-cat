@@ -1,187 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            app:contentScrim="@color/theme500"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content"
+            android:visibility="invisible">
 
-            <com.konifar.materialcat.views.AspectRatioImageView
-                android:id="@+id/img_preview_cover"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:visibility="invisible"
-                app:imageRatio="1" />
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                app:contentScrim="@color/theme500"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <io.codetail.widget.RevealFrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_collapseMode="parallax">
-
-                <com.konifar.materialcat.views.CustomKenBurnsView
-                    android:id="@+id/img_preview"
+                <com.konifar.materialcat.views.AspectRatioImageView
+                    android:id="@+id/img_preview_cover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:transitionName="@string/shared_element_photo"
                     android:visibility="invisible"
                     app:imageRatio="1" />
-            </io.codetail.widget.RevealFrameLayout>
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                <io.codetail.widget.RevealFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="parallax">
+
+                    <com.konifar.materialcat.views.CustomKenBurnsView
+                        android:id="@+id/img_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:transitionName="@string/shared_element_photo"
+                        android:visibility="invisible"
+                        app:imageRatio="1" />
+                </io.codetail.widget.RevealFrameLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nested_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+                <TextView
+                    style="@style/TextTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing"
+                    android:text="@string/colors"
+                    android:textSize="@dimen/text_xlarge" />
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <View style="@style/Border" />
 
-        <LinearLayout
+                <com.konifar.materialcat.views.ColorPalleteView
+                    android:id="@+id/color_pallete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/TextTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing"
+                    android:padding="@dimen/spacing"
+                    android:text="@string/photo_data"
+                    android:textSize="@dimen/text_xlarge" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_format_list_numbered_cyan_500_24dp"
+                    app:subText="@string/identifier" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_person_cyan_500_24dp"
+                    app:subText="@string/owner" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_secret"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_vpn_key_cyan_500_24dp"
+                    app:subText="@string/secret" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_subtitles_cyan_500_24dp"
+                    app:subText="@string/title" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_server"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_computer_cyan_500_24dp"
+                    app:subText="@string/server" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_public"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_public_cyan_500_24dp"
+                    app:subText="@string/is_public" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_people_cyan_500_24dp"
+                    app:subText="@string/is_friend" />
+
+                <View style="@style/Border.SpaceLeft" />
+
+                <com.konifar.materialcat.views.PhotoInfoView
+                    android:id="@+id/photo_info_family"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSrc="@drawable/ic_visibility_cyan_500_24dp"
+                    app:subText="@string/is_family" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            style="@style/FabMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_to_pause"
+            android:visibility="gone"
+            app:backgroundTint="@color/accent100"
+            app:layout_anchor="@+id/app_bar"
+            app:layout_anchorGravity="bottom|right|end" />
+
+
+        <com.konifar.materialcat.views.AspectRatioImageView
+            android:id="@+id/img_preview_dummy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:scaleType="centerCrop"
+            android:transitionName="@string/shared_element_photo"
+            app:imageRatio="1" />
 
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing"
-                android:text="@string/colors"
-                android:textSize="@dimen/text_xlarge" />
+    </android.support.design.widget.CoordinatorLayout>
 
-            <View style="@style/Border" />
-
-            <com.konifar.materialcat.views.ColorPalleteView
-                android:id="@+id/color_pallete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                style="@style/TextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing"
-                android:padding="@dimen/spacing"
-                android:text="@string/photo_data"
-                android:textSize="@dimen/text_xlarge" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_format_list_numbered_cyan_500_24dp"
-                app:subText="@string/identifier" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_owner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_person_cyan_500_24dp"
-                app:subText="@string/owner" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_secret"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_vpn_key_cyan_500_24dp"
-                app:subText="@string/secret" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_subtitles_cyan_500_24dp"
-                app:subText="@string/title" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_server"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_computer_cyan_500_24dp"
-                app:subText="@string/server" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_public"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_public_cyan_500_24dp"
-                app:subText="@string/is_public" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_friend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_people_cyan_500_24dp"
-                app:subText="@string/is_friend" />
-
-            <View style="@style/Border.SpaceLeft" />
-
-            <com.konifar.materialcat.views.PhotoInfoView
-                android:id="@+id/photo_info_family"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconSrc="@drawable/ic_visibility_cyan_500_24dp"
-                app:subText="@string/is_family" />
-
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        style="@style/FabMargin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_play_to_pause"
-        android:visibility="gone"
-        app:backgroundTint="@color/accent100"
-        app:layout_anchor="@+id/app_bar"
-        app:layout_anchorGravity="bottom|right|end" />
-
-
-    <com.konifar.materialcat.views.AspectRatioImageView
-        android:id="@+id/img_preview_dummy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:transitionName="@string/shared_element_photo"
-        app:imageRatio="1" />
-
-</android.support.design.widget.CoordinatorLayout>
+</layout>
