@@ -17,7 +17,9 @@ import com.konifar.materialcat.models.PhotoModel
 import com.konifar.materialcat.views.ListLoadingView
 import com.konifar.materialcat.views.adapters.PhotosArrayAdapter
 import com.konifar.materialcat.views.listeners.OnLoadMoreScrollListener
-import de.greenrobot.event.EventBus
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class CatsGridFragment : Fragment() {
 
@@ -93,6 +95,7 @@ class CatsGridFragment : Fragment() {
         })
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: PhotoSearchCallbackEvent) {
         if (sort != event.sort) return
 

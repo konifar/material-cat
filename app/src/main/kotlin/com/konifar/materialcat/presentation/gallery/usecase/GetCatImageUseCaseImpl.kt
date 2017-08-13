@@ -1,9 +1,9 @@
-package com.konifar.materialcat.presentation.usecase.gallery
+package com.konifar.materialcat.presentation.gallery.usecase
 
 import com.konifar.materialcat.infra.repository.catphoto.CatImageRepository
-import de.greenrobot.event.EventBus
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
+import org.greenrobot.eventbus.EventBus
 
 class GetCatImageUseCaseImpl(
         val eventBus: EventBus,
@@ -11,9 +11,17 @@ class GetCatImageUseCaseImpl(
         private val catImageRepository: CatImageRepository
 ) : GetCatImagesUseCase {
 
-    override fun requestGetPopular(text: String, page: Int, perPage: Int) {
+    companion object {
+        private val SEARCH_TEXT = "cat"
+    }
+
+    override fun eventBus(): EventBus {
+        return eventBus
+    }
+
+    override fun requestGetPopular(page: Int, perPage: Int) {
         compositeDisposable.add(
-                catImageRepository.findByTextOrderByPopular(text, page, perPage)
+                catImageRepository.findByTextOrderByPopular(SEARCH_TEXT, page, perPage)
                         .subscribeBy(
                                 onNext = { eventBus.postSticky(GetCatImagesUseCase.GetPopularCatImagesSuccessEvent(it)) },
                                 onError = { eventBus.postSticky(GetCatImagesUseCase.GetPopularCatImagesFailureEvent(it)) }
@@ -21,9 +29,9 @@ class GetCatImageUseCaseImpl(
         )
     }
 
-    override fun requestGetNew(text: String, page: Int, perPage: Int) {
+    override fun requestGetNew(page: Int, perPage: Int) {
         compositeDisposable.add(
-                catImageRepository.findByTextOrderByNew(text, page, perPage)
+                catImageRepository.findByTextOrderByNew(SEARCH_TEXT, page, perPage)
                         .subscribeBy(
                                 onNext = { eventBus.postSticky(GetCatImagesUseCase.GetNewCatImagesSuccessEvent(it)) },
                                 onError = { eventBus.postSticky(GetCatImagesUseCase.GetNewCatImagesFailureEvent(it)) }

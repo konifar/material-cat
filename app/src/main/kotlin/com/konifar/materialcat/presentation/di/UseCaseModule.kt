@@ -1,12 +1,12 @@
 package com.konifar.materialcat.presentation.di
 
 import com.konifar.materialcat.infra.repository.catphoto.CatImageRepository
-import com.konifar.materialcat.presentation.usecase.gallery.GetCatImageUseCaseImpl
-import com.konifar.materialcat.presentation.usecase.gallery.GetCatImagesUseCase
+import com.konifar.materialcat.presentation.gallery.usecase.GetCatImageUseCaseImpl
+import com.konifar.materialcat.presentation.gallery.usecase.GetCatImagesUseCase
 import dagger.Module
 import dagger.Provides
-import de.greenrobot.event.EventBus
 import io.reactivex.disposables.CompositeDisposable
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Named
 
 

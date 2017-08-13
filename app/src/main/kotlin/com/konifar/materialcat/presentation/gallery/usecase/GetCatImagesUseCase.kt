@@ -1,14 +1,17 @@
-package com.konifar.materialcat.presentation.usecase.gallery
+package com.konifar.materialcat.presentation.gallery.usecase
 
 import com.konifar.materialcat.domain.gallery.model.CatImage
 import com.konifar.materialcat.presentation.FailureEvent
 import com.konifar.materialcat.presentation.UseCase
+import org.greenrobot.eventbus.EventBus
 
-interface GetCatImagesUseCase: UseCase {
+interface GetCatImagesUseCase : UseCase {
 
-    fun requestGetPopular(text: String, page: Int, perPage: Int)
+    fun eventBus(): EventBus
 
-    fun requestGetNew(text: String, page: Int, perPage: Int)
+    fun requestGetPopular(page: Int, perPage: Int)
+
+    fun requestGetNew(page: Int, perPage: Int)
 
     data class GetPopularCatImagesSuccessEvent(val catImages: List<CatImage>)
 

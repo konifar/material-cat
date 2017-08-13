@@ -4,9 +4,9 @@ import android.content.Context
 import com.konifar.materialcat.MainApplication
 import com.konifar.materialcat.events.PhotoSearchCallbackEvent
 import com.konifar.materialcat.infra.api.FlickrApiService
-import de.greenrobot.event.EventBus
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.EventBus
 
 class PhotoModel private constructor(context: Context) {
 
