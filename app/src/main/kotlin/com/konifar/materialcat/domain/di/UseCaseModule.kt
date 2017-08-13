@@ -1,13 +1,12 @@
-package com.konifar.materialcat.presentation.di
+package com.konifar.materialcat.domain.di
 
+import com.konifar.materialcat.domain.gallery.usecase.GetCatImageUseCaseImpl
+import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCase
 import com.konifar.materialcat.infra.repository.catphoto.CatImageRepository
-import com.konifar.materialcat.presentation.gallery.usecase.GetCatImageUseCaseImpl
-import com.konifar.materialcat.presentation.gallery.usecase.GetCatImagesUseCase
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
-import javax.inject.Named
 
 
 @Module
@@ -23,7 +22,7 @@ class UseCaseModule() {
     fun provideGetCatImagesUseCase(
             eventBus: EventBus,
             compositeDisposable: CompositeDisposable,
-            @Named("flickrCatImageRepository") catImageRepository: CatImageRepository
+            catImageRepository: CatImageRepository
     ): GetCatImagesUseCase = GetCatImageUseCaseImpl(eventBus, compositeDisposable, catImageRepository)
 
 }

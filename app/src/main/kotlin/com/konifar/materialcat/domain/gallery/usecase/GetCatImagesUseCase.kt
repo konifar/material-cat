@@ -1,4 +1,4 @@
-package com.konifar.materialcat.presentation.gallery.usecase
+package com.konifar.materialcat.domain.gallery.usecase
 
 import com.konifar.materialcat.domain.gallery.model.CatImage
 import com.konifar.materialcat.presentation.FailureEvent

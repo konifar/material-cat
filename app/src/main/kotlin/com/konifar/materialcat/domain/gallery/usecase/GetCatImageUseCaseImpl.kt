@@ -1,4 +1,4 @@
-package com.konifar.materialcat.presentation.gallery.usecase
+package com.konifar.materialcat.domain.gallery.usecase
 
 import com.konifar.materialcat.infra.repository.catphoto.CatImageRepository
 import io.reactivex.disposables.CompositeDisposable

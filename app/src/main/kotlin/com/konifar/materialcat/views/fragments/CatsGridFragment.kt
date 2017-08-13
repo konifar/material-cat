@@ -1,5 +1,6 @@
 package com.konifar.materialcat.views.fragments
 
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
@@ -7,19 +8,26 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.AbsListView
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.GridView
 import com.konifar.materialcat.PhotoDetailActivity
 import com.konifar.materialcat.R
 import com.konifar.materialcat.databinding.FragmentCatsGridBinding
+import com.konifar.materialcat.databinding.ItemPhotoBinding
 import com.konifar.materialcat.events.PhotoSearchCallbackEvent
+import com.konifar.materialcat.extension.component
+import com.konifar.materialcat.infra.dto.catphoto.FlickrPhoto
 import com.konifar.materialcat.models.PhotoModel
 import com.konifar.materialcat.views.ListLoadingView
-import com.konifar.materialcat.views.adapters.PhotosArrayAdapter
 import com.konifar.materialcat.views.listeners.OnLoadMoreScrollListener
+import com.squareup.picasso.Picasso
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.util.*
 
 class CatsGridFragment : Fragment() {
 
@@ -31,7 +39,6 @@ class CatsGridFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val arguments = arguments
         if (arguments.containsKey(ARG_KEY_SORT)) {
             sort = arguments.getString(ARG_KEY_SORT)
         }
@@ -41,6 +48,8 @@ class CatsGridFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<FragmentCatsGridBinding>(inflater, R.layout.fragment_cats_grid, container, false)
+
+        component.inject(this)
 
         initGridView()
         initSwipeRefresh()
@@ -128,5 +137,78 @@ class CatsGridFragment : Fragment() {
             return fragment
         }
     }
+
+    class PhotosArrayAdapter(context: Context) : ArrayAdapter<FlickrPhoto>(context, R.layout.item_photo, ArrayList<FlickrPhoto>()) {
+
+        private var lastPosition = -1
+
+        override fun getView(pos: Int, view: View?, parent: ViewGroup): View {
+            var view = view
+            val holder: ViewHolder
+
+            if (view == null || view.tag == null) {
+                view = LayoutInflater.from(context).inflate(R.layout.item_photo, parent, false)
+                holder = ViewHolder(view)
+            } else {
+                holder = view.tag as ViewHolder
+            }
+
+            view!!.tag = holder
+
+            bindData(holder, getItem(pos))
+            initListeners(holder, pos, view, parent)
+
+            if (pos > 1) startAnimation(view, pos)
+
+            return view
+        }
+
+        private fun initListeners(holder: ViewHolder, pos: Int, view: View, parent: ViewGroup) {
+            holder.binding.ripple.setOnClickListener { (parent as GridView).performItemClick(view, pos, 0L) }
+        }
+
+        private fun bindData(holder: ViewHolder, photo: FlickrPhoto) {
+            val imageUrl = "http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg"
+
+            if (holder.binding.imgPreview.tag == null || holder.binding.imgPreview.tag != imageUrl) {
+                Picasso.with(context)
+                        .load(imageUrl)
+                        .placeholder(R.color.theme50)
+                        .into(holder.binding.imgPreview)
+                holder.binding.imgPreview.tag = imageUrl
+            }
+        }
+
+        fun addAll(photos: List<FlickrPhoto>?) {
+            if (photos == null) return
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                super.addAll(photos)
+            } else {
+                for (item in photos) {
+                    super.add(item)
+                }
+            }
+        }
+
+        internal fun startAnimation(view: View, pos: Int) {
+            if (lastPosition < pos) {
+                val anim = AnimationUtils.loadAnimation(context, R.anim.item_scale_in)
+                view.startAnimation(anim)
+                lastPosition = pos
+            }
+        }
+
+        internal class ViewHolder(view: View) {
+
+            var binding: ItemPhotoBinding
+
+            init {
+                binding = DataBindingUtil.bind(view)
+            }
+        }
+
+    }
+
 
 }

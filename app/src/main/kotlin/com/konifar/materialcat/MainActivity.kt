@@ -1,10 +1,14 @@
 package com.konifar.materialcat
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -16,14 +20,20 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.konifar.fab_transformation.FabTransformation
 import com.konifar.materialcat.databinding.ActivityMainBinding
-import com.konifar.materialcat.extension.component
+import com.konifar.materialcat.infra.api.FlickrApiService
+import com.konifar.materialcat.presentation.gallery.GalleryPresenter
 import com.konifar.materialcat.utils.AppUtils
 import com.konifar.materialcat.utils.ShareUtils
-import com.konifar.materialcat.views.adapters.CatsGridPagerAdappter
+import com.konifar.materialcat.views.fragments.CatsGridFragment
+import java.util.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
 
     lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var presenter: GalleryPresenter
 
     private var drawerToggle: ActionBarDrawerToggle? = null
     private var isTransforming: Boolean = false
@@ -31,9 +41,8 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        component.inject(this)
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         FacebookSdk.sdkInitialize(applicationContext)
         callbackManager = CallbackManager.Factory.create()
@@ -171,6 +180,34 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    private class CatsGridPagerAdappter(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
+
+        private val fragments: MutableList<Fragment>
+        private val titles: MutableList<String>
+
+        init {
+            titles = ArrayList<String>()
+            titles.add(context.getString(R.string.popular))
+            titles.add(context.getString(R.string.news))
+
+            fragments = ArrayList<Fragment>()
+            fragments.add(CatsGridFragment.newInstance(FlickrApiService.SORT_INTERESTINGNESS_DESC))
+            fragments.add(CatsGridFragment.newInstance(FlickrApiService.SORT_DATE_POSTED_DESC))
+        }
+
+        override fun getItem(position: Int): Fragment {
+            return fragments[position]
+        }
+
+        override fun getCount(): Int {
+            return fragments.size
+        }
+
+        override fun getPageTitle(position: Int): CharSequence {
+            return titles[position]
+        }
     }
 
 }

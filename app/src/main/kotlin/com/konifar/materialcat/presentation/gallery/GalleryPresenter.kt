@@ -5,7 +5,7 @@ import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import com.konifar.materialcat.domain.gallery.model.CatImage
 import com.konifar.materialcat.presentation.ListObserver
-import com.konifar.materialcat.presentation.gallery.usecase.GetCatImagesUseCase
+import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCase
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
