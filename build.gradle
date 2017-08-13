@@ -5,6 +5,7 @@ buildscript {
         maven { url "http://dl.bintray.com/populov/maven" }
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
         mavenCentral()
         jcenter()
     }
@@ -20,6 +21,7 @@ allprojects {
         maven { url "http://dl.bintray.com/populov/maven" }
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
         mavenCentral()
         jcenter()
     }

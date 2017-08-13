@@ -5,7 +5,7 @@ import com.konifar.materialcat.PhotoDetailActivity
 import dagger.Subcomponent
 
 @ActivityScope
-@Subcomponent(modules = arrayOf(ActivityModule::class))
+@Subcomponent(modules = arrayOf(ActivityModule::class, UseCaseModule::class))
 interface ActivityComponent {
 
     fun inject(activity: MainActivity)
