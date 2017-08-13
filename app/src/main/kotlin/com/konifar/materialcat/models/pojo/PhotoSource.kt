@@ -9,7 +9,7 @@ class PhotoSource : Model() {
     @SerializedName("stat")
     private val stat: String? = null
 
-    fun getPhotos(): List<Photo>? {
+    fun getPhotos(): List<FlickrPhoto>? {
         return photos!!.photo
     }
 
@@ -23,7 +23,7 @@ class PhotoSource : Model() {
         @SerializedName("total")
         private val total: String? = null
         @SerializedName("photo")
-        val photo: List<Photo>? = null
+        val photo: List<FlickrPhoto>? = null
     }
 
 }

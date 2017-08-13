@@ -1,16 +1,12 @@
 package com.konifar.materialcat.models
 
 import android.content.Context
-
 import com.konifar.materialcat.MainApplication
 import com.konifar.materialcat.events.PhotoSearchCallbackEvent
-import com.konifar.materialcat.models.pojo.PhotoSource
-import com.konifar.materialcat.network.FlickrApiService
-
+import com.konifar.materialcat.infra.api.FlickrApiService
 import de.greenrobot.event.EventBus
-import retrofit.Callback
-import retrofit.RetrofitError
-import retrofit.client.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class PhotoModel private constructor(context: Context) {
 
@@ -21,15 +17,13 @@ class PhotoModel private constructor(context: Context) {
     }
 
     fun getCatPhotos(page: Int, sort: String) {
-        flickerApiService.photosSearch(CAT_SEARCH_TEXT, page, PER_PAGE, sort,
-                object : Callback<PhotoSource> {
-                    override fun success(photoSource: PhotoSource, response: Response) {
-                        EventBus.getDefault().post(PhotoSearchCallbackEvent(true, photoSource.getPhotos(), sort))
-                    }
-
-                    override fun failure(error: RetrofitError) {
-                        EventBus.getDefault().post(PhotoSearchCallbackEvent(false, sort))
-                    }
+        flickerApiService.photosSearch(CAT_SEARCH_TEXT, page, PER_PAGE, sort)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    EventBus.getDefault().post(PhotoSearchCallbackEvent(true, it.photos, sort))
+                }, {
+                    EventBus.getDefault().post(PhotoSearchCallbackEvent(false, sort))
                 })
     }
 

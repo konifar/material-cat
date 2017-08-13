@@ -2,7 +2,7 @@ package com.konifar.materialcat.models.pojo
 
 import com.google.gson.annotations.SerializedName
 
-class Photo : Model() {
+class FlickrPhoto : Model() {
 
     @SerializedName("id")
     lateinit var id: String

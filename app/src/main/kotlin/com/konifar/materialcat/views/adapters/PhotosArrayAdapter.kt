@@ -11,11 +11,11 @@ import android.widget.ArrayAdapter
 import android.widget.GridView
 import com.konifar.materialcat.R
 import com.konifar.materialcat.databinding.ItemPhotoBinding
-import com.konifar.materialcat.models.pojo.Photo
+import com.konifar.materialcat.infra.dto.catphoto.FlickrPhoto
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class PhotosArrayAdapter(context: Context) : ArrayAdapter<Photo>(context, R.layout.item_photo, ArrayList<Photo>()) {
+class PhotosArrayAdapter(context: Context) : ArrayAdapter<FlickrPhoto>(context, R.layout.item_photo, ArrayList<FlickrPhoto>()) {
 
     private var lastPosition = -1
 
@@ -44,8 +44,8 @@ class PhotosArrayAdapter(context: Context) : ArrayAdapter<Photo>(context, R.layo
         holder.binding.ripple.setOnClickListener { (parent as GridView).performItemClick(view, pos, 0L) }
     }
 
-    private fun bindData(holder: ViewHolder, photo: Photo) {
-        val imageUrl = photo.imageUrl
+    private fun bindData(holder: ViewHolder, photo: FlickrPhoto) {
+        val imageUrl = "http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg"
 
         if (holder.binding.imgPreview.tag == null || holder.binding.imgPreview.tag != imageUrl) {
             Picasso.with(context)
@@ -56,7 +56,7 @@ class PhotosArrayAdapter(context: Context) : ArrayAdapter<Photo>(context, R.layo
         }
     }
 
-    fun addAll(photos: List<Photo>?) {
+    fun addAll(photos: List<FlickrPhoto>?) {
         if (photos == null) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.konifar.materialcat.R
-import com.konifar.materialcat.network.FlickrApiService
+import com.konifar.materialcat.infra.api.FlickrApiService
 import com.konifar.materialcat.views.fragments.CatsGridFragment
 import java.util.*
 

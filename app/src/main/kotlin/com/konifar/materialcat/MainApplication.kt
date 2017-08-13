@@ -2,14 +2,16 @@ package com.konifar.materialcat
 
 import android.app.Application
 import android.content.Context
-
 import com.crashlytics.android.Crashlytics
-import com.google.gson.GsonBuilder
-import com.konifar.materialcat.network.FlickrApiService
-
+import com.konifar.materialcat.infra.api.FlickrApiService
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
 import io.fabric.sdk.android.Fabric
-import retrofit.RestAdapter
-import retrofit.converter.GsonConverter
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainApplication : Application() {
 
@@ -26,9 +28,11 @@ class MainApplication : Application() {
 
     companion object {
 
-        val FLICKR_API = RestAdapter.Builder()
-                .setEndpoint(Constants.FLICKR_ENDPOINT)
-                .setConverter(GsonConverter(GsonBuilder().setDateFormat(Constants.JSON_DATE_FORMAT).create()))
+        val FLICKR_API = Retrofit.Builder()
+                .baseUrl("https://api.flickr.com")
+                .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }).build())
+                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(FlickrApiService::class.java)
 

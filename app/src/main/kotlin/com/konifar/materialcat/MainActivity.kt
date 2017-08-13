@@ -16,6 +16,7 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.konifar.fab_transformation.FabTransformation
 import com.konifar.materialcat.databinding.ActivityMainBinding
+import com.konifar.materialcat.extension.component
 import com.konifar.materialcat.utils.AppUtils
 import com.konifar.materialcat.utils.ShareUtils
 import com.konifar.materialcat.views.adapters.CatsGridPagerAdappter
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+
+        component.inject(this)
 
         FacebookSdk.sdkInitialize(applicationContext)
         callbackManager = CallbackManager.Factory.create()

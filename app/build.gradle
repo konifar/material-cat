@@ -51,7 +51,6 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
 
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.google.code.gson:gson:2.3.1'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -74,4 +73,14 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.9'
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    compile "com.squareup.moshi:moshi:$moshi_verion"
+    compile "com.squareup.moshi:moshi-kotlin:$moshi_verion"
+    compile "com.squareup.moshi:moshi-adapters:$moshi_verion"
+
+    // Network
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 }

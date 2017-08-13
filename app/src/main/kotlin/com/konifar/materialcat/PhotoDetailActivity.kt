@@ -18,7 +18,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver
 import com.konifar.materialcat.databinding.ActivityPhotoDetailBinding
-import com.konifar.materialcat.models.pojo.Photo
+import com.konifar.materialcat.infra.dto.catphoto.FlickrPhoto
 import com.konifar.materialcat.utils.FabAnimationUtils
 import com.nineoldandroids.animation.Animator
 import com.nineoldandroids.animation.AnimatorListenerAdapter
@@ -44,7 +44,7 @@ class PhotoDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView<ActivityPhotoDetailBinding>(this, R.layout.activity_photo_detail)
 
         val bundle = intent.extras
-        val photo = bundle.getSerializable(Photo::class.java.simpleName) as Photo
+        val photo = bundle.getSerializable(FlickrPhoto::class.java.simpleName) as FlickrPhoto
 
         initToolbar(photo)
         bindPhotoInfo(photo)
@@ -52,13 +52,13 @@ class PhotoDetailActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { onClickFab() }
 
         Picasso.with(this)
-                .load(photo.imageUrl)
+                .load("http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg")
                 .placeholder(R.color.theme50)
                 .into(binding.imgPreviewDummy)
 
         // For circular reveal animation
         Picasso.with(this)
-                .load(photo.imageUrl)
+                .load("http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg")
                 .placeholder(R.color.theme50)
                 .into(binding.imgPreviewCover)
 
@@ -109,9 +109,9 @@ class PhotoDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun initPallete(photo: Photo) {
+    private fun initPallete(photo: FlickrPhoto) {
         Picasso.with(this)
-                .load(photo.imageUrl)
+                .load("http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg")
                 .placeholder(R.color.theme50)
                 .into(object : Target {
                     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
@@ -129,18 +129,15 @@ class PhotoDetailActivity : AppCompatActivity() {
                 })
     }
 
-    private fun bindPhotoInfo(photo: Photo) {
+    private fun bindPhotoInfo(photo: FlickrPhoto) {
         binding.photoInfoId.setTitleText(photo.id!!)
         binding.photoInfoOwner.setTitleText(photo.owner!!)
         binding.photoInfoSecret.setTitleText(photo.secret!!)
         binding.photoInfoServer.setTitleText(photo.server!!)
         binding.photoInfoTitle.setTitleText(photo.title!!)
-        binding.photoInfoPublic.setTitleText(photo.isPublic().toString())
-        binding.photoInfoFriend.setTitleText(photo.isFriend().toString())
-        binding.photoInfoFamily.setTitleText(photo.isFamily().toString())
     }
 
-    private fun initToolbar(photo: Photo) {
+    private fun initToolbar(photo: FlickrPhoto) {
         setSupportActionBar(binding.toolbar)
         val bar = supportActionBar
         bar?.setDisplayHomeAsUpEnabled(true)
@@ -268,9 +265,9 @@ class PhotoDetailActivity : AppCompatActivity() {
         private val ANIMATION_DURATION: Long = 250
         private val INTERPOLATOR = FastOutSlowInInterpolator()
 
-        fun start(activity: Activity, transitionView: View, photo: Photo) {
+        fun start(activity: Activity, transitionView: View, photo: FlickrPhoto) {
             val intent = Intent(activity, PhotoDetailActivity::class.java)
-            intent.putExtra(Photo::class.java.simpleName, photo)
+//            intent.putExtra(FlickrPhoto::class.java.simpleName, photo)
 
             val screenLocation = IntArray(2)
             transitionView.getLocationOnScreen(screenLocation)

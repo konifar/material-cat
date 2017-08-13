@@ -1,12 +1,12 @@
 package com.konifar.materialcat.events
 
-import com.konifar.materialcat.models.pojo.Photo
+import com.konifar.materialcat.infra.dto.catphoto.FlickrPhoto
 
 class PhotoSearchCallbackEvent {
 
     var isSuccess: Boolean = false
         private set
-    var photos: List<Photo>? = null
+    var photos: List<FlickrPhoto>? = null
     var sort: String? = null
         private set
 
@@ -15,7 +15,7 @@ class PhotoSearchCallbackEvent {
         this.sort = sort
     }
 
-    constructor(success: Boolean, photos: List<Photo>?, sort: String) {
+    constructor(success: Boolean, photos: List<FlickrPhoto>?, sort: String) {
         this.isSuccess = success
         this.photos = photos
         this.sort = sort

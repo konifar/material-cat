@@ -2,6 +2,7 @@ package com.konifar.materialcat
 
 import com.konifar.materialcat.domain.di.DomainModule
 import com.konifar.materialcat.infra.di.InfraModule
+import com.konifar.materialcat.infra.di.RepositoryModule
 import com.konifar.materialcat.presentation.di.ActivityComponent
 import com.konifar.materialcat.presentation.di.ActivityModule
 import com.konifar.materialcat.presentation.di.FragmentComponent
@@ -11,7 +12,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = arrayOf(ApplicationModule::class, InfraModule::class, DomainModule::class))
+@Component(modules = arrayOf(ApplicationModule::class, InfraModule::class, DomainModule::class, RepositoryModule::class))
 interface ApplicationComponent {
 
     fun inject(application: MainApplication)
