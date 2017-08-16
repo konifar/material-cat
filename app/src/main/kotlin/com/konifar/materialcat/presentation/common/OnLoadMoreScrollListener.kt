@@ -1,4 +1,4 @@
-package com.konifar.materialcat.views.listeners
+package com.konifar.materialcat.presentation.common
 
 import android.widget.AbsListView
 

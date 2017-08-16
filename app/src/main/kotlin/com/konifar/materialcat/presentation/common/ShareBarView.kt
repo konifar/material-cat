@@ -1,4 +1,4 @@
-package com.konifar.materialcat.views
+package com.konifar.materialcat.presentation.common
 
 import android.app.Activity
 import android.content.ClipData

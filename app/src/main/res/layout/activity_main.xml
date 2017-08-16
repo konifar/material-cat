@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom">
 
-                <com.konifar.materialcat.views.ShareBarView
+                <com.konifar.materialcat.presentation.common.ShareBarView
                     android:id="@+id/share_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

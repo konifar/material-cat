@@ -18,8 +18,8 @@ import com.konifar.materialcat.databinding.ViewPhotoBinding
 import com.konifar.materialcat.domain.gallery.model.CatImage
 import com.konifar.materialcat.extension.component
 import com.konifar.materialcat.presentation.ListObserver
-import com.konifar.materialcat.views.LoadingFooterView
-import com.konifar.materialcat.views.listeners.OnLoadMoreScrollListener
+import com.konifar.materialcat.presentation.common.LoadingFooterView
+import com.konifar.materialcat.presentation.common.OnLoadMoreScrollListener
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 

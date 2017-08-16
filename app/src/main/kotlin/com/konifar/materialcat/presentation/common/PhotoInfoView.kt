@@ -1,4 +1,4 @@
-package com.konifar.materialcat.views
+package com.konifar.materialcat.presentation.common
 
 import android.content.Context
 import android.databinding.DataBindingUtil
