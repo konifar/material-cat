@@ -27,18 +27,30 @@ class GalleryPresenter
 
     lateinit var viewModel: GalleryViewModel
 
-    fun requestGetNew(page: Int) {
-        if (page == 1) {
-            viewModel.toggleLoading(true)
-        }
+    fun requestGetNew(page: Int, isRefreshing: Boolean = false) {
+        showLoading(page, isRefreshing)
         getCatImagesUseCase.requestGetNew(page, PER_PAGE)
     }
 
-    fun requestGetPopular(page: Int) {
-        if (page == 1) {
-            viewModel.toggleLoading(true)
-        }
+    fun requestGetPopular(page: Int, isRefreshing: Boolean = false) {
+        showLoading(page, isRefreshing)
         getCatImagesUseCase.requestGetPopular(page, PER_PAGE)
+    }
+
+    private fun showLoading(page: Int, isRefreshing: Boolean = false) {
+        if (page == 1) {
+            viewModel.toggleLoading(!isRefreshing)
+        } else {
+            viewModel.toggleFooterLoading(true)
+        }
+    }
+
+    private fun hideLoading(page: Int) {
+        if (page == 1) {
+            viewModel.toggleLoading(false)
+        } else {
+            viewModel.toggleFooterLoading(false)
+        }
     }
 
     fun onClickItem(id: CatImageId) {
@@ -63,29 +75,35 @@ class GalleryPresenter
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetPopularCatImagesSuccessEvent) {
         getCatImagesUseCase.eventBus().removeStickyEvent(event)
-        renderData(event.catImages)
+        renderData(event.catImages, event.page)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetPopularCatImagesFailureEvent) {
         getCatImagesUseCase.eventBus().removeStickyEvent(event)
+        hideLoading(event.page)
+        // TODO Show error message
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesSuccessEvent) {
         getCatImagesUseCase.eventBus().removeStickyEvent(event)
-        renderData(event.catImages)
+        renderData(event.catImages, event.page)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesFailureEvent) {
         getCatImagesUseCase.eventBus().removeStickyEvent(event)
+        hideLoading(event.page)
+        // TODO Show error message
     }
 
-    private fun renderData(catImages: List<CatImage>) {
+    private fun renderData(catImages: List<CatImage>, page: Int) {
+        if (page == 1) viewModel.itemViewModels.clear()
         viewModel.itemViewModels.addAll(catImages.map { GalleryItemViewModel(it) })
         listObserver.notifyDataSetChanged()
-        viewModel.toggleLoading(false)
+        hideLoading(page)
+        viewModel.swipeRefreshing = false
     }
 
 }

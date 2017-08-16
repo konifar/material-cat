@@ -89,21 +89,20 @@ class GalleryFragment : Fragment(), ListObserver, GalleryPageNavigator, Lifecycl
     private fun initSwipeRefresh() {
         binding.swipeRefresh.run {
             setColorSchemeResources(R.color.theme500)
-            setOnRefreshListener { requestCatImages(1) }
+            setOnRefreshListener { requestCatImages(1, true) }
         }
     }
 
     private fun initGridView() {
         adapter = PhotosArrayAdapter(activity, presenter.viewModel.itemViewModels)
-        loadingFooter = LoadingFooterView(activity)
+        loadingFooter = LoadingFooterView(activity).apply { binding.viewModel = presenter.viewModel }
 
         binding.gridView.run {
             addFooterView(loadingFooter)
             adapter = this@GalleryFragment.adapter
             setOnItemClickListener { _, _, position, _ -> onItemClick(position) }
-            setOnScrollListener(object : OnLoadMoreScrollListener(innerOnScrollListener = activity as AbsListView.OnScrollListener) {
+            setOnScrollListener(object : OnLoadMoreScrollListener(activity as AbsListView.OnScrollListener) {
                 override fun onLoadMore(page: Int, totalItemsCount: Int) {
-                    loadingFooter.switchVisible(true)
                     requestCatImages(page)
                 }
             })
@@ -114,10 +113,10 @@ class GalleryFragment : Fragment(), ListObserver, GalleryPageNavigator, Lifecycl
         presenter.onClickItem(adapter.getItem(position).id)
     }
 
-    private fun requestCatImages(page: Int) {
+    private fun requestCatImages(page: Int, isRefreshing: Boolean = false) {
         when (type) {
-            Type.POPULAR -> presenter.requestGetPopular(page)
-            Type.NEW -> presenter.requestGetNew(page)
+            Type.POPULAR -> presenter.requestGetPopular(page, isRefreshing)
+            Type.NEW -> presenter.requestGetNew(page, isRefreshing)
         }
     }
 

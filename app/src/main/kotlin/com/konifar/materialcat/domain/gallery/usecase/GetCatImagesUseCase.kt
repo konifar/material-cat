@@ -13,12 +13,12 @@ interface GetCatImagesUseCase : UseCase {
 
     fun requestGetNew(page: Int, perPage: Int)
 
-    data class GetPopularCatImagesSuccessEvent(val catImages: List<CatImage>)
+    data class GetPopularCatImagesSuccessEvent(val catImages: List<CatImage>, val page: Int)
 
-    data class GetPopularCatImagesFailureEvent(override val throwable: Throwable) : FailureEvent(throwable)
+    data class GetPopularCatImagesFailureEvent(override val throwable: Throwable, val page: Int) : FailureEvent(throwable)
 
-    data class GetNewCatImagesSuccessEvent(val catImages: List<CatImage>)
+    data class GetNewCatImagesSuccessEvent(val catImages: List<CatImage>, val page: Int)
 
-    data class GetNewCatImagesFailureEvent(override val throwable: Throwable) : FailureEvent(throwable)
+    data class GetNewCatImagesFailureEvent(override val throwable: Throwable, val page: Int) : FailureEvent(throwable)
 
 }

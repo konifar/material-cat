@@ -13,6 +13,16 @@ class GalleryViewModel : BaseObservable() {
     @Bindable
     var contentVisibility: Int = View.GONE
 
+    @Bindable
+    var loadingFooterVisibility: Int = View.GONE
+
+    @Bindable
+    var swipeRefreshing: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.swipeRefreshing)
+        }
+
     val itemViewModels: MutableList<GalleryItemViewModel> = mutableListOf()
 
     fun toggleLoading(visible: Boolean) {
@@ -26,6 +36,11 @@ class GalleryViewModel : BaseObservable() {
 
         notifyPropertyChanged(BR.contentVisibility)
         notifyPropertyChanged(BR.loadingVisibility)
+    }
+
+    fun toggleFooterLoading(visible: Boolean) {
+        loadingFooterVisibility = if (visible) View.VISIBLE else View.GONE
+        notifyPropertyChanged(BR.loadingFooterVisibility)
     }
 
 }

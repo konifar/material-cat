@@ -25,8 +25,8 @@ class GetCatImageUseCaseImpl(
                 catImageRepository.findByTextOrderByPopular(SEARCH_TEXT, page, perPage)
                         .subscribeOn(Schedulers.io())
                         .subscribeBy(
-                                onNext = { eventBus.postSticky(GetCatImagesUseCase.GetPopularCatImagesSuccessEvent(it)) },
-                                onError = { eventBus.postSticky(GetCatImagesUseCase.GetPopularCatImagesFailureEvent(it)) }
+                                onNext = { eventBus.postSticky(GetCatImagesUseCase.GetPopularCatImagesSuccessEvent(it, page)) },
+                                onError = { eventBus.postSticky(GetCatImagesUseCase.GetPopularCatImagesFailureEvent(it, page)) }
                         )
         )
     }
@@ -36,8 +36,8 @@ class GetCatImageUseCaseImpl(
                 catImageRepository.findByTextOrderByNew(SEARCH_TEXT, page, perPage)
                         .subscribeOn(Schedulers.io())
                         .subscribeBy(
-                                onNext = { eventBus.postSticky(GetCatImagesUseCase.GetNewCatImagesSuccessEvent(it)) },
-                                onError = { eventBus.postSticky(GetCatImagesUseCase.GetNewCatImagesFailureEvent(it)) }
+                                onNext = { eventBus.postSticky(GetCatImagesUseCase.GetNewCatImagesSuccessEvent(it, page)) },
+                                onError = { eventBus.postSticky(GetCatImagesUseCase.GetNewCatImagesFailureEvent(it, page)) }
                         )
         )
     }
