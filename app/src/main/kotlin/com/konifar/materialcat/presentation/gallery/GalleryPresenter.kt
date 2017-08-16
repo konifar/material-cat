@@ -28,10 +28,16 @@ class GalleryPresenter
     lateinit var viewModel: GalleryViewModel
 
     fun requestGetNew(page: Int) {
+        if (page == 1) {
+            viewModel.toggleLoading(true)
+        }
         getCatImagesUseCase.requestGetNew(page, PER_PAGE)
     }
 
     fun requestGetPopular(page: Int) {
+        if (page == 1) {
+            viewModel.toggleLoading(true)
+        }
         getCatImagesUseCase.requestGetPopular(page, PER_PAGE)
     }
 

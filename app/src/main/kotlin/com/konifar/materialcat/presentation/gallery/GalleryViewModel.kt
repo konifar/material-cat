@@ -10,10 +10,21 @@ class GalleryViewModel : BaseObservable() {
     @Bindable
     var loadingVisibility: Int = View.GONE
 
+    @Bindable
+    var contentVisibility: Int = View.GONE
+
     val itemViewModels: MutableList<GalleryItemViewModel> = mutableListOf()
 
     fun toggleLoading(visible: Boolean) {
-        loadingVisibility = if (visible) View.VISIBLE else View.GONE
+        if (visible) {
+            contentVisibility = View.GONE
+            loadingVisibility = View.VISIBLE
+        } else {
+            contentVisibility = View.VISIBLE
+            loadingVisibility = View.GONE
+        }
+
+        notifyPropertyChanged(BR.contentVisibility)
         notifyPropertyChanged(BR.loadingVisibility)
     }
 
