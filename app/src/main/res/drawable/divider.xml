@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="@dimen/spacing"
-    android:insetRight="@dimen/spacing">
+    android:insetLeft="@dimen/space_16dp"
+    android:insetRight="@dimen/space_16dp">
 
     <shape>
         <solid android:color="@color/grey200" />

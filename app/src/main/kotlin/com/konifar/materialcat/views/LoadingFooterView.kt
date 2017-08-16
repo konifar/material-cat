@@ -4,17 +4,14 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import com.konifar.materialcat.R
-import com.konifar.materialcat.databinding.UiListLoadingBinding
+import com.konifar.materialcat.databinding.ViewLoadingFooterBinding
 
-class ListLoadingView(context: Context) : LinearLayout(context) {
+class LoadingFooterView(context: Context) : FrameLayout(context) {
 
-    var binding: UiListLoadingBinding
-
-    init {
-        binding = DataBindingUtil.inflate<UiListLoadingBinding>(LayoutInflater.from(context), R.layout.ui_list_loading, this, true)
-    }
+    val binding: ViewLoadingFooterBinding = DataBindingUtil.inflate<ViewLoadingFooterBinding>(
+            LayoutInflater.from(context), R.layout.view_loading_footer, this, true)
 
     fun switchVisible(visible: Boolean) {
         val visibility = if (visible) View.VISIBLE else View.GONE

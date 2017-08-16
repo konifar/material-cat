@@ -4,8 +4,9 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import com.konifar.materialcat.domain.gallery.model.CatImage
-import com.konifar.materialcat.presentation.ListObserver
+import com.konifar.materialcat.domain.gallery.model.CatImageId
 import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCase
+import com.konifar.materialcat.presentation.ListObserver
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
@@ -34,8 +35,9 @@ class GalleryPresenter
         getCatImagesUseCase.requestGetPopular(page, PER_PAGE)
     }
 
-    fun onClickItem(catImage: CatImage) {
-        navigator.openDetail(catImage)
+    fun onClickItem(id: CatImageId) {
+        TODO()
+//        navigator.openDetail(viewModel.id)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -55,9 +57,7 @@ class GalleryPresenter
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetPopularCatImagesSuccessEvent) {
         getCatImagesUseCase.eventBus().removeStickyEvent(event)
-        viewModel.itemViewModels.addAll(event.catImages.map { GalleryItemViewModel(it) })
-        listObserver.notifyDataSetChanged()
-        viewModel.toggleLoading(false)
+        renderData(event.catImages)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -68,14 +68,18 @@ class GalleryPresenter
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesSuccessEvent) {
         getCatImagesUseCase.eventBus().removeStickyEvent(event)
-        viewModel.itemViewModels.addAll(event.catImages.map { GalleryItemViewModel(it) })
-        listObserver.notifyDataSetChanged()
-        viewModel.toggleLoading(false)
+        renderData(event.catImages)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesFailureEvent) {
         getCatImagesUseCase.eventBus().removeStickyEvent(event)
+    }
+
+    private fun renderData(catImages: List<CatImage>) {
+        viewModel.itemViewModels.addAll(catImages.map { GalleryItemViewModel(it) })
+        listObserver.notifyDataSetChanged()
+        viewModel.toggleLoading(false)
     }
 
 }

@@ -2,32 +2,15 @@ package com.konifar.materialcat.views.listeners
 
 import android.widget.AbsListView
 
-abstract class OnLoadMoreScrollListener : AbsListView.OnScrollListener {
+abstract class OnLoadMoreScrollListener(
+        private val innerOnScrollListener: AbsListView.OnScrollListener? = null,
+        private val visibleThreshold: Int = 5,
+        private var currentPage: Int = 0,
+        private val startingPageIndex: Int = 0
+) : AbsListView.OnScrollListener {
 
-    private var visibleThreshold = 5
-    private var currentPage = 0
     private var previousTotalItemCount = 0
     private var loading = true
-    private var startingPageIndex = 0
-    private var innerOnScrollListener: AbsListView.OnScrollListener? = null
-
-    constructor() {
-        //
-    }
-
-    constructor(innerOnScrollListener: AbsListView.OnScrollListener) {
-        this.innerOnScrollListener = innerOnScrollListener
-    }
-
-    constructor(visibleThreshold: Int) {
-        this.visibleThreshold = visibleThreshold
-    }
-
-    constructor(visibleThreshold: Int, startPage: Int) {
-        this.visibleThreshold = visibleThreshold
-        this.startingPageIndex = startPage
-        this.currentPage = startPage
-    }
 
     val itemCountOffset: Int
         get() = 0
@@ -47,13 +30,13 @@ abstract class OnLoadMoreScrollListener : AbsListView.OnScrollListener {
             }
         }
 
-        if (loading && totalItemCount > previousTotalItemCount) {
+        if (loading && firstVisibleItem > 0 && totalItemCount > previousTotalItemCount) {
             loading = false
             previousTotalItemCount = totalItemCount
             currentPage++
         }
 
-        if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
+        if (!loading && firstVisibleItem > 0 && (firstVisibleItem + visibleItemCount + visibleThreshold) >= totalItemCount) {
             onLoadMore(currentPage + 1, totalItemCount)
             loading = true
         }

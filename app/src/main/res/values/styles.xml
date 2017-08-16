@@ -1,5 +1,13 @@
 <resources>
 
+    <!--================ List ================-->
+    <style name="BaseRecyclerView">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollingCache">false</item>
+    </style>
+
     <style name="TextTitle">
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">@color/black</item>

@@ -28,10 +28,4 @@ interface FlickrApiService {
                      @Query("per_page") perpage: Int?,
                      @Query("sort") sort: String): Observable<FlickrPhotoList>
 
-    companion object {
-
-        val SORT_INTERESTINGNESS_DESC = "interestingness-desc"
-        val SORT_DATE_POSTED_DESC = "date-posted-desc"
-    }
-
 }

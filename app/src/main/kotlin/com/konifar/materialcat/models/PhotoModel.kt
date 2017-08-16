@@ -21,7 +21,7 @@ class PhotoModel private constructor(context: Context) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    EventBus.getDefault().post(PhotoSearchCallbackEvent(true, it.photos, sort))
+                    EventBus.getDefault().post(PhotoSearchCallbackEvent(true, it.photos.photo, sort))
                 }, {
                     EventBus.getDefault().post(PhotoSearchCallbackEvent(false, sort))
                 })

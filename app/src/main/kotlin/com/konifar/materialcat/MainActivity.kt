@@ -20,20 +20,14 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.konifar.fab_transformation.FabTransformation
 import com.konifar.materialcat.databinding.ActivityMainBinding
-import com.konifar.materialcat.infra.api.FlickrApiService
-import com.konifar.materialcat.presentation.gallery.GalleryPresenter
 import com.konifar.materialcat.utils.AppUtils
 import com.konifar.materialcat.utils.ShareUtils
-import com.konifar.materialcat.views.fragments.CatsGridFragment
+import com.konifar.materialcat.presentation.gallery.GalleryFragment
 import java.util.*
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
 
     lateinit var binding: ActivityMainBinding
-
-    @Inject
-    lateinit var presenter: GalleryPresenter
 
     private var drawerToggle: ActionBarDrawerToggle? = null
     private var isTransforming: Boolean = false
@@ -193,8 +187,8 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
             titles.add(context.getString(R.string.news))
 
             fragments = ArrayList<Fragment>()
-            fragments.add(CatsGridFragment.newInstance(FlickrApiService.SORT_INTERESTINGNESS_DESC))
-            fragments.add(CatsGridFragment.newInstance(FlickrApiService.SORT_DATE_POSTED_DESC))
+            fragments.add(GalleryFragment.newInstance(GalleryFragment.Type.POPULAR))
+            fragments.add(GalleryFragment.newInstance(GalleryFragment.Type.NEW))
         }
 
         override fun getItem(position: Int): Fragment {

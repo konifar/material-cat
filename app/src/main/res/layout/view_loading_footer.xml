@@ -5,11 +5,16 @@
         android:id="@+id/list_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="@dimen/spacing"
+        android:padding="@dimen/space_8dp"
         android:visibility="gone">
 
-        <include layout="@layout/part_loading" />
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
     </FrameLayout>
 
 </layout>

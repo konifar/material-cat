@@ -14,7 +14,7 @@ object CatImageMapper {
     )
 
     fun transform(list: FlickrPhotoList): MutableList<CatImage> = mutableListOf<CatImage>().apply {
-        addAll(list.photos.map { transform(it) })
+        addAll(list.photos.photo.map { transform(it) })
     }
 
 }

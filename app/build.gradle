@@ -45,10 +45,10 @@ dependencies {
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:palette-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile "com.android.support:appcompat-v7:${support_lib_version}"
+    compile "com.android.support:palette-v7:${support_lib_version}"
+    compile "com.android.support:design:${support_lib_version}"
+    compile "com.android.support:recyclerview-v7:${support_lib_version}"
 
     compile "org.greenrobot:eventbus:$eventbus_version"
     compile 'com.google.code.gson:gson:2.3.1'
@@ -87,4 +87,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    // Debug
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }

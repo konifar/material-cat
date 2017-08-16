@@ -17,7 +17,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/spacing_small">
+                android:padding="@dimen/space_8dp">
 
                 <TextView
                     android:id="@+id/txt_lignt_vibrant"
@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/spacing_small">
+                android:padding="@dimen/space_8dp">
 
                 <TextView
                     android:id="@+id/txt_vibrant"
@@ -55,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/spacing_small">
+                android:padding="@dimen/space_8dp">
 
                 <TextView
                     android:id="@+id/txt_dark_vibrant"
@@ -82,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/spacing_small">
+                android:padding="@dimen/space_8dp">
 
                 <TextView
                     android:id="@+id/txt_lignt_muted"
@@ -101,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/spacing_small">
+                android:padding="@dimen/space_8dp">
 
                 <TextView
                     android:id="@+id/txt_muted"
@@ -120,7 +120,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/spacing_small">
+                android:padding="@dimen/space_8dp">
 
                 <TextView
                     android:id="@+id/txt_dark_muted"
