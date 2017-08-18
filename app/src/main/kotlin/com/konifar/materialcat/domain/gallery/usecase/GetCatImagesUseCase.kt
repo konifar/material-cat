@@ -3,11 +3,8 @@ package com.konifar.materialcat.domain.gallery.usecase
 import com.konifar.materialcat.domain.gallery.model.CatImage
 import com.konifar.materialcat.presentation.FailureEvent
 import com.konifar.materialcat.presentation.UseCase
-import org.greenrobot.eventbus.EventBus
 
 interface GetCatImagesUseCase : UseCase {
-
-    fun eventBus(): EventBus
 
     fun requestGetPopular(page: Int, perPage: Int)
 

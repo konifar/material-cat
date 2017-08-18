@@ -1,8 +1,6 @@
 package com.konifar.materialcat
 
-import android.annotation.TargetApi
 import android.app.Activity
-import android.app.ActivityOptions
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
@@ -10,88 +8,51 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.view.animation.FastOutSlowInInterpolator
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.support.v7.app.AppCompatActivity
 import android.transition.Slide
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewTreeObserver
 import com.konifar.materialcat.databinding.ActivityPhotoDetailBinding
+import com.konifar.materialcat.domain.gallery.model.CatImageId
+import com.konifar.materialcat.extension.component
 import com.konifar.materialcat.infra.dto.catphoto.FlickrPhoto
-import com.konifar.materialcat.utils.FabAnimationUtils
-import com.nineoldandroids.animation.Animator
-import com.nineoldandroids.animation.AnimatorListenerAdapter
-import com.nineoldandroids.view.ViewPropertyAnimator
-import com.nineoldandroids.view.animation.AnimatorProxy
+import com.konifar.materialcat.presentation.gallery.GalleryPresenter
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import io.codetail.animation.SupportAnimator
-import io.codetail.animation.ViewAnimationUtils
 
 class PhotoDetailActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityPhotoDetailBinding
 
-    private var leftDelta: Int = 0
-    private var topDelta: Int = 0
-    private var widthScale: Float = 0.toFloat()
-    private var heightScale: Float = 0.toFloat()
-    private var originalOrientation: Int = 0
+    lateinit var presenter: GalleryPresenter
 
     public override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
+
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView<ActivityPhotoDetailBinding>(this, R.layout.activity_photo_detail)
 
         val bundle = intent.extras
-        val photo = bundle.getSerializable(FlickrPhoto::class.java.simpleName) as FlickrPhoto
+        val catImageId = CatImageId(bundle.getString(CAT_IMAGE_ID))
 
-        initToolbar(photo)
-        bindPhotoInfo(photo)
+//        initToolbar(photo)
+//        bindPhotoInfo(photo)
 
         binding.fab.setOnClickListener { onClickFab() }
 
-        Picasso.with(this)
-                .load("http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg")
-                .placeholder(R.color.theme50)
-                .into(binding.imgPreviewDummy)
+//        Picasso.with(this)
+//                .load("http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg")
+//                .placeholder(R.color.theme50)
+//                .into(binding.imgPreviewDummy)
 
         // For circular reveal animation
-        Picasso.with(this)
-                .load("http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg")
-                .placeholder(R.color.theme50)
-                .into(binding.imgPreviewCover)
+//        Picasso.with(this)
+//                .load("http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg")
+//                .placeholder(R.color.theme50)
+//                .into(binding.imgPreviewCover)
 
-        initPallete(photo)
-
-        if (savedInstanceState == null) {
-            val thumbnailTop = bundle.getInt(EXTRA_TOP)
-            val thumbnailLeft = bundle.getInt(EXTRA_LEFT)
-            val thumbnailWidth = bundle.getInt(EXTRA_WIDTH)
-            val thumbnailHeight = bundle.getInt(EXTRA_HEIGHT)
-            originalOrientation = bundle.getInt(EXTRA_ORIENTATION)
-            val observer = binding.imgPreviewDummy!!.viewTreeObserver
-            observer.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    // TODO setVisibility(View.gone) does not work...
-                    // fab.setVisibility(View.GONE);
-                    FabAnimationUtils.scaleOut(binding.fab, 50, null)
-
-                    binding.imgPreviewDummy.viewTreeObserver.removeOnPreDrawListener(this)
-
-                    val screenLocation = IntArray(2)
-                    binding.imgPreviewDummy.getLocationOnScreen(screenLocation)
-                    leftDelta = thumbnailLeft - screenLocation[0]
-                    topDelta = thumbnailTop - screenLocation[1]
-                    widthScale = thumbnailWidth.toFloat() / binding.imgPreviewDummy.width
-                    heightScale = thumbnailHeight.toFloat() / binding.imgPreviewDummy.height
-
-                    startEnterAnimation()
-
-                    return true
-                }
-            })
-        }
+//        initPallete(photo)
 
         onClickFab()
 
@@ -130,11 +91,11 @@ class PhotoDetailActivity : AppCompatActivity() {
     }
 
     private fun bindPhotoInfo(photo: FlickrPhoto) {
-        binding.photoInfoId.setTitleText(photo.id!!)
-        binding.photoInfoOwner.setTitleText(photo.owner!!)
-        binding.photoInfoSecret.setTitleText(photo.secret!!)
-        binding.photoInfoServer.setTitleText(photo.server!!)
-        binding.photoInfoTitle.setTitleText(photo.title!!)
+        binding.photoInfoId.setTitleText(photo.id)
+        binding.photoInfoOwner.setTitleText(photo.owner)
+        binding.photoInfoSecret.setTitleText(photo.secret)
+        binding.photoInfoServer.setTitleText(photo.server)
+        binding.photoInfoTitle.setTitleText(photo.title)
     }
 
     private fun initToolbar(photo: FlickrPhoto) {
@@ -145,50 +106,6 @@ class PhotoDetailActivity : AppCompatActivity() {
         binding.collapsingToolbar.setTitle(photo.title)
     }
 
-    fun startEnterAnimation() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            binding.imgPreviewDummy.pivotX = 0f
-            binding.imgPreviewDummy.pivotY = 0f
-            binding.imgPreviewDummy.scaleX = widthScale
-            binding.imgPreviewDummy.scaleY = heightScale
-            binding.imgPreviewDummy.translationX = leftDelta.toFloat()
-            binding.imgPreviewDummy.translationY = topDelta.toFloat()
-        } else {
-            val proxy = AnimatorProxy.wrap(binding.imgPreviewDummy)
-            proxy.pivotX = 0f
-            proxy.pivotY = 0f
-            proxy.scaleX = widthScale
-            proxy.scaleY = heightScale
-            proxy.translationX = leftDelta.toFloat()
-            proxy.translationY = topDelta.toFloat()
-        }
-
-        ViewPropertyAnimator.animate(binding.imgPreviewDummy)
-                .setDuration(ANIMATION_DURATION)
-                .scaleX(1f).scaleY(1f)
-                .translationX(0f).translationY(0f)
-                .setInterpolator(INTERPOLATOR)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        // AppBarLayout is set invisible, because AppbarLayout has default background color.
-                        binding.appBar.visibility = View.VISIBLE
-                        binding.imgPreview.visibility = View.VISIBLE
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            revealPreview()
-                        }
-                    }
-                })
-    }
-
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
-    }
-
-    override fun onBackPressed() {
-        finish()
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -197,38 +114,6 @@ class PhotoDetailActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun revealPreview() {
-        val cx = (binding.imgPreview.left + binding.imgPreview.right) / 2
-        val cy = (binding.imgPreview.top + binding.imgPreview.bottom) / 2
-
-        val finalRadius = Math.hypot(cx.toDouble(), cy.toDouble()).toFloat()
-
-        val animator = ViewAnimationUtils.createCircularReveal(binding.imgPreview, cx, cy, 0f, finalRadius)
-        animator.setInterpolator(INTERPOLATOR)
-        animator.setDuration(300)
-        animator.addListener(object : SupportAnimator.AnimatorListener {
-            override fun onAnimationStart() {
-                binding.imgPreviewDummy.visibility = View.GONE
-                binding.imgPreviewCover.visibility = View.VISIBLE
-                binding.imgPreview.visibility = View.VISIBLE
-            }
-
-            override fun onAnimationEnd() {
-                FabAnimationUtils.scaleIn(binding.fab)
-            }
-
-            override fun onAnimationCancel() {
-                //
-            }
-
-            override fun onAnimationRepeat() {
-                //
-            }
-        })
-        animator.start()
     }
 
     internal fun onClickFab() {
@@ -256,35 +141,11 @@ class PhotoDetailActivity : AppCompatActivity() {
 
     companion object {
 
-        private val EXTRA_ORIENTATION = "extra_orientation"
-        private val EXTRA_LEFT = "extra_left"
-        private val EXTRA_TOP = "extra_top"
-        private val EXTRA_WIDTH = "extra_width"
-        private val EXTRA_HEIGHT = "extra_height"
+        private val CAT_IMAGE_ID = "catImageId"
 
-        private val ANIMATION_DURATION: Long = 250
-        private val INTERPOLATOR = FastOutSlowInInterpolator()
-
-        fun start(activity: Activity, transitionView: View, photo: FlickrPhoto) {
-            val intent = Intent(activity, PhotoDetailActivity::class.java)
-//            intent.putExtra(FlickrPhoto::class.java.simpleName, photo)
-
-            val screenLocation = IntArray(2)
-            transitionView.getLocationOnScreen(screenLocation)
-            val orientation = activity.resources.configuration.orientation
-            intent.putExtra(EXTRA_ORIENTATION, orientation)
-            intent.putExtra(EXTRA_LEFT, screenLocation[0])
-            intent.putExtra(EXTRA_TOP, screenLocation[1])
-            intent.putExtra(EXTRA_WIDTH, transitionView.width)
-            intent.putExtra(EXTRA_HEIGHT, transitionView.height)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                val options = ActivityOptions.makeSceneTransitionAnimation(activity)
-                activity.startActivity(intent, options.toBundle())
-            } else {
-                activity.startActivity(intent)
-            }
-            activity.overridePendingTransition(0, R.anim.activity_fade_out)
+        fun createIntent(activity: Activity, catImageId: CatImageId): Intent
+                = Intent(activity, PhotoDetailActivity::class.java).apply {
+            putExtra(CAT_IMAGE_ID, catImageId.value)
         }
     }
 

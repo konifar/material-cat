@@ -2,6 +2,7 @@ package com.konifar.materialcat.infra.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.konifar.materialcat.infra.api.FlickrApiService
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
@@ -33,8 +34,10 @@ class InfraModule() {
             .add(KotlinJsonAdapterFactory())
             .build()
 
-    @Singleton @Provides
+    @Singleton
+    @Provides
     fun providesOkHttp(): OkHttpClient = OkHttpClient.Builder()
+            .addNetworkInterceptor(StethoInterceptor())
             .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
             .build()
 

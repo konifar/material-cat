@@ -20,18 +20,19 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.konifar.fab_transformation.FabTransformation
 import com.konifar.materialcat.databinding.ActivityMainBinding
+import com.konifar.materialcat.presentation.gallery.GalleryFragment
 import com.konifar.materialcat.utils.AppUtils
 import com.konifar.materialcat.utils.ShareUtils
-import com.konifar.materialcat.presentation.gallery.GalleryFragment
 import java.util.*
 
 class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
-    private var drawerToggle: ActionBarDrawerToggle? = null
+    private lateinit var drawerToggle: ActionBarDrawerToggle
+
     private var isTransforming: Boolean = false
-    private var callbackManager: CallbackManager? = null
+    private val callbackManager: CallbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,6 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         FacebookSdk.sdkInitialize(applicationContext)
-        callbackManager = CallbackManager.Factory.create()
 
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar
@@ -79,12 +79,12 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
         })
 
         drawerToggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.drawer_open, R.string.drawer_close)
-        drawerToggle!!.isDrawerIndicatorEnabled = true
+                .apply { isDrawerIndicatorEnabled = true }
         binding.drawerLayout.setDrawerListener(drawerToggle)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (drawerToggle!!.onOptionsItemSelected(item)) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true
         }
 
@@ -104,12 +104,12 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        drawerToggle!!.syncState()
+        drawerToggle.syncState()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        drawerToggle!!.onConfigurationChanged(newConfig)
+        drawerToggle.onConfigurationChanged(newConfig)
     }
 
     internal fun onClickFab() {
@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
-        callbackManager!!.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

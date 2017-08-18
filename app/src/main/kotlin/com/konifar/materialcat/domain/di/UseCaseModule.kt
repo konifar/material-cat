@@ -1,6 +1,6 @@
 package com.konifar.materialcat.domain.di
 
-import com.konifar.materialcat.domain.gallery.usecase.GetCatImageUseCaseImpl
+import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCaseImpl
 import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCase
 import com.konifar.materialcat.infra.repository.catphoto.CatImageRepository
 import dagger.Module
@@ -23,6 +23,6 @@ class UseCaseModule() {
             eventBus: EventBus,
             compositeDisposable: CompositeDisposable,
             catImageRepository: CatImageRepository
-    ): GetCatImagesUseCase = GetCatImageUseCaseImpl(eventBus, compositeDisposable, catImageRepository)
+    ): GetCatImagesUseCase = GetCatImagesUseCaseImpl(eventBus, compositeDisposable, catImageRepository)
 
 }
