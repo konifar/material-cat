@@ -3,10 +3,11 @@ package com.konifar.materialcat.presentation.gallery
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
-import com.konifar.materialcat.domain.gallery.model.CatImage
-import com.konifar.materialcat.domain.gallery.model.CatImageId
-import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCase
+import com.konifar.materialcat.domain.model.CatImage
+import com.konifar.materialcat.domain.model.CatImageId
+import com.konifar.materialcat.domain.usecase.GetCatImagesUseCase
 import com.konifar.materialcat.presentation.ListObserver
+import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -16,6 +17,7 @@ import javax.inject.Inject
 class GalleryPresenter
 @Inject constructor(
         private val getCatImagesUseCase: GetCatImagesUseCase,
+        private val compositeDisposable: CompositeDisposable,
         private val eventBus: EventBus
 ) : LifecycleObserver {
 
@@ -56,7 +58,6 @@ class GalleryPresenter
     }
 
     fun onClickItem(id: CatImageId) {
-        TODO()
 //        navigator.openDetail(viewModel.id)
     }
 
@@ -72,6 +73,11 @@ class GalleryPresenter
         if (eventBus.isRegistered(this)) {
             eventBus.unregister(this)
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        compositeDisposable.clear()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)

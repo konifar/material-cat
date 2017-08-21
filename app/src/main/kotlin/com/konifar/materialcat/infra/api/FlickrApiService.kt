@@ -1,7 +1,7 @@
 package com.konifar.materialcat.infra.api
 
 import com.konifar.materialcat.BuildConfig
-import com.konifar.materialcat.infra.dto.catphoto.FlickrPhotoList
+import com.konifar.materialcat.infra.data.FlickrPhotoList
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

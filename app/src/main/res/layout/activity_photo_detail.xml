@@ -20,7 +20,7 @@
                 app:contentScrim="@color/theme500"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <com.konifar.materialcat.presentation.common.AspectRatioImageView
+                <com.konifar.materialcat.presentation.common.customview.AspectRatioImageView
                     android:id="@+id/img_preview_cover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     app:layout_collapseMode="parallax">
 
-                    <com.konifar.materialcat.presentation.common.CustomKenBurnsView
+                    <com.konifar.materialcat.presentation.common.customview.CustomKenBurnsView
                         android:id="@+id/img_preview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
 
                 <View style="@style/Border" />
 
-                <com.konifar.materialcat.presentation.common.ColorPalleteView
+                <com.konifar.materialcat.presentation.common.customview.ColorPalleteView
                     android:id="@+id/color_pallete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -91,7 +91,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_owner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_secret"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_server"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_public"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_friend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
 
                 <View style="@style/Border.SpaceLeft" />
 
-                <com.konifar.materialcat.presentation.common.PhotoInfoView
+                <com.konifar.materialcat.presentation.common.customview.PhotoInfoView
                     android:id="@+id/photo_info_family"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
             app:layout_anchorGravity="bottom|right|end" />
 
 
-        <com.konifar.materialcat.presentation.common.AspectRatioImageView
+        <com.konifar.materialcat.presentation.common.customview.AspectRatioImageView
             android:id="@+id/img_preview_dummy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

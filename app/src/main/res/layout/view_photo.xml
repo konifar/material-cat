@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.konifar.materialcat.presentation.common.AspectRatioImageView
+        <com.konifar.materialcat.presentation.common.customview.AspectRatioImageView
             android:id="@+id/img_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

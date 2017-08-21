@@ -1,6 +1,6 @@
 package com.konifar.materialcat.presentation.gallery
 
-import com.konifar.materialcat.domain.gallery.model.CatImage
+import com.konifar.materialcat.domain.model.CatImage
 
 interface GalleryPageNavigator {
 
