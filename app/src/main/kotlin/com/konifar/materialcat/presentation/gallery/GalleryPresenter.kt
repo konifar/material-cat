@@ -77,7 +77,9 @@ class GalleryPresenter
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {
-        compositeDisposable.clear()
+        if (!compositeDisposable.isDisposed) {
+            compositeDisposable.dispose()
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
