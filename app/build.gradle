@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.konifar.materialcat"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 2
         versionName "1.0.1"
@@ -67,6 +67,11 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.3.0'
 
     kapt "com.android.databinding:compiler:$gradle_version"
+
+    // Database
+    compile 'com.github.gfx.android.orma:orma:4.2.5'
+    kapt 'com.github.gfx.android.orma:orma-processor:4.2.5'
+    kapt 'com.squareup:javapoet:1.6.1'
 
     // Structure
     compile 'com.google.dagger:dagger:2.9'

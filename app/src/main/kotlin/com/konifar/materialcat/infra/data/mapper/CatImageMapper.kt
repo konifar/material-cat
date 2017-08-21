@@ -3,7 +3,7 @@ package com.konifar.materialcat.infra.data.mapper
 import com.konifar.materialcat.domain.model.CatImage
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.infra.data.FlickrPhoto
-import com.konifar.materialcat.infra.data.FlickrPhotoList
+import com.konifar.materialcat.infra.data.FlickrPhotoResponse
 
 object CatImageMapper {
 
@@ -13,7 +13,7 @@ object CatImageMapper {
             title = photo.title
     )
 
-    fun transform(list: FlickrPhotoList): MutableList<CatImage> = mutableListOf<CatImage>().apply {
+    fun transform(list: FlickrPhotoResponse): MutableList<CatImage> = mutableListOf<CatImage>().apply {
         addAll(list.photos.photo.map { transform(it) })
     }
 

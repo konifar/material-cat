@@ -5,7 +5,8 @@ import io.reactivex.Observable
 
 class CatImageFlickerRepositoryImpl(
         private val api: CatImageRepository,
-        private val inMemory: CatImageRepository
+        private val database: CatImageRepository,
+        private val memory: CatImageRepository
 ) : CatImageRepository {
 
     override fun findByTextOrderByPopular(text: String, page: Int, perPage: Int): Observable<List<CatImage>> {

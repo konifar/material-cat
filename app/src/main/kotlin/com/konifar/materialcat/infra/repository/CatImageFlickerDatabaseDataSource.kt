@@ -2,26 +2,22 @@ package com.konifar.materialcat.infra.repository
 
 import com.konifar.materialcat.domain.model.CatImage
 import com.konifar.materialcat.domain.model.CatImageId
+import com.konifar.materialcat.infra.data.OrmaDatabase
 import io.reactivex.Observable
 
-class CatImageFlickerInMemoryDataSource(
-        private val cacheForPopular: MutableMap<CatImageId, CatImage>
+class CatImageFlickerDatabaseDataSource(
+        private val orma: OrmaDatabase
 ) : CatImageRepository {
 
     override fun findByTextOrderByPopular(text: String, page: Int, perPage: Int): Observable<List<CatImage>> {
-        // TODO
-        return Observable.just(cacheForPopular.values.toList())
+        return Observable.empty()
     }
 
     override fun findByTextOrderByNew(text: String, page: Int, perPage: Int): Observable<List<CatImage>> {
-        // TODO
-        return Observable.just(cacheForPopular.values.toList())
+        return Observable.empty()
     }
 
     override fun findById(catImageId: CatImageId): Observable<CatImage> {
-        if (cacheForPopular[catImageId] != null) {
-            return Observable.just(cacheForPopular[catImageId])
-        }
         return Observable.empty()
     }
 

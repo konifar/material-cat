@@ -3,10 +3,8 @@ package com.konifar.materialcat._di
 import com.konifar.materialcat.domain.model.CatImage
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.infra.api.FlickrApiService
-import com.konifar.materialcat.infra.repository.CatImageFlickerApiDataSource
-import com.konifar.materialcat.infra.repository.CatImageFlickerInMemoryDataSource
-import com.konifar.materialcat.infra.repository.CatImageRepository
-import com.konifar.materialcat.infra.repository.CatImageFlickerRepositoryImpl
+import com.konifar.materialcat.infra.data.OrmaDatabase
+import com.konifar.materialcat.infra.repository.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -18,21 +16,27 @@ class RepositoryModule() {
 
     @Singleton
     @Provides
-    @Named("flicker_api")
+    @Named("flickr_api")
     fun provideCatImageFlickerApiDataStore(flickrApiService: FlickrApiService): CatImageRepository = CatImageFlickerApiDataSource(flickrApiService)
 
     @Singleton
     @Provides
-    @Named("flicker_in_memory")
-    fun provideCatImageFlickerInMemoryDataStore(): CatImageRepository = CatImageFlickerInMemoryDataSource(LinkedHashMap<CatImageId, CatImage>())
+    @Named("flickr_memory")
+    fun provideCatImageFlickerMemoryDataStore(): CatImageRepository = CatImageFlickerMemoryDataSource(HashMap<Int, List<CatImage>>(), HashMap<Int, List<CatImage>>(), HashMap<CatImageId, CatImage>())
+
+    @Singleton
+    @Provides
+    @Named("flickr_database")
+    fun provideCatImageFlickerDatabaseDataStore(orma: OrmaDatabase): CatImageRepository = CatImageFlickerDatabaseDataSource(orma)
 
     @Singleton
     @Provides
     fun provideFlickrCatImageRepository(
-            @Named("flicker_api") api: CatImageRepository,
-            @Named("flicker_in_memory") inMemory: CatImageRepository
+            @Named("flickr_api") api: CatImageRepository,
+            @Named("flickr_database") database: CatImageRepository,
+            @Named("flickr_memory") memory: CatImageRepository
     ): CatImageRepository {
-        return CatImageFlickerRepositoryImpl(api, inMemory)
+        return CatImageFlickerRepositoryImpl(api, database, memory)
     }
 
 }
