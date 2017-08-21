@@ -1,4 +1,4 @@
-package com.konifar.materialcat.presentation.di
+package com.konifar.materialcat.di
 
 import javax.inject.Scope
 

@@ -3,6 +3,9 @@ package com.konifar.materialcat
 import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
+import com.konifar.materialcat.di.ApplicationComponent
+import com.konifar.materialcat.di.ApplicationModule
+import com.konifar.materialcat.di.DaggerApplicationComponent
 import io.fabric.sdk.android.Fabric
 
 class MainApplication : Application() {

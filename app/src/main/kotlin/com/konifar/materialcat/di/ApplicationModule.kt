@@ -1,4 +1,4 @@
-package com.konifar.materialcat
+package com.konifar.materialcat.di
 
 import android.app.Application
 import android.content.Context

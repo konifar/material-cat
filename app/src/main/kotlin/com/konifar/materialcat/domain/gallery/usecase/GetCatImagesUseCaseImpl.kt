@@ -16,10 +16,6 @@ class GetCatImagesUseCaseImpl(
         private val SEARCH_TEXT = "cat"
     }
 
-    override fun eventBus(): EventBus {
-        return eventBus
-    }
-
     override fun requestGetPopular(page: Int, perPage: Int) {
         compositeDisposable.add(
                 catImageRepository.findByTextOrderByPopular(SEARCH_TEXT, page, perPage)

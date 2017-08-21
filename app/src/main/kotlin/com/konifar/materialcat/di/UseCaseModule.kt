@@ -1,7 +1,7 @@
-package com.konifar.materialcat.domain.di
+package com.konifar.materialcat.di
 
-import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCaseImpl
 import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCase
+import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCaseImpl
 import com.konifar.materialcat.infra.repository.catphoto.CatImageRepository
 import dagger.Module
 import dagger.Provides
@@ -10,14 +10,8 @@ import org.greenrobot.eventbus.EventBus
 
 
 @Module
-class UseCaseModule() {
-
-    @Provides
-    fun provideEventBus() = EventBus()
-
-    @Provides
-    fun provideCompositeDisposable() = CompositeDisposable()
-
+class UseCaseModule {
+    
     @Provides
     fun provideGetCatImagesUseCase(
             eventBus: EventBus,

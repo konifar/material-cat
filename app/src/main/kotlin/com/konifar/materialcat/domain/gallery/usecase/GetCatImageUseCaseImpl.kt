@@ -11,10 +11,6 @@ class GetCatImageUseCaseImpl(
         private val catImageRepository: CatImageRepository
 ) : GetCatImageUseCase {
 
-    override fun eventBus(): EventBus {
-        return eventBus
-    }
-
     override fun requestGet(id: CatImageId) {
 //        compositeDisposable.add(
 //                catImageRepository.findByTextOrderByPopular(SEARCH_TEXT, page, perPage)

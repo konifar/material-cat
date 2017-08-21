@@ -7,6 +7,7 @@ import com.konifar.materialcat.domain.gallery.model.CatImage
 import com.konifar.materialcat.domain.gallery.model.CatImageId
 import com.konifar.materialcat.domain.gallery.usecase.GetCatImagesUseCase
 import com.konifar.materialcat.presentation.ListObserver
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 class GalleryPresenter
 @Inject constructor(
-        private val getCatImagesUseCase: GetCatImagesUseCase
+        private val getCatImagesUseCase: GetCatImagesUseCase,
+        private val eventBus: EventBus
 ) : LifecycleObserver {
 
     companion object {
@@ -60,40 +62,40 @@ class GalleryPresenter
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun onResume() {
-        if (!getCatImagesUseCase.eventBus().isRegistered(this)) {
-            getCatImagesUseCase.eventBus().register(this)
+        if (!eventBus.isRegistered(this)) {
+            eventBus.register(this)
         }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun onPause() {
-        if (getCatImagesUseCase.eventBus().isRegistered(this)) {
-            getCatImagesUseCase.eventBus().unregister(this)
+        if (eventBus.isRegistered(this)) {
+            eventBus.unregister(this)
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetPopularCatImagesSuccessEvent) {
-        getCatImagesUseCase.eventBus().removeStickyEvent(event)
+        eventBus.removeStickyEvent(event)
         renderData(event.catImages, event.page)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetPopularCatImagesFailureEvent) {
-        getCatImagesUseCase.eventBus().removeStickyEvent(event)
+        eventBus.removeStickyEvent(event)
         hideLoading(event.page)
         // TODO Show error message
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesSuccessEvent) {
-        getCatImagesUseCase.eventBus().removeStickyEvent(event)
+        eventBus.removeStickyEvent(event)
         renderData(event.catImages, event.page)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesFailureEvent) {
-        getCatImagesUseCase.eventBus().removeStickyEvent(event)
+        eventBus.removeStickyEvent(event)
         hideLoading(event.page)
         // TODO Show error message
     }

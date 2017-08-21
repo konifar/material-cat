@@ -1,4 +1,4 @@
-package com.konifar.materialcat.infra.di
+package com.konifar.materialcat.di
 
 import android.content.Context
 import android.content.SharedPreferences

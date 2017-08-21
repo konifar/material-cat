@@ -1,4 +1,4 @@
-package com.konifar.materialcat.infra.di
+package com.konifar.materialcat.di
 
 import com.konifar.materialcat.domain.gallery.model.CatImage
 import com.konifar.materialcat.domain.gallery.model.CatImageId
