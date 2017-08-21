@@ -24,6 +24,6 @@ class FlickrPhoto {
     var isFriend: Int = 0
     @Json(name = "isfamily") @Column @JvmField
     var isFamily: Int = 0
-    @Column @JvmField
+    @Column(indexed = true) @JvmField
     var type: String = ""
 }

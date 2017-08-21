@@ -7,14 +7,16 @@ import com.konifar.materialcat.infra.data.FlickrPhotoResponse
 
 object CatImageMapper {
 
-    private fun transform(photo: FlickrPhoto): CatImage = CatImage(
+    fun transform(photo: FlickrPhoto): CatImage = CatImage(
             id = CatImageId(photo.id),
             imageUrl = "http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg",
             title = photo.title
     )
 
-    fun transform(list: FlickrPhotoResponse): MutableList<CatImage> = mutableListOf<CatImage>().apply {
-        addAll(list.photos.photo.map { transform(it) })
+    fun transform(response: FlickrPhotoResponse): MutableList<CatImage> = transform(response.photos.photo)
+
+    fun transform(list: List<FlickrPhoto>): MutableList<CatImage> = mutableListOf<CatImage>().apply {
+        addAll(list.map { transform(it) })
     }
 
 }
