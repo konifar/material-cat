@@ -1,9 +1,8 @@
 package com.konifar.materialcat._di
 
-import com.konifar.materialcat.domain.model.CatImage
-import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.infra.api.FlickrApiService
-import com.konifar.materialcat.infra.data.OrmaDatabase
+import com.konifar.materialcat.infra.data.FlickrPhoto
+import com.konifar.materialcat.infra.database.OrmaDatabaseWrapper
 import com.konifar.materialcat.infra.repository.*
 import dagger.Module
 import dagger.Provides
@@ -22,12 +21,12 @@ class RepositoryModule() {
     @Singleton
     @Provides
     @Named("flickr_memory")
-    fun provideCatImageFlickerMemoryDataStore(): CatImageRepository = CatImageFlickerMemoryDataSource(HashMap<Int, List<CatImage>>(), HashMap<Int, List<CatImage>>(), HashMap<CatImageId, CatImage>())
+    fun provideCatImageFlickerMemoryDataStore(): CatImageRepository = CatImageFlickerMemoryDataSource(HashMap<Int, List<FlickrPhoto>>(), HashMap<Int, List<FlickrPhoto>>(), HashMap<String, FlickrPhoto>())
 
     @Singleton
     @Provides
     @Named("flickr_database")
-    fun provideCatImageFlickerDatabaseDataStore(orma: OrmaDatabase): CatImageRepository = CatImageFlickerDatabaseDataSource(orma)
+    fun provideCatImageFlickerDatabaseDataStore(ormaDatabaseWrapper: OrmaDatabaseWrapper): CatImageRepository = CatImageFlickerDatabaseDataSource(ormaDatabaseWrapper.orma)
 
     @Singleton
     @Provides

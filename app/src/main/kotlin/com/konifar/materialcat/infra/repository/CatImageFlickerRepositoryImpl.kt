@@ -17,4 +17,14 @@ class CatImageFlickerRepositoryImpl(
         return api.findByTextOrderByNew(text, page, perPage)
     }
 
+    override fun clearPopularCache() {
+        database.clearPopularCache()
+        memory.clearPopularCache()
+    }
+
+    override fun clearNewCache() {
+        database.clearNewCache()
+        memory.clearNewCache()
+    }
+
 }

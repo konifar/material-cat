@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.konifar.materialcat.infra.api.FlickrApiService
-import com.konifar.materialcat.infra.data.OrmaDatabase
+import com.konifar.materialcat.infra.database.OrmaDatabaseWrapper
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -31,8 +31,8 @@ class InfraModule() {
 
     @Singleton
     @Provides
-    fun provideOrmaDatabase(context: Context): OrmaDatabase {
-        return OrmaDatabase.builder(context).build()
+    fun provideOrmaDatabaseWrapper(context: Context): OrmaDatabaseWrapper {
+        return OrmaDatabaseWrapper(context)
     }
 
     @Singleton
