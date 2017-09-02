@@ -1,14 +1,14 @@
 package com.konifar.materialcat.domain.usecase
 
 import com.konifar.materialcat.domain.model.CatImageId
-import com.konifar.materialcat.infra.repository.CatImageRepository
+import com.konifar.materialcat.infra.repository.CatImageFlickrRepository
 import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.EventBus
 
 class GetCatImageUseCaseImpl(
         val eventBus: EventBus,
         private val compositeDisposable: CompositeDisposable,
-        private val catImageRepository: CatImageRepository
+        private val catImageRepository: CatImageFlickrRepository
 ) : GetCatImageUseCase {
 
     override fun requestGet(id: CatImageId) {

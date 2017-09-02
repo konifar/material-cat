@@ -26,4 +26,6 @@ class FlickrPhoto {
     var isFamily: Int = 0
     @Column(indexed = true) @JvmField
     var type: String = ""
+    @Column(indexed = true) @JvmField
+    var searchedText: String = ""
 }

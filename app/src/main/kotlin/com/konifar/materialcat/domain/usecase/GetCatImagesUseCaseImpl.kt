@@ -1,6 +1,7 @@
 package com.konifar.materialcat.domain.usecase
 
-import com.konifar.materialcat.infra.repository.CatImageRepository
+import com.konifar.materialcat.infra.data.SearchOrderType
+import com.konifar.materialcat.infra.repository.CatImageFlickrRepository
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -9,7 +10,7 @@ import org.greenrobot.eventbus.EventBus
 class GetCatImagesUseCaseImpl(
         val eventBus: EventBus,
         private val compositeDisposable: CompositeDisposable,
-        private val catImageRepository: CatImageRepository
+        private val catImageRepository: CatImageFlickrRepository
 ) : GetCatImagesUseCase {
 
     companion object {
@@ -18,7 +19,7 @@ class GetCatImagesUseCaseImpl(
 
     override fun requestGetPopular(page: Int, perPage: Int) {
         compositeDisposable.add(
-                catImageRepository.findByTextOrderByPopular(SEARCH_TEXT, page, perPage)
+                catImageRepository.findByText(SearchOrderType.POPULAR, SEARCH_TEXT, page, perPage)
                         .subscribeOn(Schedulers.io())
                         .subscribeBy(
                                 onNext = { eventBus.postSticky(GetCatImagesUseCase.GetPopularCatImagesSuccessEvent(it, page)) },
@@ -29,7 +30,7 @@ class GetCatImagesUseCaseImpl(
 
     override fun requestGetNew(page: Int, perPage: Int) {
         compositeDisposable.add(
-                catImageRepository.findByTextOrderByNew(SEARCH_TEXT, page, perPage)
+                catImageRepository.findByText(SearchOrderType.NEW, SEARCH_TEXT, page, perPage)
                         .subscribeOn(Schedulers.io())
                         .subscribeBy(
                                 onNext = { eventBus.postSticky(GetCatImagesUseCase.GetNewCatImagesSuccessEvent(it, page)) },
