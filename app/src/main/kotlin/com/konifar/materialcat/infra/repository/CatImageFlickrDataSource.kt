@@ -3,6 +3,7 @@ package com.konifar.materialcat.infra.repository
 import com.konifar.materialcat.infra.data.FlickrPhoto
 import com.konifar.materialcat.infra.data.SearchOrderType
 import io.reactivex.Observable
+import io.reactivex.Single
 
 interface CatImageFlickrDataSource {
 
@@ -12,6 +13,6 @@ interface CatImageFlickrDataSource {
 
     fun updateCache(searchOrderType: SearchOrderType, text: String, page: Int, photos: List<FlickrPhoto>) = Any()
 
-    fun clearCache(searchOrderType: SearchOrderType, text: String) = Any()
+    fun clearCache(searchOrderType: SearchOrderType, text: String): Single<Int> = Single.never()
 
 }

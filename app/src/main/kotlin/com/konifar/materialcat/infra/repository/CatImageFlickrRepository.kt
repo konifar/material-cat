@@ -4,6 +4,7 @@ import com.konifar.materialcat.domain.model.CatImage
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.infra.data.SearchOrderType
 import io.reactivex.Observable
+import io.reactivex.Single
 
 interface CatImageFlickrRepository {
 
@@ -11,6 +12,6 @@ interface CatImageFlickrRepository {
 
     fun findById(catImageId: CatImageId): Observable<CatImage>
 
-    fun clearCache(searchOrderType: SearchOrderType, text: String)
+    fun clearCache(searchOrderType: SearchOrderType, text: String): Single<Int>
 
 }

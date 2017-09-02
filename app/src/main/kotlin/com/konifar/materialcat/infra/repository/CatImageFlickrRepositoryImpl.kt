@@ -5,6 +5,7 @@ import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.infra.data.SearchOrderType
 import com.konifar.materialcat.infra.data.mapper.CatImageMapper
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -33,8 +34,9 @@ class CatImageFlickrRepositoryImpl(
                 .map { CatImageMapper.transform(it) }
     }
 
-    override fun clearCache(searchOrderType: SearchOrderType, text: String) {
-        database.clearCache(searchOrderType, text)
+    override fun clearCache(searchOrderType: SearchOrderType, text: String): Single<Int> {
+        return database.clearCache(searchOrderType, text)
+                .observeOn(Schedulers.newThread())
     }
 
 }

@@ -5,6 +5,7 @@ import com.konifar.materialcat.infra.data.FlickrPhoto
 import com.konifar.materialcat.infra.data.OrmaDatabase
 import com.konifar.materialcat.infra.data.SearchOrderType
 import io.reactivex.Observable
+import io.reactivex.Single
 
 class CatImageFlickrDatabaseDataSource(
         private val orma: OrmaDatabase
@@ -38,11 +39,11 @@ class CatImageFlickrDatabaseDataSource(
                 )
     }
 
-    override fun clearCache(searchOrderType: SearchOrderType, text: String) {
-        orma.deleteFromFlickrPhoto()
+    override fun clearCache(searchOrderType: SearchOrderType, text: String): Single<Int> {
+        return orma.deleteFromFlickrPhoto()
                 .typeEq(searchOrderType.toString())
                 .searchedTextEq(text)
-                .execute()
+                .executeAsSingle()
     }
 
 }
