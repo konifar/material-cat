@@ -26,7 +26,7 @@ class GalleryPresenter
 
     fun requestGetNew(page: Int, isRefreshing: Boolean = false) {
         showLoading(page, isRefreshing)
-        getCatImagesUseCase.requestGetNew(page)
+        getCatImagesUseCase.requestGetNew(page, isRefreshing)
                 .subscribeBy(
                         onNext = { renderData(it, page) },
                         onError = { hideLoading(page) }
@@ -36,7 +36,7 @@ class GalleryPresenter
 
     fun requestGetPopular(page: Int, isRefreshing: Boolean = false) {
         showLoading(page, isRefreshing)
-        getCatImagesUseCase.requestGetPopular(page)
+        getCatImagesUseCase.requestGetPopular(page, isRefreshing)
                 .subscribeBy(
                         onNext = { renderData(it, page) },
                         onError = { hideLoading(page) }

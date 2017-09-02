@@ -5,8 +5,8 @@ import io.reactivex.Observable
 
 interface GetCatImagesUseCase {
 
-    fun requestGetPopular(page: Int): Observable<List<CatImage>>
+    fun requestGetPopular(page: Int, shouldRefresh: Boolean): Observable<List<CatImage>>
 
-    fun requestGetNew(page: Int): Observable<List<CatImage>>
+    fun requestGetNew(page: Int, shouldRefresh: Boolean): Observable<List<CatImage>>
 
 }

@@ -13,12 +13,18 @@ class GetCatImagesUseCaseImpl(private val catImageRepository: CatImageFlickrRepo
         private val PER_PAGE = 36
     }
 
-    override fun requestGetPopular(page: Int): Observable<List<CatImage>> {
+    override fun requestGetPopular(page: Int, shouldRefresh: Boolean): Observable<List<CatImage>> {
+        if (shouldRefresh) {
+            catImageRepository.clearCache(SearchOrderType.POPULAR, SEARCH_TEXT)
+        }
         return catImageRepository.findByText(SearchOrderType.POPULAR, SEARCH_TEXT, page, PER_PAGE)
                 .subscribeOn(Schedulers.io())
     }
 
-    override fun requestGetNew(page: Int): Observable<List<CatImage>> {
+    override fun requestGetNew(page: Int, shouldRefresh: Boolean): Observable<List<CatImage>> {
+        if (shouldRefresh) {
+            catImageRepository.clearCache(SearchOrderType.NEW, SEARCH_TEXT)
+        }
         return catImageRepository.findByText(SearchOrderType.NEW, SEARCH_TEXT, page, PER_PAGE)
                 .subscribeOn(Schedulers.io())
     }
