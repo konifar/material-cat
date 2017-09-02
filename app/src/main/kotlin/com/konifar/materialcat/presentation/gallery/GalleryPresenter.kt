@@ -8,22 +8,15 @@ import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.domain.usecase.GetCatImagesUseCase
 import com.konifar.materialcat.presentation.ListObserver
 import io.reactivex.disposables.CompositeDisposable
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 
 class GalleryPresenter
 @Inject constructor(
         private val getCatImagesUseCase: GetCatImagesUseCase,
-        private val compositeDisposable: CompositeDisposable,
-        private val eventBus: EventBus
+        private val compositeDisposable: CompositeDisposable
 ) : LifecycleObserver {
-
-    companion object {
-        private val PER_PAGE = 36
-    }
 
     lateinit var navigator: GalleryPageNavigator
 
@@ -33,12 +26,21 @@ class GalleryPresenter
 
     fun requestGetNew(page: Int, isRefreshing: Boolean = false) {
         showLoading(page, isRefreshing)
-        getCatImagesUseCase.requestGetNew(page, PER_PAGE)
+        getCatImagesUseCase.requestGetNew(page)
+                .subscribeBy(
+                        onNext = { renderData(it, page) },
+                        onError = { hideLoading(page) }
+                )
+
     }
 
     fun requestGetPopular(page: Int, isRefreshing: Boolean = false) {
         showLoading(page, isRefreshing)
-        getCatImagesUseCase.requestGetPopular(page, PER_PAGE)
+        getCatImagesUseCase.requestGetPopular(page)
+                .subscribeBy(
+                        onNext = { renderData(it, page) },
+                        onError = { hideLoading(page) }
+                )
     }
 
     private fun showLoading(page: Int, isRefreshing: Boolean = false) {
@@ -61,51 +63,11 @@ class GalleryPresenter
 //        navigator.openDetail(viewModel.id)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun onResume() {
-        if (!eventBus.isRegistered(this)) {
-            eventBus.register(this)
-        }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun onPause() {
-        if (eventBus.isRegistered(this)) {
-            eventBus.unregister(this)
-        }
-    }
-
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {
         if (!compositeDisposable.isDisposed) {
             compositeDisposable.dispose()
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun onEvent(event: GetCatImagesUseCase.GetPopularCatImagesSuccessEvent) {
-        eventBus.removeStickyEvent(event)
-        renderData(event.catImages, event.page)
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun onEvent(event: GetCatImagesUseCase.GetPopularCatImagesFailureEvent) {
-        eventBus.removeStickyEvent(event)
-        hideLoading(event.page)
-        // TODO Show error message
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesSuccessEvent) {
-        eventBus.removeStickyEvent(event)
-        renderData(event.catImages, event.page)
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun onEvent(event: GetCatImagesUseCase.GetNewCatImagesFailureEvent) {
-        eventBus.removeStickyEvent(event)
-        hideLoading(event.page)
-        // TODO Show error message
     }
 
     private fun renderData(catImages: List<CatImage>, page: Int) {
