@@ -1,7 +1,7 @@
 package com.konifar.materialcat._di
 
 import com.konifar.materialcat.presentation.main.MainActivity
-import com.konifar.materialcat.presentation.gallery.PhotoDetailActivity
+import com.konifar.materialcat.presentation.gallery.detail.PhotoDetailActivity
 import dagger.Subcomponent
 
 @ActivityScope

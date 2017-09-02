@@ -60,7 +60,7 @@ class GalleryPresenter
     }
 
     fun onClickItem(id: CatImageId) {
-//        navigator.openDetail(viewModel.id)
+        navigator.openDetail(id)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

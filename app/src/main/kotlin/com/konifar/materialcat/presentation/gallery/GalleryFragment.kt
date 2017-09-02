@@ -16,10 +16,11 @@ import com.konifar.materialcat.R
 import com.konifar.materialcat._extension.component
 import com.konifar.materialcat.databinding.FragmentGalleryBinding
 import com.konifar.materialcat.databinding.ViewPhotoBinding
-import com.konifar.materialcat.domain.model.CatImage
+import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.presentation.ListObserver
 import com.konifar.materialcat.presentation.common.customview.LoadingFooterView
 import com.konifar.materialcat.presentation.common.customview.OnLoadMoreScrollListener
+import com.konifar.materialcat.presentation.gallery.detail.PhotoDetailActivity
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
@@ -128,8 +129,8 @@ class GalleryFragment : Fragment(), ListObserver, GalleryPageNavigator, Lifecycl
         return registry
     }
 
-    override fun openDetail(catImage: CatImage) {
-        TODO("not implemented")
+    override fun openDetail(catImageId: CatImageId) {
+        startActivity(PhotoDetailActivity.createIntent(activity, catImageId))
     }
 
     internal class ViewHolder(view: View) {

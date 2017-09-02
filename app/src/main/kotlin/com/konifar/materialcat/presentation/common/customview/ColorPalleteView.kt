@@ -3,6 +3,7 @@ package com.konifar.materialcat.presentation.common.customview
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
+import android.support.v7.graphics.Palette
 import android.support.v7.graphics.Palette.Builder
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -23,7 +24,7 @@ class ColorPalleteView : LinearLayout {
 
     fun initColors(bitmap: Bitmap) {
         Builder(bitmap).generate { palette ->
-            val vibrantSwatch = palette.vibrantSwatch
+            val vibrantSwatch: Palette.Swatch? = palette.vibrantSwatch
             if (vibrantSwatch != null) {
                 binding.containerVibrant.setBackgroundColor(vibrantSwatch.rgb)
                 binding.txtVibrant.setTextColor(vibrantSwatch.titleTextColor)

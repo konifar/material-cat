@@ -1,5 +1,7 @@
 package com.konifar.materialcat._di
 
+import com.konifar.materialcat.domain.usecase.GetCatImageUseCase
+import com.konifar.materialcat.domain.usecase.GetCatImageUseCaseImpl
 import com.konifar.materialcat.domain.usecase.GetCatImagesUseCase
 import com.konifar.materialcat.domain.usecase.GetCatImagesUseCaseImpl
 import com.konifar.materialcat.infra.repository.CatImageFlickrRepository
@@ -14,5 +16,10 @@ class UseCaseModule {
     fun provideGetCatImagesUseCase(
             catImageRepository: CatImageFlickrRepository
     ): GetCatImagesUseCase = GetCatImagesUseCaseImpl(catImageRepository)
+
+    @Provides
+    fun provideGetCatImageUseCase(
+            catImageRepository: CatImageFlickrRepository
+    ): GetCatImageUseCase = GetCatImageUseCaseImpl(catImageRepository)
 
 }
