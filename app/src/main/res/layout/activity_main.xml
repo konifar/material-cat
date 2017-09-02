@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_margin="@dimen/spacing"
+                android:layout_margin="@dimen/space_16dp"
                 android:src="@drawable/ic_share_grey_600_24dp"
                 app:backgroundTint="@color/accent100" />
 
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom">
 
-                <com.konifar.materialcat.views.ShareBarView
+                <com.konifar.materialcat.presentation.common.customview.ShareBarView
                     android:id="@+id/share_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

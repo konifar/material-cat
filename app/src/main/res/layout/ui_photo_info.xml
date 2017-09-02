@@ -19,7 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/spacing"
+                android:padding="@dimen/space_16dp"
                 android:scaleType="center" />
 
             <TextView
@@ -27,9 +27,9 @@
                 style="@style/TextSub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing"
-                android:layout_marginRight="@dimen/spacing"
-                android:layout_marginTop="@dimen/spacing"
+                android:layout_marginLeft="@dimen/space_16dp"
+                android:layout_marginRight="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
                 android:layout_toRightOf="@id/img_icon"
                 android:lines="1" />
 
@@ -39,9 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_sub"
-                android:layout_marginBottom="@dimen/spacing"
-                android:layout_marginLeft="@dimen/spacing"
-                android:layout_marginRight="@dimen/spacing"
+                android:layout_marginBottom="@dimen/space_16dp"
+                android:layout_marginLeft="@dimen/space_16dp"
+                android:layout_marginRight="@dimen/space_16dp"
                 android:layout_marginTop="4dp"
                 android:layout_toRightOf="@id/img_icon" />
 

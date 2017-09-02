@@ -1,0 +1,49 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.konifar.materialcat.presentation.gallery.GalleryViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:visibility="@{viewModel.contentVisibility}"
+            app:swipeRefreshing="@{viewModel.swipeRefreshing}">
+
+            <jp.co.recruit_mp.android.widget.HeaderFooterGridView
+                android:id="@+id/grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:horizontalSpacing="@dimen/line"
+                android:nestedScrollingEnabled="true"
+                android:numColumns="3"
+                android:verticalSpacing="@dimen/line"
+                tools:targetApi="lollipop" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <FrameLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:visibility="@{viewModel.loadingVisibility}">
+
+            <include layout="@layout/view_loading" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</layout>

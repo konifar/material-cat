@@ -2,33 +2,31 @@ package com.konifar.materialcat
 
 import android.app.Application
 import android.content.Context
-
+import android.support.multidex.MultiDex
 import com.crashlytics.android.Crashlytics
-import com.google.gson.GsonBuilder
-import com.konifar.materialcat.network.FlickrApiService
-
+import com.facebook.stetho.Stetho
+import com.konifar.materialcat._di.ApplicationComponent
+import com.konifar.materialcat._di.ApplicationModule
+import com.konifar.materialcat._di.DaggerApplicationComponent
 import io.fabric.sdk.android.Fabric
-import retrofit.RestAdapter
-import retrofit.converter.GsonConverter
 
 class MainApplication : Application() {
+
+    val applicationComponent: ApplicationComponent by lazy {
+        DaggerApplicationComponent.builder().apply {
+            applicationModule(ApplicationModule(this@MainApplication))
+        }.build()
+    }
 
     override fun onCreate() {
         super.onCreate()
         Fabric.with(this, Crashlytics())
+        Stetho.initializeWithDefaults(this);
     }
 
-    companion object {
-
-        val FLICKR_API = RestAdapter.Builder()
-                .setEndpoint(Constants.FLICKR_ENDPOINT)
-                .setConverter(GsonConverter(GsonBuilder().setDateFormat(Constants.JSON_DATE_FORMAT).create()))
-                .build()
-                .create(FlickrApiService::class.java)
-
-        operator fun get(context: Context): MainApplication {
-            return context.applicationContext as MainApplication
-        }
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.konifar.materialcat.presentation.gallery.GalleryItemViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.konifar.materialcat.presentation.common.customview.AspectRatioImageView
+            android:id="@+id/img_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:transitionName="@string/shared_element_photo"
+            app:imageRatio="1"
+            app:photoImageUrl="@{viewModel.imageUrl}" />
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/ripple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/img_preview"
+            android:layout_alignLeft="@id/img_preview"
+            android:layout_alignRight="@id/img_preview"
+            android:layout_alignTop="@id/img_preview"
+            app:mrl_rippleAlpha="0.6"
+            app:mrl_rippleColor="@color/accent100"
+            app:mrl_rippleDuration="300"
+            app:mrl_rippleFadeDuration="75"
+            app:mrl_rippleInAdapter="true">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -18,7 +18,7 @@
         android:theme="@style/NoActionBarTheme">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:launchMode="singleTask">
@@ -29,7 +29,7 @@
         </activity>
 
         <activity
-            android:name=".PhotoDetailActivity"
+            android:name=".presentation.gallery.detail.PhotoDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:theme="@style/NoActionBarTheme.Transparent" />

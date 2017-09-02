@@ -6,15 +6,17 @@ apply plugin: 'io.fabric'
 apply from: "${rootDir.absolutePath}/keys.gradle"
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 25
     buildToolsVersion '25.0.3'
 
     defaultConfig {
         applicationId "com.konifar.materialcat"
-        minSdkVersion 10
-        targetSdkVersion 22
+        minSdkVersion 15
+        targetSdkVersion 25
         versionCode 2
         versionName "1.0.1"
+
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -45,13 +47,11 @@ dependencies {
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    compile 'com.android.support:support-v4:22.2.1'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:palette-v7:22.2.1'
-    compile 'com.android.support:design:22.2.1'
+    compile "com.android.support:appcompat-v7:${support_lib_version}"
+    compile "com.android.support:palette-v7:${support_lib_version}"
+    compile "com.android.support:design:${support_lib_version}"
+    compile "com.android.support:recyclerview-v7:${support_lib_version}"
 
-    compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.google.code.gson:gson:2.3.1'
 
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -68,4 +68,37 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.3.0'
 
     kapt "com.android.databinding:compiler:$gradle_version"
+
+    // Database
+    compile 'com.github.gfx.android.orma:orma:4.2.5'
+    kapt 'com.github.gfx.android.orma:orma-processor:4.2.5'
+    kapt 'com.squareup:javapoet:1.6.1'
+
+    // Structure
+    compile 'com.google.dagger:dagger:2.9'
+    kapt 'com.google.dagger:dagger-compiler:2.9'
+    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex:rxkotlin:2.0.0-RC1'
+
+    compile "com.squareup.moshi:moshi:$moshi_verion"
+    compile "com.squareup.moshi:moshi-kotlin:$moshi_verion"
+    compile "com.squareup.moshi:moshi-adapters:$moshi_verion"
+
+    compile "android.arch.lifecycle:runtime:$arch_version"
+    compile "android.arch.lifecycle:extensions:$arch_version"
+
+    compile 'com.annimon:stream:1.1.8'
+
+    compile 'com.android.support:multidex:1.0.1'
+
+    // Network
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    // Debug
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }

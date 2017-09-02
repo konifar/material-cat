@@ -5,13 +5,14 @@ buildscript {
         maven { url "http://dl.bintray.com/populov/maven" }
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
         mavenCentral()
         jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.android.tools.build:gradle:$gradle_version"
-        classpath 'io.fabric.tools:gradle:1.19.2'
+        classpath 'io.fabric.tools:gradle:1.21.6'
     }
 }
 
@@ -20,6 +21,7 @@ allprojects {
         maven { url "http://dl.bintray.com/populov/maven" }
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
         mavenCentral()
         jcenter()
     }
