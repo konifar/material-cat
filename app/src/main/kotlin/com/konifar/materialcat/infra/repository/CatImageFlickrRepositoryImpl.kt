@@ -1,6 +1,6 @@
 package com.konifar.materialcat.infra.repository
 
-import com.konifar.materialcat.domain.model.CatImage
+import com.konifar.materialcat.domain.model.CatImageDomainModel
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.infra.data.SearchOrderType
 import com.konifar.materialcat.infra.data.mapper.CatImageMapper
@@ -14,7 +14,7 @@ class CatImageFlickrRepositoryImpl(
         private val database: CatImageFlickrDataSource
 ) : CatImageFlickrRepository {
 
-    override fun findByText(searchOrderType: SearchOrderType, text: String, page: Int, perPage: Int): Observable<List<CatImage>> {
+    override fun findByText(searchOrderType: SearchOrderType, text: String, page: Int, perPage: Int): Observable<List<CatImageDomainModel>> {
         return Observable.concat(
                 database.findByText(searchOrderType, text, page, perPage),
                 api.findByText(searchOrderType, text, page, perPage)
@@ -28,7 +28,7 @@ class CatImageFlickrRepositoryImpl(
                 .map { CatImageMapper.transform(it) }
     }
 
-    override fun findById(catImageId: CatImageId): Observable<CatImage> {
+    override fun findById(catImageId: CatImageId): Observable<CatImageDomainModel> {
         return database.findById(catImageId.value)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { CatImageMapper.transform(it) }

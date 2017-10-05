@@ -1,6 +1,6 @@
 package com.konifar.materialcat.domain.usecase
 
-import com.konifar.materialcat.domain.model.CatImage
+import com.konifar.materialcat.domain.model.CatImageDomainModel
 import com.konifar.materialcat.infra.data.SearchOrderType
 import com.konifar.materialcat.infra.repository.CatImageFlickrRepository
 import io.reactivex.Observable
@@ -14,15 +14,15 @@ class GetCatImagesUseCaseImpl(private val catImageRepository: CatImageFlickrRepo
         private val PER_PAGE = 36
     }
 
-    override fun requestGetPopular(page: Int, shouldRefresh: Boolean): Observable<List<CatImage>> {
+    override fun requestGetPopular(page: Int, shouldRefresh: Boolean): Observable<List<CatImageDomainModel>> {
         return requestGet(page, shouldRefresh, SearchOrderType.POPULAR)
     }
 
-    override fun requestGetNew(page: Int, shouldRefresh: Boolean): Observable<List<CatImage>> {
+    override fun requestGetNew(page: Int, shouldRefresh: Boolean): Observable<List<CatImageDomainModel>> {
         return requestGet(page, shouldRefresh, SearchOrderType.NEW)
     }
 
-    private fun requestGet(page: Int, shouldRefresh: Boolean, searchOrderType: SearchOrderType): Observable<List<CatImage>> {
+    private fun requestGet(page: Int, shouldRefresh: Boolean, searchOrderType: SearchOrderType): Observable<List<CatImageDomainModel>> {
         val single: Single<Int> = if (shouldRefresh) catImageRepository.clearCache(searchOrderType, SEARCH_TEXT) else Single.just(1)
 
         return single.toObservable()

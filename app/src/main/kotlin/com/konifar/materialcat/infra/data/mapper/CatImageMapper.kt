@@ -1,21 +1,21 @@
 package com.konifar.materialcat.infra.data.mapper
 
-import com.konifar.materialcat.domain.model.CatImage
+import com.konifar.materialcat.domain.model.CatImageDomainModel
 import com.konifar.materialcat.domain.model.CatImageId
-import com.konifar.materialcat.infra.data.FlickrPhoto
-import com.konifar.materialcat.infra.data.FlickrPhotoResponse
+import com.konifar.materialcat.infra.data.FlickrPhotoJson
+import com.konifar.materialcat.infra.data.FlickrPhotoResponseJson
 
 object CatImageMapper {
 
-    fun transform(photo: FlickrPhoto): CatImage = CatImage(
-            id = CatImageId(photo.id),
-            imageUrl = "http://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg",
-            title = photo.title
+    fun transform(photoJson: FlickrPhotoJson): CatImageDomainModel = CatImageDomainModel(
+            id = CatImageId(photoJson.id),
+            imageUrl = "http://farm${photoJson.farm}.staticflickr.com/${photoJson.server}/${photoJson.id}_${photoJson.secret}.jpg",
+            title = photoJson.title
     )
 
-    fun transform(response: FlickrPhotoResponse): MutableList<CatImage> = transform(response.photos.photo)
+    fun transform(responseJson: FlickrPhotoResponseJson): MutableList<CatImageDomainModel> = transform(responseJson.photos.photo)
 
-    fun transform(list: List<FlickrPhoto>): MutableList<CatImage> = mutableListOf<CatImage>().apply {
+    fun transform(list: List<FlickrPhotoJson>): MutableList<CatImageDomainModel> = mutableListOf<CatImageDomainModel>().apply {
         addAll(list.map { transform(it) })
     }
 

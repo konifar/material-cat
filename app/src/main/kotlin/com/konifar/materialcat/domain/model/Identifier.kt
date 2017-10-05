@@ -1,4 +1,4 @@
-package com.konifar.materialcat.domain
+package com.konifar.materialcat.domain.model
 
 open class Identifier<out T>(val value: T) {
 

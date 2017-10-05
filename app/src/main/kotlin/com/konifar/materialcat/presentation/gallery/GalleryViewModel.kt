@@ -5,7 +5,7 @@ import android.databinding.Bindable
 import android.view.View
 import com.konifar.materialcat.BR
 
-class GalleryViewModel : BaseObservable() {
+open class GalleryViewModel : BaseObservable() {
 
     @Bindable
     var loadingVisibility: Int = View.GONE

@@ -1,8 +1,6 @@
 package com.konifar.materialcat.domain.model
 
-import com.konifar.materialcat.domain.DomainModel
-
-data class CatImage(
+data class CatImageDomainModel(
         override val id: CatImageId,
         val title: String,
         val imageUrl: String

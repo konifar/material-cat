@@ -3,7 +3,7 @@ package com.konifar.materialcat.presentation.gallery
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
-import com.konifar.materialcat.domain.model.CatImage
+import com.konifar.materialcat.domain.model.CatImageDomainModel
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.domain.usecase.GetCatImagesUseCase
 import com.konifar.materialcat.presentation.ListObserver
@@ -43,7 +43,7 @@ class GalleryPresenter
                 )
     }
 
-    private fun showLoading(page: Int, isRefreshing: Boolean = false) {
+    fun showLoading(page: Int, isRefreshing: Boolean = false) {
         if (page == 1) {
             viewModel.toggleLoading(!isRefreshing)
         } else {
@@ -70,9 +70,9 @@ class GalleryPresenter
         }
     }
 
-    private fun renderData(catImages: List<CatImage>, page: Int) {
+    private fun renderData(catImageDomainModels: List<CatImageDomainModel>, page: Int) {
         if (page == 1) viewModel.itemViewModels.clear()
-        viewModel.itemViewModels.addAll(catImages.map { GalleryItemViewModel(it) })
+        viewModel.itemViewModels.addAll(catImageDomainModels.map { GalleryItemViewModel(it) })
         listObserver.notifyDataSetChanged()
         hideLoading(page)
         viewModel.swipeRefreshing = false

@@ -1,4 +1,4 @@
-package com.konifar.materialcat.domain
+package com.konifar.materialcat.domain.model
 
 abstract class DomainModel<out T : Identifier<*>> {
 
