@@ -6,7 +6,7 @@ import android.support.multidex.MultiDex
 import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
 import com.konifar.materialcat._di.ApplicationComponent
-import com.konifar.materialcat._di.ApplicationModule
+import com.konifar.materialcat._di.module.ApplicationModule
 import com.konifar.materialcat._di.DaggerApplicationComponent
 import io.fabric.sdk.android.Fabric
 

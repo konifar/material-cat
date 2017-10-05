@@ -1,0 +1,18 @@
+apply plugin: 'kotlin'
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+dependencies {
+    compile depends.rxjava2.core
+    compile depends.rxjava2.kotlin
+    compile depends.dagger.core
+    compile depends.dagger.compiler
+
+    testCompile depends.junit
+}

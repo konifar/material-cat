@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/Users/konifar/private/material-cat/domain/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher_round.png",
+        "source": "/Users/konifar/private/material-cat/domain/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    }
+]

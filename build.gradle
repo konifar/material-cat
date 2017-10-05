@@ -10,9 +10,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.android.tools.build:gradle:$gradle_version"
-        classpath 'io.fabric.tools:gradle:1.21.6'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath "com.android.tools.build:gradle:$versions.gradleBuildTool"
+        classpath "io.fabric.tools:gradle:$versions.fabricGradleTool"
     }
 }
 

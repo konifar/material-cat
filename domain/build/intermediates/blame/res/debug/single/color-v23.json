@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_text_material.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_tint_default.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/konifar/private/material-cat/domain/build/intermediates/res/merged/debug/color-v23/abc_tint_spinner.xml",
+        "source": "/Users/konifar/.android/build-cache/8edeb00e6af4b38f1a72da9bd67b751139f52bb3/output/res/color-v23/abc_tint_spinner.xml"
+    }
+]

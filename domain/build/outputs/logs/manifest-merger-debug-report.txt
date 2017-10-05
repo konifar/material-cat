@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml:1:11-51
+application
+ADDED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml:3:5-5:19
+uses-sdk
+INJECTED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] /Users/konifar/.android/build-cache/4b5a60b89c64b639f2e51b4e163083be949c0a07/output/AndroidManifest.xml:19:5-43
+	android:targetSdkVersion
+		INJECTED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml
+		INJECTED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml
+		INJECTED from /Users/konifar/private/material-cat/domain/src/main/AndroidManifest.xml

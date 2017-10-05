@@ -47,25 +47,28 @@ android {
 dependencies {
     configurations.all {
         resolutionStrategy {
-            force "com.android.support:support-v4:${support_lib_version}"
-            force "com.android.support:appcompat-v7:${support_lib_version}"
-            force "com.android.support:cardview-v7:${support_lib_version}"
-            force "com.android.support:design:${support_lib_version}"
-            force "com.android.support:recyclerview-v7:${support_lib_version}"
-            force "com.android.support:support-annotations:${support_lib_version}"
-            force 'io.reactivex.rxjava2:rxjava:2.0.5'
+            force depends.support.v4
+            force depends.support.appCompat
+            force depends.support.cardView
+            force depends.support.design
+            force depends.support.recyclerView
+            force depends.support.annotations
+            force 'com.google.guava:guava:20.0'
         }
     }
 
+    compile project(':domain')
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile depends.kotlin.stdlib
 
-    compile "com.android.support:appcompat-v7:${support_lib_version}"
-    compile "com.android.support:palette-v7:${support_lib_version}"
-    compile "com.android.support:design:${support_lib_version}"
-    compile "com.android.support:recyclerview-v7:${support_lib_version}"
-    compile "com.android.support:support-annotations:${support_lib_version}"
+    compile depends.support.v4
+    compile depends.support.appCompat
+    compile depends.support.palette
+    compile depends.support.design
+    compile depends.support.recyclerView
+    compile depends.support.annotations
 
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
@@ -80,37 +83,36 @@ dependencies {
     }
     compile 'com.facebook.android:facebook-android-sdk:4.3.0'
 
-    kapt "com.android.databinding:compiler:$gradle_version"
+    kapt depends.binding.compiler
 
     // Database
-    compile 'com.github.gfx.android.orma:orma:4.2.5'
-    kapt 'com.github.gfx.android.orma:orma-processor:4.2.5'
-    kapt 'com.squareup:javapoet:1.6.1'
+    compile depends.orma.core
+    kapt depends.orma.processor
+    kapt depends.javapoet
 
     // Structure
-    compile 'com.google.dagger:dagger:2.9'
-    kapt 'com.google.dagger:dagger-compiler:2.9'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.5'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile "io.reactivex:rxandroid:1.2.1"
-    compile 'io.reactivex:rxkotlin:2.0.0-RC1'
+    compile depends.dagger.core
+    kapt depends.dagger.compiler
+    compile depends.rxjava2.core
+    compile depends.rxjava2.android
+    compile depends.rxjava2.kotlin
 
-    compile "com.squareup.moshi:moshi:$moshi_verion"
-    compile "com.squareup.moshi:moshi-kotlin:$moshi_verion"
-    compile "com.squareup.moshi:moshi-adapters:$moshi_verion"
+    compile depends.moshi.core
+    compile depends.moshi.kotlin
+    compile depends.moshi.adapters
 
-    compile "android.arch.lifecycle:runtime:$arch_version"
-    compile "android.arch.lifecycle:extensions:$arch_version"
+    compile depends.arch.lifecycleRuntime
+    compile depends.arch.lifecycleExtensions
 
     compile 'com.annimon:stream:1.1.8'
 
     compile 'com.android.support:multidex:1.0.1'
 
     // Network
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
-    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
-    compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    compile depends.okhttp3.loggingIntercepter
+    compile depends.retrofit.core
+    compile depends.retrofit.converterMoshi
+    compile depends.retrofit.adapterRxJava2
 
     // Debug
     compile 'com.facebook.stetho:stetho:1.5.0'

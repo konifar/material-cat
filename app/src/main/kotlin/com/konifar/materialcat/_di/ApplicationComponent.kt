@@ -1,6 +1,8 @@
 package com.konifar.materialcat._di
 
 import com.konifar.materialcat.MainApplication
+import com.konifar.materialcat._di.module.*
+import com.konifar.materialcat.domain.di.UseCaseModule
 import dagger.Component
 import javax.inject.Singleton
 
