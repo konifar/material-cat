@@ -1,0 +1,57 @@
+p com.konifar.materialcat.domain.valueobject 0
+d 0/SearchOrderType
+a org.jetbrains.annotations.NotNull 0
+m 0 0/SearchOrderType toString
+f 0 0/SearchOrderType flickrSortString
+m 0 0/SearchOrderType getFlickrSortString
+p com.konifar.materialcat.domain.usecase 1
+d 1/GetCatImagesUseCase
+m 0 1/GetCatImagesUseCase requestGetPopular
+m 0 1/GetCatImagesUseCase requestGetNew
+d 1/GetCatImagesUseCase$DefaultImpls
+d 1/GetCatImagesUseCaseImpl
+m 0 1/GetCatImagesUseCaseImpl requestGetPopular
+m 0 1/GetCatImagesUseCaseImpl requestGetNew
+d 1/GetCatImagesUseCaseImpl$requestGet$1
+m 0 1/GetCatImagesUseCaseImpl$requestGet$1 apply
+d 1/GetCatImagesUseCaseImpl$Companion
+m 0 1/GetCatImagesUseCaseImpl$Companion access$getSEARCH_TEXT$p
+m 0 1/GetCatImagesUseCaseImpl access$getCatImageRepository$p
+m 0 1/GetCatImagesUseCaseImpl access$getSEARCH_TEXT$cp
+d 1/GetCatImageUseCase
+m 0 1/GetCatImageUseCase requestGet
+d 1/GetCatImageUseCase$DefaultImpls
+d 1/GetCatImageUseCaseImpl
+m 0 1/GetCatImageUseCaseImpl requestGet
+p com.konifar.materialcat.domain.repository 2
+d 2/CatImageFlickrRepository
+m 0 2/CatImageFlickrRepository findByText
+m 0 2/CatImageFlickrRepository findById
+m 0 2/CatImageFlickrRepository clearCache
+d 2/CatImageFlickrRepository$DefaultImpls
+p com.konifar.materialcat.domain.model 3
+d 3/CatImageDomainModel
+f 0 3/CatImageDomainModel id
+m 0 3/CatImageDomainModel getId
+f 0 3/CatImageDomainModel title
+m 0 3/CatImageDomainModel getTitle
+f 0 3/CatImageDomainModel imageUrl
+m 0 3/CatImageDomainModel getImageUrl
+m 0 3/CatImageDomainModel component1
+m 0 3/CatImageDomainModel component2
+m 0 3/CatImageDomainModel component3
+m 0 3/CatImageDomainModel copy
+m 0 3/CatImageDomainModel copy$default
+d 3/CatImageId
+d 3/DomainModel
+m 0 3/DomainModel getId
+d 3/Identifier
+p com.konifar.materialcat.domain.di 4
+d 4/UseCaseModule
+a dagger.Module 1
+c 1 4/UseCaseModule
+a dagger.Provides 2
+m 2 4/UseCaseModule provideGetCatImagesUseCase
+m 0 4/UseCaseModule provideGetCatImagesUseCase
+m 2 4/UseCaseModule provideGetCatImageUseCase
+m 0 4/UseCaseModule provideGetCatImageUseCase

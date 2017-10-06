@@ -11,8 +11,6 @@ open class Identifier<out T>(val value: T) {
         return true
     }
 
-    override fun hashCode(): Int {
-        return value?.hashCode() ?: 0
-    }
+    override fun hashCode(): Int = value?.hashCode() ?: 0
 
 }

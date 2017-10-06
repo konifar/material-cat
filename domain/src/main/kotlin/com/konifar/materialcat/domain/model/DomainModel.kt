@@ -10,8 +10,6 @@ abstract class DomainModel<out T : Identifier<*>> {
         return false
     }
 
-    override fun hashCode(): Int {
-        return id.hashCode()
-    }
+    override fun hashCode(): Int = id.hashCode()
 
 }

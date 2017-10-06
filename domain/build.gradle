@@ -8,11 +8,15 @@ sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
 }
 
+targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_7
+
 dependencies {
     compile depends.rxjava2.core
     compile depends.rxjava2.kotlin
+
     compile depends.dagger.core
-    compile depends.dagger.compiler
+    kapt depends.dagger.compiler
 
     testCompile depends.junit
 }

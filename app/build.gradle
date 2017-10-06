@@ -6,30 +6,36 @@ apply plugin: 'io.fabric'
 apply from: "${rootDir.absolutePath}/keys.gradle"
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.1'
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
         applicationId "com.konifar.materialcat"
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
         versionCode 2
         versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "FLICKR_API_KEY", "\"" + (System.getenv('FLICKR_API_DEBUG_KEY') != null ? System.getenv('FLICKR_API_DEBUG_KEY') : keys.flickrApiDebugKey) + "\""
+
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "FLICKR_API_KEY", "\"" + (System.getenv('FLICKR_API_RELEASE_KEY') != null ? System.getenv('FLICKR_API_RELEASE_KEY') : keys.flickrApiReleaseKey) + "\""
         }
     }
+
     productFlavors {
     }
     packagingOptions {
@@ -58,6 +64,7 @@ dependencies {
     }
 
     compile project(':domain')
+    compile project(':infra')
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
