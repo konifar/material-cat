@@ -3,18 +3,32 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
-apply from: "${rootDir.absolutePath}/keys.gradle"
+// Manifest version
+def versionMajor = 2
+def versionMinor = 0
+def versionPatch = 0
+
+// CI
+def isCi = "true" == System.getenv("CI")
+def preDexEnabled = "true" == System.getProperty("pre-dex", "true")
+
+def packageName = "com.konifar.materialcat"
 
 android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
 
+    dexOptions {
+        // Skip pre-dexing when running on CI or when disabled via -Dpre-dex=false.
+        preDexLibraries = preDexEnabled && !isCi
+    }
+
     defaultConfig {
-        applicationId "com.konifar.materialcat"
+        applicationId packageName
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 2
-        versionName "1.0.1"
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "$versionMajor.$versionMinor.$versionPatch"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -25,26 +39,61 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    buildTypes {
+    signingConfigs {
         debug {
-            minifyEnabled false
-
+            storeFile rootProject.file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
         }
         release {
-            minifyEnabled false
+            storeFile rootProject.file("release.keystore")
+            storePassword System.getenv("RELEASE_STORE_PASSWORD")
+            keyAlias System.getenv("RELEASE_KEY_ALIAS")
+            keyPassword System.getenv("RELEASE_KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix '.debug'
+            versionNameSuffix "-debug"
+            debuggable true
+            zipAlignEnabled true
+        }
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            zipAlignEnabled true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
     productFlavors {
+        develop {
+            applicationId "${packageName}.develop"
+        }
+        production {
+            applicationId packageName
+        }
     }
+
     packagingOptions {
+        exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'META-INF/rxjava.properties'
     }
+
     dataBinding {
         enabled = true
     }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -59,14 +108,11 @@ dependencies {
             force depends.support.design
             force depends.support.recyclerView
             force depends.support.annotations
-            force 'com.google.guava:guava:20.0'
         }
     }
 
     compile project(':domain')
     compile project(':infra')
-
-    compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile depends.kotlin.stdlib
 
@@ -78,19 +124,17 @@ dependencies {
     compile depends.support.recyclerView
     compile depends.support.annotations
 
+    // Ui
     compile depends.picasso
     compile depends.headerFooterGridView
     compile depends.circleImageView
     compile depends.fabTransformation
 
-    compile(depends.crashlytics) {
-        transitive = true;
-    }
-    compile 'com.facebook.android:facebook-android-sdk:4.3.0'
-
-    kapt depends.binding.compiler
+    // Sdk
+    compile depends.facebook
 
     // Structure
+    kapt depends.binding.compiler
     compile depends.dagger.core
     kapt depends.dagger.compiler
     compile depends.rxjava2.core
@@ -100,10 +144,13 @@ dependencies {
     compile depends.arch.lifecycleRuntime
     compile depends.arch.lifecycleExtensions
 
-    compile 'com.android.support:multidex:1.0.1'
+    compile depends.support.multidex
 
     // Debug
     compile depends.stetho.core
+    compile(depends.crashlytics) {
+        transitive = true;
+    }
 
     // Test
     testCompile depends.junit
@@ -112,5 +159,4 @@ dependencies {
     testCompile depends.assertj.core
     testCompile depends.assertj.android
     testCompile depends.mockito.core
-
 }
