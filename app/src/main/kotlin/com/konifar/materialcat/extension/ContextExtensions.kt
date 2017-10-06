@@ -1,4 +1,4 @@
-package com.konifar.materialcat._extension
+package com.konifar.materialcat.extension
 
 import android.content.Context
 import com.konifar.materialcat.di.ApplicationComponent

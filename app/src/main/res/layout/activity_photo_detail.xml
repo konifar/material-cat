@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="presentationModel"
             type="com.konifar.materialcat.presentation.gallery.detail.PhotoDetailViewModel" />
     </data>
 
@@ -26,7 +26,7 @@
                 android:background="@color/white"
                 app:contentScrim="@color/theme500"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{viewModel.title}">
+                app:title="@{presentationModel.title}">
 
                 <com.konifar.materialcat.presentation.common.customview.AspectRatioImageView
                     android:id="@+id/img_preview_cover"
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
                     app:imageRatio="1"
-                    app:photoImageUrl="@{viewModel.imageUrl}" />
+                    app:photoImageUrl="@{presentationModel.imageUrl}" />
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -72,7 +72,7 @@
                     android:id="@+id/color_pallete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:colorPaletteImageUrl="@{viewModel.imageUrl}" />
+                    app:colorPaletteImageUrl="@{presentationModel.imageUrl}" />
 
             </LinearLayout>
 

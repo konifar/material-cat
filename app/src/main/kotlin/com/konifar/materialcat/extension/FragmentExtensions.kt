@@ -1,4 +1,4 @@
-package com.konifar.materialcat._extension
+package com.konifar.materialcat.extension
 
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity

@@ -4,7 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.domain.usecase.GetCatImageUseCase
-import com.konifar.materialcat.presentation.gallery.detail.PhotoDetailViewModel
+import com.konifar.materialcat.presentation.photodetail.PhotoDetailViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject

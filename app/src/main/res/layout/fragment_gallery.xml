@@ -1,13 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.konifar.materialcat.presentation.gallery.GalleryViewModel" />
-    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,8 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:visibility="@{viewModel.contentVisibility}"
-            app:swipeRefreshing="@{viewModel.swipeRefreshing}">
+            android:visibility="gone">
 
             <jp.co.recruit_mp.android.widget.HeaderFooterGridView
                 android:id="@+id/grid_view"
@@ -39,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:visibility="@{viewModel.loadingVisibility}">
+            android:visibility="gone">
 
             <include layout="@layout/view_loading" />
         </FrameLayout>

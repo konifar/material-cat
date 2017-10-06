@@ -1,4 +1,4 @@
-package com.konifar.materialcat.presentation.gallery.detail
+package com.konifar.materialcat.presentation.photodetail
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.konifar.materialcat.R
-import com.konifar.materialcat._extension.component
+import com.konifar.materialcat.extension.component
 import com.konifar.materialcat.databinding.ActivityPhotoDetailBinding
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.presentation.gallery.PhotoDetailPresenter

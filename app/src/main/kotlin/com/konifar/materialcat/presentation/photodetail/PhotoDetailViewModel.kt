@@ -1,4 +1,4 @@
-package com.konifar.materialcat.presentation.gallery.detail
+package com.konifar.materialcat.presentation.photodetail
 
 import android.databinding.BaseObservable
 import android.databinding.Bindable

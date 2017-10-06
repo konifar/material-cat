@@ -20,8 +20,8 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.konifar.fab_transformation.FabTransformation
 import com.konifar.materialcat.R
-import com.konifar.materialcat._extension.AppUtils
-import com.konifar.materialcat._extension.ShareUtils
+import com.konifar.materialcat.extension.AppUtils
+import com.konifar.materialcat.extension.ShareUtils
 import com.konifar.materialcat.databinding.ActivityMainBinding
 import com.konifar.materialcat.presentation.gallery.GalleryFragment
 import java.util.*

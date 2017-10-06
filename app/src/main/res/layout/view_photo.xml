@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="presentationModel"
             type="com.konifar.materialcat.presentation.gallery.GalleryItemViewModel" />
     </data>
 
@@ -20,7 +20,7 @@
             android:scaleType="centerCrop"
             android:transitionName="@string/shared_element_photo"
             app:imageRatio="1"
-            app:photoImageUrl="@{viewModel.imageUrl}" />
+            app:photoImageUrl="@{presentationModel.imageUrl}" />
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/ripple"

@@ -9,8 +9,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.konifar.materialcat.R
-import com.konifar.materialcat._extension.AppUtils
-import com.konifar.materialcat._extension.ShareUtils
+import com.konifar.materialcat.extension.AppUtils
+import com.konifar.materialcat.extension.ShareUtils
 import com.konifar.materialcat.databinding.UiShareBarBinding
 
 class ShareBarView : LinearLayout {

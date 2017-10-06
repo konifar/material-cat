@@ -2,7 +2,6 @@ package com.konifar.materialcat.presentation.gallery
 
 import com.konifar.materialcat.domain.model.CatImageDomainModel
 import com.konifar.materialcat.domain.usecase.GetCatImagesUseCase
-import com.konifar.materialcat.presentation.ListObserver
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.CompositeDisposable
@@ -18,15 +17,6 @@ import org.mockito.MockitoAnnotations
 
 @RunWith(BlockJUnit4ClassRunner::class)
 class GalleryPresenterTest {
-
-    @Mock
-    lateinit var navigator: GalleryPageNavigator
-
-    @Mock
-    lateinit var listObserver: ListObserver
-
-    @Mock
-    lateinit var viewModel: GalleryViewModel
 
     @Mock
     lateinit var getCatImagesUseCase: GetCatImagesUseCase
@@ -48,11 +38,6 @@ class GalleryPresenterTest {
 
         MockitoAnnotations.initMocks(this)
         galleryPresenter = GalleryPresenter(getCatImagesUseCase, compositeDisposable)
-                .apply {
-                    listObserver = this@GalleryPresenterTest.listObserver
-                    navigator = this@GalleryPresenterTest.navigator
-                    viewModel = this@GalleryPresenterTest.viewModel
-                }
     }
 
     @Test
@@ -66,7 +51,6 @@ class GalleryPresenterTest {
 
         // Verify
         Mockito.verify(getCatImagesUseCase).requestGetNew(1, true)
-        Mockito.verify(viewModel).toggleLoading(false)
     }
 
 }

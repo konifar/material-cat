@@ -11,7 +11,7 @@
     <dimen name="text_xlarge">24sp</dimen>
 
     <!-- Line -->
-    <dimen name="line">2sp</dimen>
+    <dimen name="line">2dp</dimen>
 
 
     <!-- Component -->
