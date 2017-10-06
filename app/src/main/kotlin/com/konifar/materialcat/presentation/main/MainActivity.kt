@@ -20,10 +20,10 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.konifar.fab_transformation.FabTransformation
 import com.konifar.materialcat.R
-import com.konifar.materialcat.databinding.ActivityMainBinding
-import com.konifar.materialcat.presentation.gallery.GalleryFragment
 import com.konifar.materialcat._extension.AppUtils
 import com.konifar.materialcat._extension.ShareUtils
+import com.konifar.materialcat.databinding.ActivityMainBinding
+import com.konifar.materialcat.presentation.gallery.GalleryFragment
 import java.util.*
 
 class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
@@ -192,17 +192,11 @@ class MainActivity : AppCompatActivity(), AbsListView.OnScrollListener {
             fragments.add(GalleryFragment.newInstance(GalleryFragment.Type.NEW))
         }
 
-        override fun getItem(position: Int): Fragment {
-            return fragments[position]
-        }
+        override fun getItem(position: Int): Fragment = fragments[position]
 
-        override fun getCount(): Int {
-            return fragments.size
-        }
+        override fun getCount(): Int = fragments.size
 
-        override fun getPageTitle(position: Int): CharSequence {
-            return titles[position]
-        }
+        override fun getPageTitle(position: Int): CharSequence = titles[position]
     }
 
 }

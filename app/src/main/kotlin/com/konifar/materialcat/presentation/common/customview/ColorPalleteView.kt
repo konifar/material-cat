@@ -16,7 +16,7 @@ class ColorPalleteView : LinearLayout {
 
     lateinit var binding: UiColorPalleteBinding
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         binding = DataBindingUtil.inflate<UiColorPalleteBinding>(LayoutInflater.from(context), R.layout.ui_color_pallete, this, true)
@@ -76,9 +76,7 @@ class ColorPalleteView : LinearLayout {
         }
     }
 
-    private fun getHexString(rgb: Int): String {
-        return HEX_PREFIX + Integer.toHexString(rgb)
-    }
+    private fun getHexString(rgb: Int): String = HEX_PREFIX + Integer.toHexString(rgb)
 
     companion object {
 

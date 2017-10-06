@@ -11,7 +11,7 @@ class AspectRatioImageView : ImageView {
     private var ratio: Float = 0.toFloat()
     private var autoScale: Boolean = false
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
 

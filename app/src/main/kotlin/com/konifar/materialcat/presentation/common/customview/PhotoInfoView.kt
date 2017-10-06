@@ -13,7 +13,7 @@ class PhotoInfoView : FrameLayout {
 
     lateinit var binding: UiPhotoInfoBinding
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.ui_photo_info, this, true)

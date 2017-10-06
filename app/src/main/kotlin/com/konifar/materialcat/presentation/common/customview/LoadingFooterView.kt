@@ -9,7 +9,6 @@ import com.konifar.materialcat.databinding.ViewLoadingFooterBinding
 
 class LoadingFooterView(context: Context) : FrameLayout(context) {
 
-    val binding: ViewLoadingFooterBinding = DataBindingUtil.inflate<ViewLoadingFooterBinding>(
-            LayoutInflater.from(context), R.layout.view_loading_footer, this, true)
+    val binding: ViewLoadingFooterBinding = DataBindingUtil.inflate<ViewLoadingFooterBinding>(LayoutInflater.from(context), R.layout.view_loading_footer, this, true)
 
 }

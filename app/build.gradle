@@ -70,6 +70,7 @@ dependencies {
 
     compile depends.kotlin.stdlib
 
+    // Support Library
     compile depends.support.v4
     compile depends.support.appCompat
     compile depends.support.palette
@@ -77,25 +78,17 @@ dependencies {
     compile depends.support.recyclerView
     compile depends.support.annotations
 
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'jp.co.recruit_mp:android-HeaderFooterGridView:0.2.1'
-    compile 'de.hdodenhof:circleimageview:1.3.0'
-    compile 'com.pnikosis:materialish-progress:1.5'
-    compile 'konifar:fab-transformation:1.0.0'
-    compile 'com.flaviofaria:kenburnsview:1.0.6'
+    compile depends.picasso
+    compile depends.headerFooterGridView
+    compile depends.circleImageView
+    compile depends.fabTransformation
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
+    compile(depends.crashlytics) {
         transitive = true;
     }
     compile 'com.facebook.android:facebook-android-sdk:4.3.0'
 
     kapt depends.binding.compiler
-
-    // Database
-    compile depends.orma.core
-    kapt depends.orma.processor
-    kapt depends.javapoet
 
     // Structure
     compile depends.dagger.core
@@ -104,33 +97,20 @@ dependencies {
     compile depends.rxjava2.android
     compile depends.rxjava2.kotlin
 
-    compile depends.moshi.core
-    compile depends.moshi.kotlin
-    compile depends.moshi.adapters
-
     compile depends.arch.lifecycleRuntime
     compile depends.arch.lifecycleExtensions
 
-    compile 'com.annimon:stream:1.1.8'
-
     compile 'com.android.support:multidex:1.0.1'
 
-    // Network
-    compile depends.okhttp3.loggingIntercepter
-    compile depends.retrofit.core
-    compile depends.retrofit.converterMoshi
-    compile depends.retrofit.adapterRxJava2
-
     // Debug
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile depends.stetho.core
 
     // Test
-    testCompile "junit:junit:4.12"
-    testCompile "org.robolectric:robolectric:3.4"
-    testCompile "org.robolectric:shadows-multidex:3.3.2"
-    testCompile "org.assertj:assertj-core:3.8.0"
-    testCompile 'com.squareup.assertj:assertj-android:1.2.0'
-    testCompile 'org.mockito:mockito-core:2.8.47'
+    testCompile depends.junit
+    testCompile depends.robolectric.core
+    testCompile depends.robolectric.shadowsMultidex
+    testCompile depends.assertj.core
+    testCompile depends.assertj.android
+    testCompile depends.mockito.core
 
 }
