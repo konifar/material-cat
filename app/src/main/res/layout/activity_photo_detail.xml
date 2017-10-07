@@ -6,7 +6,7 @@
 
         <variable
             name="presentationModel"
-            type="com.konifar.materialcat.presentation.gallery.detail.PhotoDetailViewModel" />
+            type="com.konifar.materialcat.presentation.photodetail.model.PhotoDetailPresentationModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

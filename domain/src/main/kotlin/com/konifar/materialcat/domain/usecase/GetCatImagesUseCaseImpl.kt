@@ -21,10 +21,10 @@ class GetCatImagesUseCaseImpl(private val catImageRepository: CatImageFlickrRepo
             requestGet(page, shouldRefresh, SearchOrderType.NEW)
 
     private fun requestGet(page: Int, shouldRefresh: Boolean, searchOrderType: SearchOrderType): Observable<List<CatImageDomainModel>> {
-        val single: Single<Int> = if (shouldRefresh) catImageRepository.clearCache(searchOrderType.toString(), SEARCH_TEXT) else Single.just(1)
+        val single: Single<Int> = if (shouldRefresh) catImageRepository.clearCache(searchOrderType.flickrSortString, SEARCH_TEXT) else Single.just(1)
 
         return single.toObservable()
-                .flatMap { catImageRepository.findByText(searchOrderType.toString(), SEARCH_TEXT, page, PER_PAGE) }
+                .flatMap { catImageRepository.findByText(searchOrderType.flickrSortString, SEARCH_TEXT, page, PER_PAGE) }
                 .subscribeOn(Schedulers.io())
     }
 

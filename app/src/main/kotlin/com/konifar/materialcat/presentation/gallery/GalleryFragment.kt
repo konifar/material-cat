@@ -15,7 +15,6 @@ import android.widget.GridView
 import com.konifar.materialcat.R
 import com.konifar.materialcat.databinding.FragmentGalleryBinding
 import com.konifar.materialcat.databinding.ViewPhotoBinding
-import com.konifar.materialcat.domain.model.CatImageDomainModel
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.extension.component
 import com.konifar.materialcat.presentation.common.customview.LoadingFooterView
@@ -55,8 +54,6 @@ class GalleryFragment : Fragment(), GalleryContract.View, GalleryContract.Naviga
 
     private lateinit var type: Type
 
-    private val itemPresentationModels: MutableList<GalleryItemPresentationModel> = mutableListOf()
-
     private val registry = LifecycleRegistry(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,8 +89,8 @@ class GalleryFragment : Fragment(), GalleryContract.View, GalleryContract.Naviga
     }
 
     private fun initGridView() {
-        adapter = PhotosArrayAdapter(activity, itemPresentationModels)
         loadingFooter = LoadingFooterView(activity)
+        adapter = PhotosArrayAdapter(activity, ArrayList())
 
         binding.gridView.run {
             addFooterView(loadingFooter)
@@ -138,12 +135,13 @@ class GalleryFragment : Fragment(), GalleryContract.View, GalleryContract.Naviga
         }
     }
 
-    override fun showCatImages(domainModels: List<CatImageDomainModel>, page: Int) {
-        if (page == 1) itemPresentationModels.clear()
-        itemPresentationModels.addAll(domainModels.map { GalleryItemPresentationModel(it) })
+    override fun showCatImages(presentationModels: List<GalleryItemPresentationModel>, page: Int) {
+        if (page == 1) adapter.clear()
+        adapter.addAll(presentationModels)
         adapter.notifyDataSetChanged()
         hideProgress(page)
         binding.swipeRefresh.isRefreshing = false
+        binding.swipeRefresh.visibility = View.VISIBLE
     }
 
     override fun getLifecycle(): LifecycleRegistry = registry
@@ -156,7 +154,8 @@ class GalleryFragment : Fragment(), GalleryContract.View, GalleryContract.Naviga
         val binding: ViewPhotoBinding = DataBindingUtil.bind(view)
     }
 
-    private class PhotosArrayAdapter(context: Context, presentationModels: List<GalleryItemPresentationModel>) : ArrayAdapter<GalleryItemPresentationModel>(context, R.layout.view_photo, presentationModels) {
+    private class PhotosArrayAdapter(context: Context, presentationModels: List<GalleryItemPresentationModel>)
+        : ArrayAdapter<GalleryItemPresentationModel>(context, R.layout.view_photo, presentationModels) {
 
         override fun getView(pos: Int, convertView: View?, parent: ViewGroup): View {
             val view: View

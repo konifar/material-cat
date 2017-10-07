@@ -4,6 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.domain.usecase.GetCatImagesUseCase
+import com.konifar.materialcat.presentation.gallery.model.converter.GalleryItemPresentationModelConverter
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class GalleryPresenter
     }
 
     override fun setUp(view: GalleryContract.View, navigator: GalleryContract.Navigator) {
-        this.view = view;
+        this.view = view
         this.navigator = navigator
     }
 
@@ -35,7 +36,7 @@ class GalleryPresenter
         view.showProgress(page, isRefreshing)
         getCatImagesUseCase.requestGetNew(page, isRefreshing)
                 .subscribeBy(
-                        onNext = { view.showCatImages(it, page) },
+                        onNext = { view.showCatImages(GalleryItemPresentationModelConverter.convert(it), page) },
                         onError = { view.hideProgress(page) }
                 )
 
@@ -45,7 +46,7 @@ class GalleryPresenter
         view.showProgress(page, isRefreshing)
         getCatImagesUseCase.requestGetPopular(page, isRefreshing)
                 .subscribeBy(
-                        onNext = { view.showCatImages(it, page) },
+                        onNext = { view.showCatImages(GalleryItemPresentationModelConverter.convert(it), page) },
                         onError = { view.hideProgress(page) }
                 )
     }

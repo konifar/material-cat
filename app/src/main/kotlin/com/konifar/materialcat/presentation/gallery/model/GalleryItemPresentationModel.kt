@@ -1,11 +1,5 @@
 package com.konifar.materialcat.presentation.gallery.model
 
-import android.databinding.BaseObservable
-import com.konifar.materialcat.domain.model.CatImageDomainModel
+import com.konifar.materialcat.domain.model.CatImageId
 
-class GalleryItemPresentationModel(catImageDomainModel: CatImageDomainModel) : BaseObservable() {
-
-    val id = catImageDomainModel.id
-    val imageUrl: String = catImageDomainModel.imageUrl
-
-}
+class GalleryItemPresentationModel(val id: CatImageId, val imageUrl: String)

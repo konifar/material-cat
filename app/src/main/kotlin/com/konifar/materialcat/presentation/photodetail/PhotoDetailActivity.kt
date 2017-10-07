@@ -7,32 +7,31 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.konifar.materialcat.R
-import com.konifar.materialcat.extension.component
 import com.konifar.materialcat.databinding.ActivityPhotoDetailBinding
 import com.konifar.materialcat.domain.model.CatImageId
-import com.konifar.materialcat.presentation.gallery.PhotoDetailPresenter
+import com.konifar.materialcat.extension.component
+import com.konifar.materialcat.presentation.photodetail.model.PhotoDetailPresentationModel
 import javax.inject.Inject
 
-class PhotoDetailActivity : AppCompatActivity() {
+class PhotoDetailActivity : AppCompatActivity(), PhotoDetailContract.View {
 
     lateinit var binding: ActivityPhotoDetailBinding
 
     @Inject
-    lateinit var presenter: PhotoDetailPresenter
+    lateinit var presenter: PhotoDetailContract.Presenter
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
 
         super.onCreate(savedInstanceState)
 
-        presenter.viewModel = PhotoDetailViewModel()
+        presenter.setUp(this)
 
         binding = DataBindingUtil.setContentView<ActivityPhotoDetailBinding>(this, R.layout.activity_photo_detail)
-        binding.viewModel = presenter.viewModel
 
         initToolbar()
 
-        presenter.requestGet(CatImageId(intent.extras.getString(CAT_IMAGE_ID)))
+        presenter.requestGetCatImage(CatImageId(intent.extras.getString(CAT_IMAGE_ID)))
     }
 
     private fun initToolbar() {
@@ -49,6 +48,10 @@ class PhotoDetailActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showCatImage(model: PhotoDetailPresentationModel) {
+        binding.presentationModel = model
     }
 
     companion object {
