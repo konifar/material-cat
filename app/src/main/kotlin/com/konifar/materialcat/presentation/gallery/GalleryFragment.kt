@@ -17,6 +17,8 @@ import com.konifar.materialcat.databinding.FragmentGalleryBinding
 import com.konifar.materialcat.databinding.ViewPhotoBinding
 import com.konifar.materialcat.domain.model.CatImageId
 import com.konifar.materialcat.extension.component
+import com.konifar.materialcat.extension.hide
+import com.konifar.materialcat.extension.show
 import com.konifar.materialcat.presentation.common.customview.LoadingFooterView
 import com.konifar.materialcat.presentation.common.customview.OnLoadMoreScrollListener
 import com.konifar.materialcat.presentation.gallery.model.GalleryItemPresentationModel
@@ -118,9 +120,9 @@ class GalleryFragment : Fragment(), GalleryContract.View, GalleryContract.Naviga
     override fun showProgress(page: Int, isRefreshing: Boolean) {
         if (page == 1) {
             if (isRefreshing) {
-                binding.loading.visibility = View.GONE
+                binding.loading.hide()
             } else {
-                binding.loading.visibility = View.VISIBLE
+                binding.loading.show()
             }
         } else {
             loadingFooter.show()
@@ -129,7 +131,7 @@ class GalleryFragment : Fragment(), GalleryContract.View, GalleryContract.Naviga
 
     override fun hideProgress(page: Int) {
         if (page == 1) {
-            binding.loading.visibility = View.GONE
+            binding.loading.hide()
         } else {
             loadingFooter.hide()
         }
@@ -141,7 +143,7 @@ class GalleryFragment : Fragment(), GalleryContract.View, GalleryContract.Naviga
         adapter.notifyDataSetChanged()
         hideProgress(page)
         binding.swipeRefresh.isRefreshing = false
-        binding.swipeRefresh.visibility = View.VISIBLE
+        binding.swipeRefresh.show()
     }
 
     override fun getLifecycle(): LifecycleRegistry = registry
