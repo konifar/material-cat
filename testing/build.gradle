@@ -6,20 +6,21 @@ configurations {
 
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
 }
 
 targetCompatibility = JavaVersion.VERSION_1_7
 sourceCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
-
     compile depends.rxjava2.core
     compile depends.rxjava2.kotlin
-
-    compile depends.dagger.core
-    kapt depends.dagger.compiler
+    compile depends.rxjava2.android
 
     testCompile depends.junit
+    testCompile depends.robolectric.core
+    testCompile depends.robolectric.shadowsMultidex
     testCompile depends.assertj.core
+    testCompile depends.assertj.android
     testCompile depends.mockito.core
 }

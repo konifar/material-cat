@@ -1,18 +1,35 @@
-a org.jetbrains.annotations.NotNull 0
 p com.konifar.materialcat.domain.valueobject 0
-m 0 0/SearchOrderType toString
+d 0/SearchOrderType
+a org.jetbrains.annotations.NotNull 0
 f 0 0/SearchOrderType flickrSortString
 m 0 0/SearchOrderType getFlickrSortString
 p com.konifar.materialcat.domain.usecase 1
+d 1/GetCatImagesUseCase
 m 0 1/GetCatImagesUseCase requestGetPopular
 m 0 1/GetCatImagesUseCase requestGetNew
+d 1/GetCatImagesUseCase$DefaultImpls
+d 1/GetCatImagesUseCaseImpl
+m 0 1/GetCatImagesUseCaseImpl requestGetPopular
+m 0 1/GetCatImagesUseCaseImpl requestGetNew
+d 1/GetCatImagesUseCaseImpl$requestGet$1
+m 0 1/GetCatImagesUseCaseImpl$requestGet$1 apply
+d 1/GetCatImagesUseCaseImpl$Companion
+m 0 1/GetCatImagesUseCaseImpl$Companion access$getSEARCH_TEXT$p
+m 0 1/GetCatImagesUseCaseImpl access$getCatImageRepository$p
+m 0 1/GetCatImagesUseCaseImpl access$getSEARCH_TEXT$cp
+d 1/GetCatImageUseCase
 m 0 1/GetCatImageUseCase requestGet
+d 1/GetCatImageUseCase$DefaultImpls
+d 1/GetCatImageUseCaseImpl
 m 0 1/GetCatImageUseCaseImpl requestGet
 p com.konifar.materialcat.domain.repository 2
+d 2/CatImageFlickrRepository
 m 0 2/CatImageFlickrRepository findByText
 m 0 2/CatImageFlickrRepository findById
 m 0 2/CatImageFlickrRepository clearCache
+d 2/CatImageFlickrRepository$DefaultImpls
 p com.konifar.materialcat.domain.model 3
+d 3/CatImageDomainModel
 f 0 3/CatImageDomainModel id
 m 0 3/CatImageDomainModel getId
 f 0 3/CatImageDomainModel title
@@ -24,39 +41,16 @@ m 0 3/CatImageDomainModel component2
 m 0 3/CatImageDomainModel component3
 m 0 3/CatImageDomainModel copy
 m 0 3/CatImageDomainModel copy$default
+d 3/CatImageId
+d 3/DomainModel
 m 0 3/DomainModel getId
+d 3/Identifier
 p com.konifar.materialcat.domain.di 4
-m 0 4/UseCaseModule provideGetCatImagesUseCase
-m 0 4/UseCaseModule provideGetCatImageUseCase
-m 0 1/GetCatImagesUseCaseImpl requestGetPopular
-m 0 1/GetCatImagesUseCaseImpl requestGetNew
-p com.konifar.materialcat.domain.usecase.GetCatImagesUseCaseImpl.requestGet 5
-m 0 5/1 apply
-p com.konifar.materialcat.domain.usecase.GetCatImagesUseCaseImpl 6
-m 0 6/Companion access$getSEARCH_TEXT$p
-m 0 1/GetCatImagesUseCaseImpl access$getCatImageRepository$p
-m 0 1/GetCatImagesUseCaseImpl access$getSEARCH_TEXT$cp
+d 4/UseCaseModule
 a dagger.Module 1
 c 1 4/UseCaseModule
 a dagger.Provides 2
 m 2 4/UseCaseModule provideGetCatImagesUseCase
+m 0 4/UseCaseModule provideGetCatImagesUseCase
 m 2 4/UseCaseModule provideGetCatImageUseCase
-d 0/SearchOrderType
-d 1/GetCatImagesUseCase
-p com.konifar.materialcat.domain.usecase.GetCatImagesUseCase 7
-d 7/DefaultImpls
-d 1/GetCatImageUseCase
-p com.konifar.materialcat.domain.usecase.GetCatImageUseCase 8
-d 8/DefaultImpls
-d 1/GetCatImageUseCaseImpl
-d 2/CatImageFlickrRepository
-p com.konifar.materialcat.domain.repository.CatImageFlickrRepository 9
-d 9/DefaultImpls
-d 3/CatImageDomainModel
-d 3/CatImageId
-d 3/DomainModel
-d 3/Identifier
-d 4/UseCaseModule
-d 1/GetCatImagesUseCaseImpl
-d 5/1
-d 6/Companion
+m 0 4/UseCaseModule provideGetCatImageUseCase
